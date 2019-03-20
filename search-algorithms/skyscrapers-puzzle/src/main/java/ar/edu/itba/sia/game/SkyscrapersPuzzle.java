@@ -6,10 +6,21 @@ import ar.edu.itba.sia.api.State;
 
 import java.util.List;
 
-public class SkyscrapersPuzzle implements Problem {
+public class SkyscrapersPuzzle implements Problem<Board> {
+    private Board initialBoard;
+
+    public SkyscrapersPuzzle(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
+        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews);
+    }
+
+    public SkyscrapersPuzzle(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
+                             int[][] initialMatrix) {
+        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews, initialMatrix);
+    }
+
     @Override
     public State getInitState() {
-        return null;
+        return new SkyscrapersState(this.initialBoard);
     }
 
     @Override

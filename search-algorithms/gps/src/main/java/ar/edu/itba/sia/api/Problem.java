@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Problem interface.
  */
-public interface Problem {
+public interface Problem<T> {
 
 	/**
 	 * Provides the initial state for the GPS to start from.

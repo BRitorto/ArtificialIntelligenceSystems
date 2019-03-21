@@ -99,10 +99,14 @@ public class GPSEngine {
 		}
 	}
 
+	/*
+	 *	TODO(Nachito): Why does for(Rule rule: problem.getRules()) throw incompatible types exception: Object cannot be converted to Rule
+	 */
 	private void addCandidates(GPSNode node, Collection<GPSNode> candidates) {
 		explosionCounter++;
 		updateBest(node);
-		for (Rule rule : problem.getRules()) {
+		for (Object obj : problem.getRules()) {
+			Rule rule = (Rule) obj;
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);

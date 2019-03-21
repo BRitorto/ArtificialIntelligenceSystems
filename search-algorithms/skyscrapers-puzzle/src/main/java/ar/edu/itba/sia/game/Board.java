@@ -11,8 +11,7 @@ public class Board {
     private Skyscraper[][] matrix;
 
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
-        if (topViews.length != dimension || bottomViews.length != dimension ||
-                leftViews.length != dimension || rightViews.length != dimension) {
+        if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
             throw new RuntimeException("Wrong dimensions of side numbers");
         }
         this.matrix = new Skyscraper[dimension][dimension];
@@ -24,8 +23,7 @@ public class Board {
 
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
                  int[][] initialMatrix) {
-        if (topViews.length != dimension || bottomViews.length != dimension ||
-                leftViews.length != dimension || rightViews.length != dimension) {
+        if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
             throw new RuntimeException("Wrong dimensions of side numbers");
         }
         this.matrix = new Skyscraper[dimension][dimension];
@@ -40,6 +38,11 @@ public class Board {
         this.rightViews = rightViews;
     }
 
+
+    private Boolean sideViewsDimensionAreCorrect(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews){
+        return topViews.length == dimension && bottomViews.length == dimension &&
+                leftViews.length == dimension && rightViews.length == dimension;
+    }
     public List<int[]> getViews() {
         LinkedList<int[]> list = new LinkedList<>();
         list.add(this.topViews);

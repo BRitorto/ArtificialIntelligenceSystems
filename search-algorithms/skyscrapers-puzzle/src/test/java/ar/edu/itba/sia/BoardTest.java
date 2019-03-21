@@ -5,18 +5,18 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 import ar.edu.itba.sia.game.Board;
+import ar.edu.itba.sia.game.IllegalDimensionException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-/**
- * Unit test for simple App.
- */
+
 public class BoardTest {
     private static final int[] dummy_arr = {1,2,3,4,5};
     private int[] topViews, bottomViews, leftViews, rightViews;
     private int dimension;
+    
     @Before
     public void Before() {
         topViews = dummy_arr;
@@ -30,7 +30,7 @@ public class BoardTest {
 //    public void mustPassTest(){
 //        assertTrue(true);
 //    }
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalDimensionException.class)
     public void wrongSideDimensionsThrowsExceptionTest(){
         int[] bad_side= {1, 2, 3};
         int[] good_side = {1,2,3,4,5};

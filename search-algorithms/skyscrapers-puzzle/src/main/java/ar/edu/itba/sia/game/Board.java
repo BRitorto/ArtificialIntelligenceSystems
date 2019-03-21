@@ -12,7 +12,7 @@ public class Board {
 
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
         if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
-            throw new RuntimeException("Wrong dimensions of side numbers");
+            throw new IllegalDimensionException();
         }
         this.matrix = new Skyscraper[dimension][dimension];
         this.topViews = topViews;
@@ -24,7 +24,7 @@ public class Board {
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
                  int[][] initialMatrix) {
         if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
-            throw new RuntimeException("Wrong dimensions of side numbers");
+            throw new IllegalDimensionException();
         }
         this.matrix = new Skyscraper[dimension][dimension];
         for (int i = 0; i < initialMatrix.length; i++) {

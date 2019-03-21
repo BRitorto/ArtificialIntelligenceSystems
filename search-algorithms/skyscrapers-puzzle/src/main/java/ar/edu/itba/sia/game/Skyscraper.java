@@ -1,6 +1,6 @@
 package ar.edu.itba.sia.game;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class Skyscraper {
     private int height;

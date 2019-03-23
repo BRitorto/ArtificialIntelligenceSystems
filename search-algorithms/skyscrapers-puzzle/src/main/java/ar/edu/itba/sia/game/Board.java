@@ -10,6 +10,11 @@ public class Board {
     private int[] rightViews;
     private Skyscraper[][] matrix;
 
+    public Board cloneBoard(){
+        return new Board(this.bottomViews.length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,this.matrix);
+    }
+
+
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
         if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
             throw new IllegalDimensionException();
@@ -20,6 +25,17 @@ public class Board {
         this.leftViews = leftViews;
         this.rightViews = rightViews;
     }
+    public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,Skyscraper[][] m) {
+        if (!sideViewsDimensionAreCorrect(dimension, topViews, bottomViews, leftViews, rightViews)) {
+            throw new IllegalDimensionException();
+        }
+        this.matrix = m;
+        this.topViews = topViews;
+        this.bottomViews = bottomViews;
+        this.leftViews = leftViews;
+        this.rightViews = rightViews;
+    }
+
 
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
                  int[][] initialMatrix) {
@@ -59,4 +75,22 @@ public class Board {
     public Skyscraper[][] getMatrix() {
         return matrix;
     }
+
+
+    public void printMatrix(){
+        int rows = this.matrix.length;
+        int columns = this.matrix[0].length;
+        String str = "|\t";
+
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                str += this.matrix[i][j].getHeight() + "\t";
+            }
+
+            System.out.println(str + "|");
+            str = "|\t";
+        }
+    }
+
+
 }

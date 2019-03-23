@@ -11,6 +11,12 @@ public class Skyscraper {
         this.position = new Point(x, y);
     }
 
+    public Skyscraper(int x, int y,int height) {
+        this.height = height;
+        this.position = new Point(x, y);
+    }
+
+
     public Point getPosition() {
         return position;
     }

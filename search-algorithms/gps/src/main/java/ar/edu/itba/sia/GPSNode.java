@@ -13,9 +13,19 @@ public class GPSNode {
 
 	private Rule generationRule;
 
+	private Integer depth;
+
 	public GPSNode(State state, Integer cost, Rule generationRule) {
 		this.state = state;
 		this.cost = cost;
+		this.generationRule = generationRule;
+		this.depth = parent.getDepth()+1;
+	}
+
+	public GPSNode(State state, Integer cost, Integer depth, Rule generationRule) {
+		this.state = state;
+		this.cost = cost;
+		this.depth = depth;
 		this.generationRule = generationRule;
 	}
 
@@ -33,6 +43,10 @@ public class GPSNode {
 
 	public Integer getCost() {
 		return cost;
+	}
+
+	public Integer getDepth() {
+		return depth;
 	}
 
 	@Override

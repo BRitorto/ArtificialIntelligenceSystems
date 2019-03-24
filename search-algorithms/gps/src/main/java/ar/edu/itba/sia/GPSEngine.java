@@ -100,17 +100,27 @@ public class GPSEngine {
 
 			break;
 		case GREEDY:
-			newCandidates = new PriorityQueue<>(/* TODO: Comparator! */);
+			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
+				@Override
+				public int compare(GPSNode node1, GPSNode node2) {
+					return 1;//heuristic.getValue(node1.getState()).compareTo(heuristic.getValue(node2.getState()));
+				}
+			});
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en GREEDY?
+			open.addAll(newCandidates);
 			break;
 		case ASTAR:
 			if (!isBest(node.getState(), node.getCost())) {
 				return;
 			}
-			newCandidates = new ArrayList<>();
+			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
+				@Override
+				public int compare(GPSNode node1, GPSNode node2) {
+					return 1;//(heuristic.getValue(node1.getState())+node1.getCost()).compareTo(heuristic.getValue(node2.getState())+node2.getCost());
+				}
+			});
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en A*?
+			open.addAll(newCandidates);
 			break;
 		}
 	}

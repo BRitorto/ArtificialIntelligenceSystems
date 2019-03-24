@@ -1,17 +1,13 @@
 package ar.edu.itba.sia;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 import ar.edu.itba.sia.api.Heuristic;
 import ar.edu.itba.sia.api.Problem;
 import ar.edu.itba.sia.api.Rule;
 import ar.edu.itba.sia.api.State;
+
+import static ar.edu.itba.sia.SearchStrategy.IDDFS;
 
 public class GPSEngine {
 
@@ -43,7 +39,7 @@ public class GPSEngine {
 		open.add(rootNode);
 		int currentDepthLimit = strategy == IDDFS ? 1 : Integer.MAX_VALUE;
 		do {
-			while (open.size() > 0 && open.peekFirst().getDepth() <= currentDepthLimit) {
+			while (open.size() > 0 && open.peek().getDepth() <= currentDepthLimit) {
 				GPSNode currentNode = open.remove();
 				if (problem.isGoal(currentNode.getState())) {
 					finished = true;
@@ -82,10 +78,10 @@ public class GPSEngine {
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
 
-			Queue<GPSNode> auxStack = new LinkedList<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			Stack<GPSNode> auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
 			auxStack.addAll(newCandidates);
 			while(!auxStack.isEmpty()){
-				open.push(auxStack.removeLast());
+				((LinkedList<GPSNode>)open).push(auxStack.pop());
 			}
 
 			break;
@@ -96,10 +92,10 @@ public class GPSEngine {
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
 
-			Queue<GPSNode> auxStack = new LinkedList<>();
-			auxStack.addAll(newCandidates);
-			while(!auxStack.isEmpty()){
-				open.push(auxStack.removeLast());
+			Stack<GPSNode> auxStack2 = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			auxStack2.addAll(newCandidates);
+			while(!auxStack2.isEmpty()){
+				((LinkedList<GPSNode>)open).push(auxStack2.pop());
 			}
 
 			break;

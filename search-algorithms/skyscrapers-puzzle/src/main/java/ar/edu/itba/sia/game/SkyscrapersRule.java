@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.PriorityQueue;
 
 public class SkyscrapersRule implements Rule {
     private int cost;
@@ -43,9 +44,11 @@ public class SkyscrapersRule implements Rule {
     }
 
     public Board applyNumber(int addNum, Point pos, Board board) {
-        int currMaxRow = 0, currMaxCol = 0, minRView = board.getMatrix().length, RView = 0, LView = 0, currNum = 0, TView = 0;//tView:topView
-        List<int[]> view = new LinkedList<>();
-        view = board.getViews();
+        int currMaxRow = 0, currMaxCol = 0, minRView = board.getMatrix().length, RView = 0, LView = 0, currNum = 0, TView = 0,BView=0;//tView:topView
+
+        PriorityQueue<Integer> canSeeRight=new PriorityQueue<>();
+        PriorityQueue<Integer> cannSeeBottom=new PriorityQueue<>();
+        List<int[]> view = board.getViews();
 
         //chequeo filas
         for (int i = 0; i <= pos.y; i++) {
@@ -63,10 +66,26 @@ public class SkyscrapersRule implements Rule {
 
                     LView++;
                 }
-
-
             }
+            Boolean end_cond=false;
+            do{
+                if(canSeeRight.isEmpty()){
+                    end_cond=true;
+                    canSeeRight.offer(currNum);
+                }
+                else {
+                    if(canSeeRight.peek()<currNum){
+                        canSeeRight.poll();
+                    }
+                    else {
+                        canSeeRight.offer(currNum);
+                        end_cond=true;
+                    }
+                }
+            }while (!end_cond);
         }
+        RView=canSeeRight.size();
+
         //chequeo cols
         for (int j = 0; j <= pos.x; j++) {
             if (j == pos.x) {
@@ -86,16 +105,29 @@ public class SkyscrapersRule implements Rule {
 
                     TView++;
                 }
-//            if(currNum<minRView){
-//                RView++;
-//                minRView=currNum;
-//            }
-//            if(currNum>minRView){
-//                minRView=currNum;
-//            }
-
             }
+
+            Boolean end_cond=false;
+            do{
+                if(cannSeeBottom.isEmpty()){
+                    end_cond=true;
+                    cannSeeBottom.offer(currNum);
+                }
+                else {
+                    if(cannSeeBottom.peek()<currNum){
+                        cannSeeBottom.poll();
+                    }
+                    else {
+                        cannSeeBottom.offer(currNum);
+                        end_cond=true;
+                    }
+                }
+            }while (!end_cond);
+
         }
+        BView=cannSeeBottom.size();
+
+
         //analizo res de la izq
         if (view.get(2)[pos.x] != 0) {
             if((view.get(2)[pos.x]) - LView<0){
@@ -118,16 +150,37 @@ public class SkyscrapersRule implements Rule {
         }
 
         //anallizo restriccion de la derecha
-//        if(pos.y==board.getMatrix().length){ //analizo el ultimo numero de la derecha
-//            if(RView!= view.get(3)[pos.x]) {
+//        if (view.get(3)[pos.x] != 0) {
+//
+//            if ((RView + (board.getMatrix().length - (pos.x + 1))) != (view.get(3)[pos.x])) {
 //                return null;
 //            }
 //        }
-//        else {
-//            if(RView>view.get(3)[pos.x]){
-//                return null;
-//            }
-//        }
+
+        if(view.get(3)[pos.x] != 0) {
+            if (pos.y+1 == board.getMatrix().length) { //analizo el ultimo numero de la derecha
+                if (RView != view.get(3)[pos.x]) {
+                    return null;
+                }
+//            } else {
+//                if (RView > view.get(3)[pos.x]) {
+//                    return null;
+//                }
+            }
+        }
+
+        //analizo bottom
+        if(view.get(1)[pos.y] != 0) {
+            if (pos.x+1 == board.getMatrix().length) { //analizo el ultimo numero de la derecha
+                if (BView != view.get(1)[pos.y]) {
+                    return null;
+                }
+//            } else {
+//                if (RView > view.get(3)[pos.x]) {
+//                    return null;
+//                }
+            }
+        }
 
         Board rta = board.cloneBoard();
 
@@ -193,19 +246,28 @@ public class SkyscrapersRule implements Rule {
     }
 
     public static void main(String args[]) {
-        int leftViews[] = {2, 0, 2};
-        int topViews[] = {2, 1, 0};
+//        int leftViews[] = {0,0,0};
+//        int topViews[] = {0, 0, 0};
+//        int rightViews[]={0,0,0};
+//        int bottomViews[]={1,2,2};
+//        int elseViews[] = {0, 0, 0};
+//        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-        int elseViews[] = {0, 0, 0};
-        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-
-//        int leftViews[] = {2, 3, 2,1};
-//        int topViews[] = {2, 1,3, 2};
-//
+//        int leftViews[] = {2,3,2,1};
+//        int topViews[] = {2,1,3,2};
+//        int rightViews[] = {2,1,2,3};
+//        int bottomViews[]={1,3,2,3};
 //        int elseViews[] = {0, 0, 0,0};
 //        int m[][] = {{0, 0, 0,0}, {0,0,0, 0}, {0,0, 0, 0},{0,0,0,0}};
 
-        Board b = new Board(3, topViews, elseViews, leftViews, elseViews, m);
+        int leftViews[] = {3,2,3,2,1};
+        int topViews[] = {4,2,1,2,3};
+        int rightViews[] = {3,4,1,2,2};
+        int bottomViews[]={1,4,3,2,2};
+        int elseViews[] = {0, 0, 0,0,0};
+        int m[][] = {{0, 0,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
+
+        Board b = new Board(5, topViews, bottomViews, leftViews, rightViews, m);
         SkyscrapersState s = new SkyscrapersState(b);
         System.out.println("Inicial");
         s.printMatrix(b.getMatrix());

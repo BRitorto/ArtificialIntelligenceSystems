@@ -2,8 +2,7 @@
 target/
 
 # Ignore .idea stuff
-**/.idea
-./**/.idea/**/workspace.xml
+/.idea/**/
 .idea/**/workspace.xml
 .idea/**/uiDesigner.xml
 *.iml

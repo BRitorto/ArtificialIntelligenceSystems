@@ -55,7 +55,7 @@ public class GPSEngine {
 				open.add(rootNode);
 			}
 
-		}while(strategy == IDDFS && open.size() > 0);
+		} while(strategy == IDDFS && open.size() > 0);
 		failed = true;
 		finished = true;
 	}

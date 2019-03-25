@@ -8,14 +8,18 @@ import java.util.List;
 
 public class SkyscrapersProblem implements Problem<Board> {
     private Board initialBoard;
+    private List<Rule> rules;
 
-    public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
+    public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
+                              List<Rule> rules) {
         this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews);
+        this.rules = rules;
     }
 
     public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
-                              int[][] initialMatrix) {
+                              int[][] initialMatrix, List<Rule> rules) {
         this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews, initialMatrix);
+        this.rules = rules;
     }
 
     @Override
@@ -30,6 +34,6 @@ public class SkyscrapersProblem implements Problem<Board> {
 
     @Override
     public List<Rule> getRules() {
-        return null;
+        return rules;
     }
 }

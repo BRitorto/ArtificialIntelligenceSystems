@@ -1,7 +1,0 @@
-# Ignore .class files
-target/
-
-# Ignore .idea stuff
-.idea/**/workspace.xml
-.idea/**/uiDesigner.xml
-*.iml

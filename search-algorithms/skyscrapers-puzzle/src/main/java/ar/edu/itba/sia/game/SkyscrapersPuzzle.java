@@ -1,6 +1,11 @@
 package ar.edu.itba.sia.game;
 
+import ar.edu.itba.sia.EngineFactory;
+import ar.edu.itba.sia.GPSEngine;
+import ar.edu.itba.sia.SearchStrategy;
+
 import java.awt.*;
+import java.util.LinkedList;
 
 public class SkyscrapersPuzzle {
 
@@ -23,27 +28,26 @@ public class SkyscrapersPuzzle {
         int topViews[] = {4, 2, 1, 2, 3};
         int rightViews[] = {3, 4, 1, 2, 2};
         int bottomViews[] = {1, 4, 3, 2, 2};
-        int elseViews[] = {0, 0, 0, 0, 0};
         int m[][] = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
 
+        LinkedList rules = new LinkedList<SkyscrapersFillRule>();
         Board b = new Board(5, topViews, bottomViews, leftViews, rightViews, m);
-        SkyscrapersState s = new SkyscrapersState(b);
-        System.out.println("Inicial");
-        s.printMatrix(b.getMatrix());
-        //SkyscrapersFillRule r = new SkyscrapersFillRule();
-
-    }
-
-    private boolean fullBoard(Board b) {
-        for (int i = 0; i < b.getMatrix().length; i++) {
-            for (int j = 0; j < b.getMatrix().length; j++) {
-                if (b.getMatrix()[i][j].getHeight() == 0) {
-                    return false;
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                for (int k = 1; k<6; k++){
+                    SkyscrapersFillRule rule = new SkyscrapersFillRule(k, i, j);
+                    rules.add(rule);
                 }
             }
         }
-        return true;
+
+        SkyscrapersProblem problem = new SkyscrapersProblem(5, topViews, bottomViews, leftViews, rightViews, rules);
+        System.out.println("Inicial");
+        EngineFactory factory = new EngineFactory();
+        GPSEngine engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
+        engine.findSolution();
     }
+
 
 // inicializar rules y problem
     // depenede de si es swap o put

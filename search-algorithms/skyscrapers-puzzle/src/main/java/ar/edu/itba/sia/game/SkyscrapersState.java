@@ -9,10 +9,6 @@ public class SkyscrapersState implements State {
         this.currentBoard = board;
     }
 
-    public Board getCurrentBoard() {
-        return currentBoard;
-    }
-
     @Override
     public String getRepresentation() {
         return printMatrix(currentBoard.getMatrix());
@@ -30,5 +26,9 @@ public class SkyscrapersState implements State {
             str += "|" + "|\t";
         }
         return str;
+    }
+
+    public Board getCurrentBoard() {
+        return currentBoard;
     }
 }

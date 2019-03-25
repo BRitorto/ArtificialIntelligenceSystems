@@ -7,9 +7,8 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.PriorityQueue;
 
-public class SkyscrapersRuleSwap implements Rule {
+public class SkyscrapersSwapRule implements Rule {
     public static final int COST = 12;
     private static final String RULE_NAME = "SWAP";
     private final String name;
@@ -17,7 +16,7 @@ public class SkyscrapersRuleSwap implements Rule {
     private Point pos1;
     private Point pos2;
 
-    public SkyscrapersRuleSwap(int x1, int y1, int x2, int y2) {
+    public SkyscrapersSwapRule(int x1, int y1, int x2, int y2) {
         this.pos1 = new Point(x1, y1);
         this.pos2 = new Point(x2, y2);
         this.name = RULE_NAME + " (" + x1 + ", " + y1 + ") <-> (" + x2 + ", " + y2 + ")";
@@ -75,8 +74,8 @@ public class SkyscrapersRuleSwap implements Rule {
         Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m, fixedCells);
         SkyscrapersState s = new SkyscrapersState(b);
         System.out.println("Inicial");
-        s.printMatrix(b.getMatrix());
-        SkyscrapersRuleSwap r = new SkyscrapersRuleSwap(1,1,0,0);
+        s.getCurrentBoard().printMatrix();
+        SkyscrapersSwapRule r = new SkyscrapersSwapRule(1,1,0,0);
 
         boolean rta = r.apply(s).isPresent();
 

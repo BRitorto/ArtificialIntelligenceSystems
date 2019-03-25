@@ -9,6 +9,10 @@ public class SkyscrapersState implements State {
         this.currentBoard = board;
     }
 
+    public Board getCurrentBoard() {
+        return currentBoard;
+    }
+
     @Override
     public String getRepresentation() {
         return null;

@@ -1,35 +1,51 @@
 package ar.edu.itba.sia.game;
 
-import ar.edu.itba.sia.api.Problem;
-import ar.edu.itba.sia.api.Rule;
-import ar.edu.itba.sia.api.State;
+import java.awt.*;
 
-import java.util.List;
+public class SkyscrapersPuzzle {
 
-public class SkyscrapersPuzzle implements Problem<Board> {
-    private Board initialBoard;
+    public static void main(String args[]) {
+//        int leftViews[] = {0,0,0};
+//        int topViews[] = {0, 0, 0};
+//        int rightViews[]={0,0,0};
+//        int bottomViews[]={1,2,2};
+//        int elseViews[] = {0, 0, 0};
+//        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-    public SkyscrapersPuzzle(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews) {
-        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews);
+//        int leftViews[] = {2,3,2,1};
+//        int topViews[] = {2,1,3,2};
+//        int rightViews[] = {2,1,2,3};
+//        int bottomViews[]={1,3,2,3};
+//        int elseViews[] = {0, 0, 0,0};
+//        int m[][] = {{0, 0, 0,0}, {0,0,0, 0}, {0,0, 0, 0},{0,0,0,0}};
+
+        int leftViews[] = {3, 2, 3, 2, 1};
+        int topViews[] = {4, 2, 1, 2, 3};
+        int rightViews[] = {3, 4, 1, 2, 2};
+        int bottomViews[] = {1, 4, 3, 2, 2};
+        int elseViews[] = {0, 0, 0, 0, 0};
+        int m[][] = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
+
+        Board b = new Board(5, topViews, bottomViews, leftViews, rightViews, m);
+        SkyscrapersState s = new SkyscrapersState(b);
+        System.out.println("Inicial");
+        s.printMatrix(b.getMatrix());
+        //SkyscrapersFillRule r = new SkyscrapersFillRule();
+
     }
 
-    public SkyscrapersPuzzle(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
-                             int[][] initialMatrix) {
-        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews, initialMatrix);
+    private boolean fullBoard(Board b) {
+        for (int i = 0; i < b.getMatrix().length; i++) {
+            for (int j = 0; j < b.getMatrix().length; j++) {
+                if (b.getMatrix()[i][j].getHeight() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
-    @Override
-    public State getInitState() {
-        return new SkyscrapersState(this.initialBoard);
-    }
-
-    @Override
-    public boolean isGoal(State state) {
-        return false;
-    }
-
-    @Override
-    public List<Rule> getRules() {
-        return null;
-    }
+// inicializar rules y problem
+    // depenede de si es swap o put
+    // return new engine con incluido la search strategy
 }

@@ -15,21 +15,20 @@ public class SkyscrapersState implements State {
 
     @Override
     public String getRepresentation() {
-        return null;
+        return printMatrix(currentBoard.getMatrix());
     }
 
-    public void printMatrix(Skyscraper[][] m){
+    private String printMatrix(Skyscraper[][] m){
         int rows = m.length;
         int columns = m[0].length;
         String str = "|\t";
 
-        for(int i=0; i<rows; i++){
+        for(int i=0; i<rows; i++) {
             for(int j=0; j<columns; j++){
                 str += m[i][j].getHeight() + "\t";
             }
-
-            System.out.println(str + "|");
-            str = "|\t";
+            str += "|" + "|\t";
         }
+        return str;
     }
 }

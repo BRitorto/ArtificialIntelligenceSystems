@@ -41,6 +41,7 @@ public class GPSEngine {
 		do {
 			while (open.size() > 0 && open.peek().getDepth() <= currentDepthLimit) {
 				GPSNode currentNode = open.remove();
+				System.out.println(currentNode.getState().getRepresentation());
 				if (problem.isGoal(currentNode.getState())) {
 					finished = true;
 					solutionNode = currentNode;

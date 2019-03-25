@@ -42,11 +42,11 @@ public class SkyscrapersPuzzle {
         }
 
         SkyscrapersProblem problem = new SkyscrapersProblem(5, topViews, bottomViews, leftViews, rightViews, rules);
-        System.out.println("Inicial");
         EngineFactory factory = new EngineFactory();
         GPSEngine engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
         engine.findSolution();
     }
+
 
 
 // inicializar rules y problem

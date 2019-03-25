@@ -28,7 +28,7 @@ public class GPSEngine {
 		bestCosts = new HashMap<>();
 		this.problem = problem;
 		this.strategy = strategy;
-		this.heuristic = Optional.of(heuristic);
+		this.heuristic = null;
 		explosionCounter = 0;
 		finished = false;
 		failed = false;
@@ -65,6 +65,7 @@ public class GPSEngine {
 		Collection<GPSNode> newCandidates;
 		switch (strategy) {
 		case BFS:
+			System.out.println("BFS");
 			if (bestCosts.containsKey(node.getState())) {
 				return;
 			}

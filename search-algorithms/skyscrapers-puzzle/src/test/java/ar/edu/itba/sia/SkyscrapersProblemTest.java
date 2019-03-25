@@ -17,7 +17,6 @@ public class SkyscrapersProblemTest {
 
     @Test
     public void GoalStateIsGoalTest(){
-        Skyscraper[][] matrix = new Skyscraper[3][3];
         int leftViews[] = {2,2,1};
         int topViews[] = {2, 2, 1};
         int rightViews[]={1,2,3};
@@ -27,10 +26,8 @@ public class SkyscrapersProblemTest {
         SkyscrapersState s = new SkyscrapersState(b);
 
         SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
-        //assertTrue(prob.isGoal(s));
-        System.out.println(prob.isGoal(s));
-
-
+        System.out.println(s.getRepresentation());
+        assertTrue(prob.isGoal(s));
 
     }
 }

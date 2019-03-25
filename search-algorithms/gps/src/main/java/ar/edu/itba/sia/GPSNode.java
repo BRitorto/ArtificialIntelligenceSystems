@@ -6,20 +6,16 @@ import ar.edu.itba.sia.api.State;
 public class GPSNode {
 
 	private State state;
-
 	private GPSNode parent;
-
 	private Integer cost;
-
 	private Rule generationRule;
-
 	private Integer depth;
 
 	public GPSNode(State state, Integer cost, Rule generationRule) {
 		this.state = state;
 		this.cost = cost;
 		this.generationRule = generationRule;
-		this.depth = parent.getDepth()+1;
+		this.depth = 0;
 	}
 
 	public GPSNode(State state, Integer cost, Integer depth, Rule generationRule) {

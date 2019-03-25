@@ -31,7 +31,6 @@ public class SkyscrapersProblem implements Problem<Board> {
     @Override
     public boolean isGoal(State state) {
         SkyscrapersState currState = (SkyscrapersState) state;
-        PriorityQueue<Integer> rightQueue = new PriorityQueue<>();
         int index = 0, dimension = currState.getCurrentBoard().getMatrix().length;
         int[] topView = new int[dimension];
         int[] bottomView = new int[dimension];
@@ -61,33 +60,31 @@ public class SkyscrapersProblem implements Problem<Board> {
         // }
 
         if (!checkColsTopBottom(currState,topView, bottomView)){
+            System.out.println("falla aca");
             return false;
         }
+        if (!checkRowsLeftRight(currState, leftView, rightView)) {
+            System.out.println("falla aca tambien");
+            return false;
+        }
+        return true;
 
-        return checkRowsLeftRight(currState, leftView, rightView);
     }
 
     private boolean checkColsTopBottom(SkyscrapersState state, int[] topView, int[] bottomView){
         PriorityQueue<Integer> bottomQueue = new PriorityQueue<>();
         Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
-        int max=0, counterSeen=0, j;
-        for(int i =0; i<topView.length; i++){
-            j = 0;
-            for(; j<topView.length; j++){
+        for (int i = 0; i<topView.length; i++) {
+            int max = 0, counterSeen = 0;
+            for (int j = 0; j<topView.length; j++) {
                 int curr_height = matrix[i][j].getHeight();
-                if(curr_height > max){
+                if (curr_height > max) {
                     counterSeen++;
-                    max= curr_height;
+                    max = curr_height;
                 }
                 updateQueueWithVisibleBuildings(bottomQueue, curr_height);
             }
             if (counterSeen != topView[i] || bottomQueue.size() != bottomView[i]){
-                System.out.printf("Error at %d : %d\n", i, j);
-                if (counterSeen != topView[i]) {
-                    System.out.printf(" 1 Expected %d Actual %d ", topView[i], counterSeen);
-                }else{
-                    System.out.printf(" 2 Expected %d Actual %d ", bottomQueue.size(), bottomView[i]);
-                }
                 return false;
             }
             while(!bottomQueue.isEmpty()){
@@ -100,16 +97,15 @@ public class SkyscrapersProblem implements Problem<Board> {
     private boolean checkRowsLeftRight(SkyscrapersState state, int[] leftView, int[] rightView){
         PriorityQueue<Integer> rightQueue = new PriorityQueue<>();
         Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
-        int max=0, counterSeen=0, j;
-        for(int i =0; i<leftView.length; i++){
-            j = 0;
-            for(; j<leftView.length; j++){
+        for (int i =0; i<leftView.length; i++){
+            int max = 0, counterSeen = 0;
+            for (int j = 0; j<leftView.length; j++){
                 int curr_height = matrix[i][j].getHeight();
                 if(curr_height > max){
                     counterSeen++;
-                    max= curr_height;
+                    max = curr_height;
                 }
-                rightQueue=updateQueueWithVisibleBuildings(rightQueue, curr_height);
+                rightQueue = updateQueueWithVisibleBuildings(rightQueue, curr_height);
             }
             if (counterSeen != leftView[i] || rightQueue.size() != rightView[i]){
                 return false;
@@ -136,8 +132,6 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
             }
         } while (!end_cond);
-
-        System.out.printf("\n HOLA HOLA HOLA %d HOLA HOLA HOLA ", queue.size());
 
         return queue;
     }

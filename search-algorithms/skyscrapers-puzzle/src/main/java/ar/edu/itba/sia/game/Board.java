@@ -24,6 +24,11 @@ public class Board {
             throw new IllegalDimensionException();
         }
         this.matrix = new Skyscraper[dimension][dimension];
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                this.matrix[i][j] = new Skyscraper(i, j);
+            }
+        }
         this.topViews = topViews;
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
@@ -49,7 +54,7 @@ public class Board {
         this.matrix = new Skyscraper[dimension][dimension];
         for (int i = 0; i < initialMatrix.length; i++) {
             for (int j = 0; j < initialMatrix[0].length; j++) {
-                this.matrix[i][j] = new Skyscraper(i, j);
+                this.matrix[i][j] = new Skyscraper(i, j, initialMatrix[i][j]);
             }
         }
         this.topViews = topViews;
@@ -112,7 +117,7 @@ public class Board {
             }
 
             System.out.println(str + "|");
-            str = "|\t";
+            str += "|\t";
         }
     }
 

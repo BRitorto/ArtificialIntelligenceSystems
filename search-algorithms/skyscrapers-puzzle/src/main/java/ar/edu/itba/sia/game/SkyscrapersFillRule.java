@@ -39,11 +39,11 @@ public class SkyscrapersFillRule implements Rule {
         List<int[]> view = myState.getCurrentBoard().getViews();
 
         if (!checkRowsLeftRight(myState, view)) {
-            return Optional.of(null);
+            return Optional.empty();
         }
 
         if (!checkColsTopBottom(myState, view)) {
-            return Optional.of(null);
+            return Optional.empty();
         }
 
         Board rta = myState.getCurrentBoard().cloneBoard();
@@ -52,7 +52,7 @@ public class SkyscrapersFillRule implements Rule {
     }
 
     private boolean checkRowsLeftRight(SkyscrapersState state, List<int[]> view) {
-        int currMaxRow = 0, currNum = 0, RView = 0, LView = 0;
+        int currMaxRow = 0, currNum, RView, LView = 0;
         for (int i = 0; i <= this.position.y; i++) {
             if (i == this.position.y) {
                 currNum = this.height;

@@ -51,6 +51,16 @@ public class SkyscrapersFillRule implements Rule {
         return Optional.of(new SkyscrapersState(rta));
     }
 
+    /*private boolean checkRows(SkyscrapersState state) {
+        for (int i = 0; i < state.getCurrentBoard().getMatrix().length ; i++) {
+            if (state.getCurrentBoard().getMatrix()[i][this.position.y].getHeight() != 0) {
+                if (this.height == state.getCurrentBoard().getMatrix()[i][this.position.y].getHeight())
+                    return false;
+            }
+        }
+        return true;
+    }*/
+
     private boolean checkRowsLeftRight(SkyscrapersState state, List<int[]> view) {
         int currMaxRow = 0, currNum, RView, LView = 0;
         for (int i = 0; i <= this.position.y; i++) {

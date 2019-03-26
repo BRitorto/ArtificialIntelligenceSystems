@@ -65,7 +65,6 @@ public class GPSEngine {
 		Collection<GPSNode> newCandidates;
 		switch (strategy) {
 		case BFS:
-			System.out.println("BFS");
 			if (bestCosts.containsKey(node.getState())) {
 				return;
 			}
@@ -137,7 +136,7 @@ public class GPSEngine {
 			Rule rule = (Rule) obj;
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
-				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);
+				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth() + 1, rule);
 				newNode.setParent(node);
 				candidates.add(newNode);
 			}

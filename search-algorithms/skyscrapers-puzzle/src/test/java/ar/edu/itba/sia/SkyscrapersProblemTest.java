@@ -26,7 +26,6 @@ public class SkyscrapersProblemTest {
         SkyscrapersState s = new SkyscrapersState(b);
 
         SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
-        System.out.println(s.getRepresentation());
         assertTrue(prob.isGoal(s));
 
     }

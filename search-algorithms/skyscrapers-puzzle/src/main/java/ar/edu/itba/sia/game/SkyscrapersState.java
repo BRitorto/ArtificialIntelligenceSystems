@@ -23,7 +23,7 @@ public class SkyscrapersState implements State {
             for(int j=0; j<columns; j++){
                 str += m[i][j].getHeight() + "\t";
             }
-            str += "|" + "|\t";
+            str += "|" + "\n" + "|\t";
         }
         return str;
     }

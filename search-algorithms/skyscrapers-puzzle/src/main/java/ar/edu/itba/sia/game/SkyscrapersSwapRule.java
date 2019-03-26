@@ -46,7 +46,7 @@ public class SkyscrapersSwapRule implements Rule {
 
 
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         int leftViews[] = {0,0,0};
         int topViews[] = {0, 0, 0};
         int rightViews[]={0,0,0};
@@ -73,7 +73,6 @@ public class SkyscrapersSwapRule implements Rule {
 
         Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m, fixedCells);
         SkyscrapersState s = new SkyscrapersState(b);
-        System.out.println("Inicial");
         s.getCurrentBoard().printMatrix();
         SkyscrapersSwapRule r = new SkyscrapersSwapRule(1,1,0,0);
 
@@ -87,5 +86,5 @@ public class SkyscrapersSwapRule implements Rule {
             state.getCurrentBoard().printMatrix();
         }
 
-    }
+    }*/
 }

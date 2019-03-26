@@ -17,12 +17,6 @@ public class SkyscrapersProblem implements Problem<Board> {
         this.rules = rules;
     }
 
-    public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
-                              int[][] initialMatrix, List<Rule> rules) {
-        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews, initialMatrix);
-        this.rules = rules;
-    }
-
     @Override
     public State getInitState() {
         return new SkyscrapersState(this.initialBoard);
@@ -54,17 +48,11 @@ public class SkyscrapersProblem implements Problem<Board> {
             }
             index++;
         }
-        //if(!currState.getCurrentBoard().isComplete()){
-        //    System.out.println("ERRORRRRR");
-        //    return false;
-        // }
 
         if (!checkColsTopBottom(currState,topView, bottomView)){
-            System.out.println("falla aca");
             return false;
         }
         if (!checkRowsLeftRight(currState, leftView, rightView)) {
-            System.out.println("falla aca tambien");
             return false;
         }
         return true;
@@ -132,7 +120,6 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
             }
         } while (!end_cond);
-
         return queue;
     }
 

@@ -31,6 +31,9 @@ public class SkyscrapersProblem implements Problem<Board> {
         int[] leftView = new int[dimension];
         int[] rightView = new int[dimension];
 
+        if (!currState.getCurrentBoard().isComplete()){
+            return false;
+        }
         for(int[] view: currState.getCurrentBoard().getViews()){
             switch(index){
                 case 0:

@@ -26,10 +26,6 @@ public class BoardTest {
         dimension = topViews.length;
     }
 
-//    @Test
-//    public void mustPassTest(){
-//        assertTrue(true);
-//    }
     @Test(expected = IllegalDimensionException.class)
     public void wrongSideDimensionsThrowsExceptionTest(){
         int[] bad_side= {1, 2, 3};
@@ -39,25 +35,15 @@ public class BoardTest {
         Board fails_board = new Board(dimension, good_side, bad_side, good_side, good_side);
     }
 
-    /*
-     *  See getViews implementation:
-     *  index   |   view
-     *  ------------------
-     *     0    |   topViews
-     *     1    |   bottomViews
-     *     2    |   leftViews
-     *     3    |   rightViews
-     */
     @Test
     public void createCorrectBoardTest(){
 
         Board test_board = new Board(this.dimension, this.topViews,
                                     this.bottomViews, this.leftViews, this.rightViews);
-        List<int[]> views = test_board.getViews();
-        assertArrayEquals(this.topViews, views.get(0));
-        assertArrayEquals(this.bottomViews, views.get(1));
-        assertArrayEquals(this.leftViews, views.get(2));
-        assertArrayEquals(this.rightViews, views.get(3));
+        assertArrayEquals(this.topViews, test_board.getTopViews());
+        assertArrayEquals(this.bottomViews, test_board.getBottomViews());
+        assertArrayEquals(this.leftViews, test_board.getLeftViews());
+        assertArrayEquals(this.rightViews, test_board.getRightViews());
     }
 
     @Test

@@ -24,38 +24,19 @@ public class SkyscrapersProblem implements Problem<Board> {
 
     @Override
     public boolean isGoal(State state) {
+
         SkyscrapersState currState = (SkyscrapersState) state;
-        int index = 0, dimension = currState.getCurrentBoard().getMatrix().length;
-        int[] topView = new int[dimension];
-        int[] bottomView = new int[dimension];
-        int[] leftView = new int[dimension];
-        int[] rightView = new int[dimension];
+        Board board = currState.getCurrentBoard();
 
-        if (!currState.getCurrentBoard().isComplete()){
+
+        if (!board.isComplete()){
             return false;
         }
-        for(int[] view: currState.getCurrentBoard().getViews()){
-            switch(index){
-                case 0:
-                    topView = view;
-                    break;
-                case 1:
-                    bottomView = view;
-                    break;
-                case 2:
-                    leftView = view;
-                    break;
-                case 3:
-                    rightView = view;
-                    break;
-            }
-            index++;
-        }
 
-        if (!checkColsTopBottom(currState,topView, bottomView)){
+        if (!checkColsTopBottom(currState,board.getTopViews(), board.getBottomViews())){
             return false;
         }
-        if (!checkRowsLeftRight(currState, leftView, rightView)) {
+        if (!checkRowsLeftRight(currState, board.getLeftViews(), board.getRightViews())) {
             return false;
         }
         return true;

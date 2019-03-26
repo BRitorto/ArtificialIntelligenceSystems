@@ -68,15 +68,6 @@ public class Board {
                 leftViews.length == dimension && rightViews.length == dimension;
     }
 
-    public List<int[]> getViews() {
-        LinkedList<int[]> list = new LinkedList<>();
-        list.add(this.topViews);
-        list.add(this.bottomViews);
-        list.add(this.leftViews);
-        list.add(this.rightViews);
-        return list;
-    }
-
     public void setMatrix(Skyscraper[][] matrix) {
         this.matrix = matrix;
     }
@@ -124,4 +115,34 @@ public class Board {
     public boolean isComplete() {
         return this.checkEmptySpaces() == 0;
     }
+
+
+    //GETTERS FOR THE PEOPLE
+
+    public List<int[]> getViews() {
+        LinkedList<int[]> list = new LinkedList<>();
+        list.add(this.topViews);
+        list.add(this.bottomViews);
+        list.add(this.leftViews);
+        list.add(this.rightViews);
+        return list;
+    }
+
+    public int[] getTopViews(){
+        return topViews;
+    }
+
+    public int[] getBottomViews(){
+        return bottomViews;
+    }
+
+    public int[] getLeftViews(){
+        return leftViews;
+    }
+
+    public int[] getRightViews(){
+        return rightViews;
+    }
+
+
 }

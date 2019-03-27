@@ -17,6 +17,11 @@ public class SkyscrapersProblem implements Problem<Board> {
         this.rules = rules;
     }
 
+    public SkyscrapersProblem(Board board, List<Rule> rules){
+        this.initialBoard = board;
+        this.rules = rules;
+    }
+
     @Override
     public State getInitState() {
         return new SkyscrapersState(this.initialBoard);

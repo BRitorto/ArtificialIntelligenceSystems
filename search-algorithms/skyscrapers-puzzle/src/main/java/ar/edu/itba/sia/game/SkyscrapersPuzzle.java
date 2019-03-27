@@ -10,8 +10,8 @@ import java.util.LinkedList;
 public class SkyscrapersPuzzle {
 
     public static void main(String args[]) {
-        int leftViews[] = {0, 0, 0};
-        int topViews[] = {0, 0, 0};
+        int leftViews[] = {2,2, 1};
+        int topViews[] = {2, 2, 1};
         int rightViews[] = {1, 2, 3};
         int bottomViews[] = {1, 2, 3};
         int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -41,7 +41,6 @@ public class SkyscrapersPuzzle {
 
         SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, rules);
         EngineFactory factory = new EngineFactory();
-        System.out.println(problem.getInitState().getRepresentation());
         GPSEngine engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
 
         //SkyscrapersState state = (SkyscrapersState) problem.getRules().get(0).apply(problem.getInitState()).get();

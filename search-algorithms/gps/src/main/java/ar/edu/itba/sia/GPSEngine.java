@@ -47,6 +47,7 @@ public class GPSEngine {
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
 				solutionNode = currentNode;
+				System.out.println(solutionNode.getState().getRepresentation());
 				System.out.println("GANAMOS!");
 				return;
 			} else {

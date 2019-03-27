@@ -12,9 +12,8 @@ public class SkyscrapersPuzzle {
     public static void main(String args[]) {
         int leftViews[] = {0, 0, 0};
         int topViews[] = {0, 0, 0};
-        int rightViews[] = {0, 0, 0};
-        int bottomViews[] = {0, 0, 0};
-        int elseViews[] = {0, 0, 0};
+        int rightViews[] = {1, 2, 3};
+        int bottomViews[] = {1, 2, 3};
         int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 //        int leftViews[] = {2,3,2,1};

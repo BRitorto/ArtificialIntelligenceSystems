@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class Board {
+public class Board{
     private int[] topViews;
     private int[] bottomViews;
     private int[] leftViews;

@@ -17,6 +17,23 @@ public class Skyscraper {
     }
 
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj == this){
+            return true;
+        }
+
+        if (obj == null){
+            return true;
+        }
+
+
+        Skyscraper otherSkyscraper = (Skyscraper) obj;
+        return this.position.equals(otherSkyscraper.getPosition())
+                && this.height == otherSkyscraper.getHeight();
+    }
+
+    //Getters for the people
     public Point getPosition() {
         return position;
     }

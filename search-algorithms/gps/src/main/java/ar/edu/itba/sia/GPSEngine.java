@@ -35,30 +35,48 @@ public class GPSEngine {
 	}
 
 	public void findSolution() {
-		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, 0, null);
+		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null);
 		open.add(rootNode);
-		int currentDepthLimit = strategy == IDDFS ? 1 : Integer.MAX_VALUE;
-		do {
-			while (open.size() > 0 && open.peek().getDepth() <= currentDepthLimit) {
-				GPSNode currentNode = open.remove();
-				System.out.println(currentNode.getState().getRepresentation());
-				if (problem.isGoal(currentNode.getState())) {
-					finished = true;
-					solutionNode = currentNode;
-					return;
-				} else {
-					explode(currentNode);
-				}
+		// TODO: ¿Lógica de IDDFS?
+		while (open.size() > 0) {
+			GPSNode currentNode = open.remove();
+			System.out.println("--------------------------");
+			System.out.println(currentNode.getState().getRepresentation());
+			System.out.println("--------------------------");
+			if (problem.isGoal(currentNode.getState())) {
+				finished = true;
+				solutionNode = currentNode;
+				return;
+			} else {
+				explode(currentNode);
 			}
-			if(strategy == IDDFS && open.size() > 0){
-				currentDepthLimit++;
-				open.clear();
-				open.add(rootNode);
-			}
-
-		} while(strategy == IDDFS && open.size() > 0);
+		}
 		failed = true;
 		finished = true;
+//		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, 0, null);
+//		open.add(rootNode);
+//		int currentDepthLimit = strategy == IDDFS ? 1 : Integer.MAX_VALUE;
+//		do {
+//			while (open.size() > 0 && open.peek().getDepth() <= currentDepthLimit) {
+//				GPSNode currentNode = open.remove();
+//				System.out.println(currentNode.getState().getRepresentation());
+//				if (problem.isGoal(currentNode.getState())) {
+//					finished = true;
+//					solutionNode = currentNode;
+//					return;
+//				} else {
+//					explode(currentNode);
+//				}
+//			}
+//			if(strategy == IDDFS && open.size() > 0){
+//				currentDepthLimit++;
+//				open.clear();
+//				open.add(rootNode);
+//			}
+//
+//		} while(strategy == IDDFS && open.size() > 0);
+//		failed = true;
+//		finished = true;
 	}
 
 	private void explode(GPSNode node) {
@@ -126,21 +144,32 @@ public class GPSEngine {
 		}
 	}
 
-	/*
-	 *	TODO(Nachito): Why does for(Rule rule: problem.getRules()) throw incompatible types exception: Object cannot be converted to Rule
-	 */
+
 	private void addCandidates(GPSNode node, Collection<GPSNode> candidates) {
 		explosionCounter++;
 		updateBest(node);
-		for (Object obj : problem.getRules()) {
-			Rule rule = (Rule) obj;
+		for (Rule rule : (List<Rule>)problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
-				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth() + 1, rule);
+				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);
 				newNode.setParent(node);
+				System.out.println("************");
+				System.out.println(newNode.getState().getRepresentation());
+				System.out.println("************");
 				candidates.add(newNode);
 			}
 		}
+//		explosionCounter++;
+//		updateBest(node);
+//		for (Object obj : problem.getRules()) {
+//			Rule rule = (Rule) obj;
+//			Optional<State> newState = rule.apply(node.getState());
+//			if (newState.isPresent()) {
+//				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth() + 1, rule);
+//				newNode.setParent(node);
+//				candidates.add(newNode);
+//			}
+//		}
 	}
 
 	private boolean isBest(State state, Integer cost) {

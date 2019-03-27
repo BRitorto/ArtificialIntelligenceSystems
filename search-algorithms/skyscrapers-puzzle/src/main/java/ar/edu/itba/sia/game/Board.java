@@ -15,7 +15,13 @@ public class Board {
     private int emptySpaces;
 
     public Board cloneBoard(){
-        return new Board(this.bottomViews.length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,this.matrix);
+        Skyscraper [][] aux=new Skyscraper[matrix.length][matrix.length];
+        for(int i=0;i<matrix.length;i++){
+            for (int j=0;j<matrix.length;j++){
+                aux[i][j]=new Skyscraper(0,i,j);
+            }
+        }
+        return new Board(this.bottomViews.length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,aux);
     }
 
 

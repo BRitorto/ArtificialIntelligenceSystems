@@ -38,6 +38,11 @@ public class SkyscrapersFillRule implements Rule {
         SkyscrapersState myState = (SkyscrapersState) state;
         List<int[]> view = myState.getCurrentBoard().getViews();
 
+        Point aux=((SkyscrapersState) state).lastPositionToFill();
+        if(aux.x!=this.position.x || aux.y!=this.position.y){
+            return Optional.empty();
+        }
+
         if (!checkRowsLeftRight(myState, view)) {
             return Optional.empty();
         }

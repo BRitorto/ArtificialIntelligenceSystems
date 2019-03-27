@@ -2,6 +2,8 @@ package ar.edu.itba.sia.game;
 
 import ar.edu.itba.sia.api.State;
 
+import java.awt.*;
+
 public class SkyscrapersState implements State {
     private Board currentBoard;
 
@@ -30,5 +32,17 @@ public class SkyscrapersState implements State {
 
     public Board getCurrentBoard() {
         return currentBoard;
+    }
+
+    public Point lastPositionToFill(){
+        Skyscraper[][] auxM=getCurrentBoard().getMatrix();
+        for(int i=0;i<auxM.length;i++){
+            for(int j=0;j<auxM.length;j++){
+                if(auxM[i][j].getHeight()==0){
+                    return new Point(i,j);
+                }
+            }
+        }
+        return null;
     }
 }

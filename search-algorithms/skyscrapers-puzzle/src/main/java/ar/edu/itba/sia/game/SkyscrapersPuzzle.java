@@ -10,10 +10,10 @@ import java.util.LinkedList;
 public class SkyscrapersPuzzle {
 
     public static void main(String args[]) {
-        int leftViews[] = {1 ,2 ,3};
-        int topViews[] = {2, 3, 2};
-        int rightViews[] = {1, 1, 1};
-        int bottomViews[] = {1, 2, 2};
+        int leftViews[] = {0, 0, 0};
+        int topViews[] = {0, 0, 0};
+        int rightViews[] = {0, 0, 0};
+        int bottomViews[] = {0, 0, 0};
         int elseViews[] = {0, 0, 0};
         int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
@@ -44,23 +44,23 @@ public class SkyscrapersPuzzle {
         EngineFactory factory = new EngineFactory();
         GPSEngine engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
 
-        SkyscrapersState state = (SkyscrapersState) problem.getRules().get(0).apply(problem.getInitState()).get();
+        //SkyscrapersState state = (SkyscrapersState) problem.getRules().get(0).apply(problem.getInitState()).get();
 
-        int count = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                for (int k = 1; k < 4; k++) {
-                    if (problem.getRules().get(count).apply(state).isPresent()) {
-                        state = (SkyscrapersState) problem.getRules().get(count).apply(state).get();
-                        System.out.println(state.getRepresentation());
-                    }
-                    count++;
-                    System.out.println(count);
-                }
-            }
-        }
+//        int count = 0;
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                for (int k = 1; k < 4; k++) {
+//                    if (problem.getRules().get(count).apply(state).isPresent()) {
+//                        state = (SkyscrapersState) problem.getRules().get(count).apply(state).get();
+//                        System.out.println(state.getRepresentation());
+//                    }
+//                    count++;
+//                    System.out.println(count);
+//                }
+//            }
+//        }
 
-        //engine.findSolution();
+        engine.findSolution();
     }
 
 

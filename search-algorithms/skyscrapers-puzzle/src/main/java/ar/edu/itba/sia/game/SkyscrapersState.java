@@ -17,17 +17,47 @@ public class SkyscrapersState implements State {
     }
 
     public String printMatrix(Skyscraper[][] m){
+        int[] rightView = currentBoard.getRightViews();
+        int[] leftView = currentBoard.getLeftViews();
+        int[] topView = currentBoard.getTopViews();
+        int[] bottomView = currentBoard.getBottomViews();
+
         int rows = m.length;
         int columns = m[0].length;
-        String str = "|\t";
 
-        for(int i=0; i<rows; i++) {
-            for(int j=0; j<columns; j++){
-                str += m[i][j].getHeight() + "\t";
-            }
-            str += "|" + "\n" + "|\t";
+        StringBuilder str = new StringBuilder("\t\t");
+
+        for (int i = 0; i < topView.length; i++) {
+            str.append(topView[i]);
+            str.append("\t");
         }
-        return str;
+        str.append("\n\t");
+        for (int i = 0; i < (topView.length)*2+3; i++) {
+            str.append("─");
+            str.append(" ");
+        }
+        str.append("\n\t");
+        for(int i=0; i<rows; i++) {
+            str.append(leftView[i]);
+            str.append("|\t");
+            for(int j=0; j<columns; j++){
+                str.append(m[i][j].getHeight());
+                str.append("\t");
+            }
+            str.append("|");
+            str.append(rightView[i]);
+            str.append("\n\t");
+        }
+        for (int i = 0; i < (bottomView.length)*2+3; i++) {
+            str.append("─");
+            str.append(" ");
+        }
+        str.append("\n\t\t");
+        for (int i = 0; i < bottomView.length; i++) {
+            str.append(topView[i]);
+            str.append("\t");
+        }
+        return str.toString();
     }
 
     public Board getCurrentBoard() {

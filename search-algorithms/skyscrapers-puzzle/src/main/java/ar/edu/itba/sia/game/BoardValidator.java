@@ -1,60 +1,44 @@
 package ar.edu.itba.sia.game;
 
-import ar.edu.itba.sia.api.Problem;
-import ar.edu.itba.sia.api.Rule;
-import ar.edu.itba .sia.api.State;
-
-import java.util.List;
 import java.util.PriorityQueue;
 
-public class SkyscrapersProblem implements Problem<Board> {
-    private Board initialBoard;
-    private List<Rule> rules;
+public class BoardValidator {
 
-    public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
-                              List<Rule> rules) {
-        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews);
-        this.rules = rules;
+    public static void main(String[] args){
+        int leftViews[] = {1,0,2};
+        int topViews[] = {0,0,3};
+        int rightViews[] = {3,2,1};
+        int bottomViews[] = {0,2,1};
+        int m[][] = {{2,2,1}, {1,3,2}, {2,1,3}};
+        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
+        BoardValidator validator=new BoardValidator();
+
+        System.out.println(validator.cantConflicts(b));
     }
 
-    public SkyscrapersProblem(Board board, List<Rule> rules){
-        this.initialBoard = board;
-        this.rules = rules;
-    }
-
-    @Override
-    public State getInitState() {
-        return new SkyscrapersState(this.initialBoard);
-    }
-
-    @Override
-    public boolean isGoal(State state) {
-
-
-
-        SkyscrapersState currState = (SkyscrapersState) state;
-        Board board = currState.getCurrentBoard();
-
-
-        if (!board.isComplete()){
-            return false;
-        }
-
-        if (!checkColsTopBottom(currState,board.getTopViews(), board.getBottomViews())){
-            return false;
-        }
-        if (!checkRowsLeftRight(currState, board.getLeftViews(), board.getRightViews())) {
-            return false;
-        }
-        return true;
+    public BoardValidator(){
 
     }
 
-    //TODO: Ver si hay una forma más eficiente de checkear que no hayan repetidos
-    private boolean checkColsTopBottom(SkyscrapersState state, int[] topView, int[] bottomView){
+    public int cantConflicts(Board b){
+        Skyscraper[][] matrix=b.getMatrix();
+        int cantConflicts=0;
+        int[] topView=b.getTopViews();
+        int[] bottomView=b.getBottomViews();
+        int[] leftView=b.getLeftViews();
+        int[] rightView=b.getRightViews();
+
+        cantConflicts+=checkColsTopBottom(matrix,topView,bottomView);
+        cantConflicts+=checkRowsLeftRight(matrix,leftView,rightView);
+
+        return cantConflicts;
+
+    }
+
+    private int checkColsTopBottom(Skyscraper[][] matrix, int[] topView, int[] bottomView){
         PriorityQueue<Integer> bottomQueue = new PriorityQueue<>();
-        Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
         int[] seenHeights = new int[topView.length];
+        int cantConflicts=0;
 
         for (int j = 0; j<topView.length; j++) {
             int max = 0, counterSeen = 0;
@@ -63,7 +47,8 @@ public class SkyscrapersProblem implements Problem<Board> {
 
                 //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
                 if (seenHeights[currHeight - 1] != 0){
-                    return false;
+                    cantConflicts++;
+                    break;
                 }else{
                     seenHeights[currHeight - 1]++;
                 }
@@ -74,10 +59,16 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
                 updateQueueWithVisibleBuildings(bottomQueue, currHeight);
             }
-            if( topView[j]!=0 && bottomView[j] != 0) {
-                if (counterSeen != topView[j] || bottomQueue.size() != bottomView[j]) {
-
-                    return false;
+            if(bottomView[j] != 0){
+                if(bottomQueue.size() != bottomView[j]){
+                    cantConflicts++;
+                    break;
+                }
+            }
+            if( topView[j] != 0) {
+                if (counterSeen != topView[j] ) {
+                    cantConflicts++;
+                    break;
                 }
             }
             while(!bottomQueue.isEmpty()){
@@ -87,13 +78,13 @@ public class SkyscrapersProblem implements Problem<Board> {
                 seenHeights[k]=0;
             }
         }
-        return true;
+        return cantConflicts;
     }
 
-    private boolean checkRowsLeftRight(SkyscrapersState state, int[] leftView, int[] rightView){
+    private int checkRowsLeftRight(Skyscraper[][] matrix, int[] leftView, int[] rightView){
         PriorityQueue<Integer> rightQueue = new PriorityQueue<>();
-        Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
         int[] seenHeights = new int[leftView.length];
+        int cantConflicts=0;
 
         for (int i =0; i<leftView.length; i++){
             int max = 0, counterSeen = 0;
@@ -102,7 +93,8 @@ public class SkyscrapersProblem implements Problem<Board> {
                 int currHeight = matrix[i][j].getHeight();
                 //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
                 if (seenHeights[currHeight - 1] != 0){
-                    return false;
+                    cantConflicts++;
+                    break;
                 }else{
                     seenHeights[currHeight - 1]++;
                 }
@@ -113,9 +105,16 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
                 rightQueue = updateQueueWithVisibleBuildings(rightQueue, currHeight);
             }
-            if(leftView[i] != 0 && rightView[i] !=0) {
-                if (counterSeen != leftView[i] || rightQueue.size() != rightView[i]) {
-                    return false;
+            if(rightView[i] !=0){
+                if(rightQueue.size() != rightView[i]){
+                    cantConflicts++;
+                    break;
+                }
+            }
+            if(leftView[i] != 0  ) {
+                if (counterSeen != leftView[i]  ) {
+                    cantConflicts++;
+                    break;
                 }
             }
             while(!rightQueue.isEmpty()){
@@ -125,7 +124,7 @@ public class SkyscrapersProblem implements Problem<Board> {
                 seenHeights[k]=0;
             }
         }
-        return true;
+        return cantConflicts;
     }
 
     private PriorityQueue<Integer> updateQueueWithVisibleBuildings(PriorityQueue<Integer> queue, int currNum) {
@@ -145,13 +144,4 @@ public class SkyscrapersProblem implements Problem<Board> {
         } while (!end_cond);
         return queue;
     }
-
-
-
-    @Override
-    public List<Rule> getRules() {
-        return rules;
-    }
-
-
 }

@@ -60,6 +60,8 @@ public class SkyscrapersProblemTest {
         int rightViews[]={1,0,3};
         int bottomViews[]={0,0,0};
         int m[][] = {{2, 1, 3}, {1, 3, 2}, {3, 2, 1}};
+
+
         Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
         SkyscrapersState s = new SkyscrapersState(b);
 
@@ -70,7 +72,7 @@ public class SkyscrapersProblemTest {
 
     @Test
     public void isItBrokenTest(){
-        int leftViews[] = {0, 0, 0,0};
+        int leftViews[] = {2,3,2,1};
         int topViews[] = {2,1,3,2};
         int rightViews[] = {2,1,2,3};
         int bottomViews[]={1,3,2,3};

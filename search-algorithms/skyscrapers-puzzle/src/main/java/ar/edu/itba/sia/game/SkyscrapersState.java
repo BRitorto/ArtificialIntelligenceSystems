@@ -54,7 +54,7 @@ public class SkyscrapersState implements State {
         }
         str.append("\n\t\t");
         for (int i = 0; i < bottomView.length; i++) {
-            str.append(topView[i]);
+            str.append(bottomView[i]);
             str.append("\t");
         }
         return str.toString();

@@ -41,9 +41,9 @@ public class GPSEngine {
 		while (open.size() > 0) {
 			GPSNode currentNode = open.remove();
 			// estos comentarios son importantes
-			//System.out.println("-----------SACO DE OPEN---------------");
-			//System.out.println(currentNode.getState().getRepresentation());
-			//System.out.println("--------------------------");
+			System.out.println("-----------SACO DE OPEN---------------");
+			System.out.println(currentNode.getState().getRepresentation());
+			System.out.println("--------------------------");
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
 				solutionNode = currentNode;
@@ -157,9 +157,9 @@ public class GPSEngine {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);
 				newNode.setParent(node);
 				// estos comentarios son importantes
-//				System.out.println("******NEW NODE CANDIDATE******");
-//				System.out.println(newNode.getState().getRepresentation());
-//				System.out.println("************");
+				System.out.println("******NEW NODE CANDIDATE******");
+				System.out.println(newNode.getState().getRepresentation());
+				System.out.println("************");
 				candidates.add(newNode);
 			}
 		}

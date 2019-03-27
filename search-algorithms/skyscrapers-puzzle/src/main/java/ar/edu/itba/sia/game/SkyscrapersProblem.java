@@ -53,9 +53,10 @@ public class SkyscrapersProblem implements Problem<Board> {
         PriorityQueue<Integer> bottomQueue = new PriorityQueue<>();
         Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
         int[] seenHeights = new int[topView.length];
-        for (int i = 0; i<topView.length; i++) {
+
+        for (int j = 0; j<topView.length; j++) {
             int max = 0, counterSeen = 0;
-            for (int j = 0; j<topView.length; j++) {
+            for (int i = 0; i<topView.length; i++) {
                 int currHeight = matrix[i][j].getHeight();
 
                 //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
@@ -71,8 +72,8 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
                 updateQueueWithVisibleBuildings(bottomQueue, currHeight);
             }
-            if( topView[i]!=0 && bottomView[i] != 0) {
-                if (counterSeen != topView[i] || bottomQueue.size() != bottomView[i]) {
+            if( topView[j]!=0 && bottomView[j] != 0) {
+                if (counterSeen != topView[j] || bottomQueue.size() != bottomView[j]) {
 
                     return false;
                 }

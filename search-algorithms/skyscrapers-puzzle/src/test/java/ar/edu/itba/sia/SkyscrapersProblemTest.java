@@ -67,5 +67,19 @@ public class SkyscrapersProblemTest {
         assertTrue(prob.isGoal(s));
 
     }
+
+    @Test
+    public void isItBrokenTest(){
+        int leftViews[] = {0, 0, 0,0};
+        int topViews[] = {2,1,3,2};
+        int rightViews[] = {2,1,2,3};
+        int bottomViews[]={1,3,2,3};
+        int m[][] = {{3,4,1,2}, {1,3,2,4}, {2,1,4,3},{4,2,3,1}};
+        Board b = new Board(4, topViews, bottomViews, leftViews, rightViews, m);
+        SkyscrapersState s = new SkyscrapersState(b);
+
+        SkyscrapersProblem prob = new SkyscrapersProblem(4, topViews, bottomViews, leftViews, rightViews, null);
+        assertTrue(prob.isGoal(s));
+    }
 }
 

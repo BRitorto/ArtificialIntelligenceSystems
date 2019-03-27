@@ -35,6 +35,13 @@ public class SkyscrapersFillRule implements Rule {
 
     @Override
     public Optional<State> apply(State state) {
+        while(!canSeeBottom.isEmpty()){
+            canSeeBottom.poll();
+        }
+
+        while(!canSeeRight.isEmpty()){
+            canSeeRight.poll();
+        }
         SkyscrapersState myState = (SkyscrapersState) state;
         List<int[]> view = myState.getCurrentBoard().getViews();
 

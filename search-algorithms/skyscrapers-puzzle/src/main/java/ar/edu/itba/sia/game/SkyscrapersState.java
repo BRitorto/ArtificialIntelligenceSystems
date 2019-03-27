@@ -16,7 +16,7 @@ public class SkyscrapersState implements State {
         return printMatrix(currentBoard.getMatrix());
     }
 
-    private String printMatrix(Skyscraper[][] m){
+    public String printMatrix(Skyscraper[][] m){
         int rows = m.length;
         int columns = m[0].length;
         String str = "|\t";

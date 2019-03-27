@@ -40,12 +40,14 @@ public class GPSEngine {
 		// TODO: ¿Lógica de IDDFS?
 		while (open.size() > 0) {
 			GPSNode currentNode = open.remove();
-			System.out.println("--------------------------");
-			System.out.println(currentNode.getState().getRepresentation());
-			System.out.println("--------------------------");
+			// estos comentarios son importantes
+			//System.out.println("-----------SACO DE OPEN---------------");
+			//System.out.println(currentNode.getState().getRepresentation());
+			//System.out.println("--------------------------");
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
 				solutionNode = currentNode;
+				System.out.println("GANAMOS!");
 				return;
 			} else {
 				explode(currentNode);
@@ -153,9 +155,10 @@ public class GPSEngine {
 			if (newState.isPresent()) {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);
 				newNode.setParent(node);
-				System.out.println("************");
-				System.out.println(newNode.getState().getRepresentation());
-				System.out.println("************");
+				// estos comentarios son importantes
+//				System.out.println("******NEW NODE CANDIDATE******");
+//				System.out.println(newNode.getState().getRepresentation());
+//				System.out.println("************");
 				candidates.add(newNode);
 			}
 		}

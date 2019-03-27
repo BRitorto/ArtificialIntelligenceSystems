@@ -18,7 +18,10 @@ public class Board {
         Skyscraper [][] aux=new Skyscraper[matrix.length][matrix.length];
         for(int i=0;i<matrix.length;i++){
             for (int j=0;j<matrix.length;j++){
-                aux[i][j]=new Skyscraper(0,i,j);
+                if(this.matrix[i][j].getHeight()!=0)
+                    aux[i][j]=this.matrix[i][j];
+                else
+                    aux[i][j]=new Skyscraper(i,j,0);
             }
         }
         return new Board(this.bottomViews.length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,aux);

@@ -39,7 +39,7 @@ public class SkyscrapersFillRule implements Rule {
         List<int[]> view = myState.getCurrentBoard().getViews();
 
         Point aux=((SkyscrapersState) state).lastPositionToFill();
-        if(aux.x!=this.position.x || aux.y!=this.position.y){
+        if(aux==null || aux.x!=this.position.x || aux.y!=this.position.y){
             return Optional.empty();
         }
 

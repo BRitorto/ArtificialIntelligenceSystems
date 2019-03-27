@@ -10,7 +10,7 @@ public class Board{
     private int[] leftViews;
     private int[] rightViews;
     private Skyscraper[][] matrix;
-    //private BoardValidator boardValidator;
+    private BoardValidator boardValidator;
 
     public Board cloneBoard(){
         Skyscraper [][] aux=new Skyscraper[matrix.length][matrix.length];
@@ -40,7 +40,7 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
-        //this.boardValidator = new BoardValidator();
+        this.boardValidator = new BoardValidator();
     }
 
     private Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,Skyscraper[][] m) {
@@ -52,7 +52,7 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
-        //this.boardValidator = new BoardValidator();
+        this.boardValidator = new BoardValidator();
 
     }
 
@@ -71,7 +71,7 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
-        //this.boardValidator = new BoardValidator();
+        this.boardValidator = new BoardValidator();
 
     }
 
@@ -107,11 +107,10 @@ public class Board{
         auxMatrix[row1] = auxMatrix[row2];
         auxMatrix[row2] = auxRow;
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        /*if (getBoardValidator().hasConflicts(board)){
+        if (getBoardValidator().cantConflicts(board) != 0){
             return Optional.empty();
         }
-        return Optional.of(board);*/
-        return Optional.empty();
+        return Optional.of(board);
     }
 
     public Optional<Board> SwapCols(int col1, int col2) {
@@ -122,11 +121,10 @@ public class Board{
             auxMatrix[i][col2] = aux;
         }
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        /*if (getBoardValidator().hasConflicts(board)){
+        if (getBoardValidator().cantConflicts(board) != 0){
             return Optional.empty();
         }
-        return Optional.of(board);*/
-        return Optional.empty();
+        return Optional.of(board);
     }
 
     public boolean isComplete() {
@@ -161,7 +159,7 @@ public class Board{
         return rightViews;
     }
 
-    /*public BoardValidator getBoardValidator() {
+    public BoardValidator getBoardValidator() {
         return this.boardValidator;
-    }*/
+    }
 }

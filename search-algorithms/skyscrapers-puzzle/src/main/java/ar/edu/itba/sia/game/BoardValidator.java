@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 public class BoardValidator {
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         int leftViews[] = {1,0,2};
         int topViews[] = {0,0,3};
         int rightViews[] = {3,2,1};
@@ -14,7 +14,7 @@ public class BoardValidator {
         BoardValidator validator=new BoardValidator();
 
         System.out.println(validator.cantConflicts(b));
-    }
+    }*/
 
     public BoardValidator(){
 
@@ -44,6 +44,7 @@ public class BoardValidator {
             int max = 0, counterSeen = 0;
             for (int i = 0; i<topView.length; i++) {
                 int currHeight = matrix[i][j].getHeight();
+                if (currHeight == 0)
 
                 //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
                 if (seenHeights[currHeight - 1] != 0){

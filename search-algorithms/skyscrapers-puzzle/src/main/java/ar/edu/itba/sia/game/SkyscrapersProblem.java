@@ -17,6 +17,13 @@ public class SkyscrapersProblem implements Problem<Board> {
         this.rules = rules;
     }
 
+    public SkyscrapersProblem(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
+                              List<Rule> rules, int[][] m) {
+        this.initialBoard = new Board(dimension, topViews, bottomViews, leftViews, rightViews, m);
+        this.rules = rules;
+    }
+
+    // esta solo para los tests, borrar despues o cambiar en los tests
     public SkyscrapersProblem(Board board, List<Rule> rules){
         this.initialBoard = board;
         this.rules = rules;

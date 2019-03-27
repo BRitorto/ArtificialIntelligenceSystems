@@ -60,12 +60,28 @@ public class SkyscrapersProblemTest {
         int rightViews[]={1,0,3};
         int bottomViews[]={0,0,0};
         int m[][] = {{2, 1, 3}, {1, 3, 2}, {3, 2, 1}};
+
+
         Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
         SkyscrapersState s = new SkyscrapersState(b);
 
         SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
         assertTrue(prob.isGoal(s));
 
+    }
+
+    @Test
+    public void isItBrokenTest(){
+        int leftViews[] = {2,3,2,1};
+        int topViews[] = {2,1,3,2};
+        int rightViews[] = {2,1,2,3};
+        int bottomViews[]={1,3,2,3};
+        int m[][] = {{3,4,1,2}, {1,3,2,4}, {2,1,4,3},{4,2,3,1}};
+        Board b = new Board(4, topViews, bottomViews, leftViews, rightViews, m);
+        SkyscrapersState s = new SkyscrapersState(b);
+
+        SkyscrapersProblem prob = new SkyscrapersProblem(4, topViews, bottomViews, leftViews, rightViews, null);
+        assertTrue(prob.isGoal(s));
     }
 }
 

@@ -1,7 +1,10 @@
-package ar.edu.itba.sia.game;
+package ar.edu.itba.sia.game.rules;
 
 import ar.edu.itba.sia.api.Rule;
 import ar.edu.itba.sia.api.State;
+import ar.edu.itba.sia.game.Board;
+import ar.edu.itba.sia.game.Skyscraper;
+import ar.edu.itba.sia.game.SkyscrapersState;
 
 import java.awt.Point;
 import java.util.List;

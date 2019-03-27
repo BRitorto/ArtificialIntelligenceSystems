@@ -1,9 +1,8 @@
 package ar.edu.itba.sia.game;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 public class Board{
     private int[] topViews;
@@ -11,8 +10,7 @@ public class Board{
     private int[] leftViews;
     private int[] rightViews;
     private Skyscraper[][] matrix;
-    private List<Point> fixedCells;
-    private int emptySpaces;
+    //private BoardValidator boardValidator;
 
     public Board cloneBoard(){
         Skyscraper [][] aux=new Skyscraper[matrix.length][matrix.length];
@@ -42,6 +40,7 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
+        //this.boardValidator = new BoardValidator();
     }
 
     private Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,Skyscraper[][] m) {
@@ -53,6 +52,8 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
+        //this.boardValidator = new BoardValidator();
+
     }
 
     public Board(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews,
@@ -70,6 +71,8 @@ public class Board{
         this.bottomViews = bottomViews;
         this.leftViews = leftViews;
         this.rightViews = rightViews;
+        //this.boardValidator = new BoardValidator();
+
     }
 
     private Boolean sideViewsDimensionAreCorrect(int dimension, int[] topViews, int[] bottomViews, int[] leftViews, int[] rightViews){
@@ -85,10 +88,6 @@ public class Board{
         return matrix;
     }
 
-    public boolean isFull(){
-        return emptySpaces == 0;
-    }
-
     public int checkEmptySpaces(){
         int rows = this.matrix.length;
         int columns = this.matrix[0].length;
@@ -102,24 +101,33 @@ public class Board{
         return count;
     }
 
-    public boolean isValidSwap(Point pos1, Point pos2) {
-        for(Point p: this.fixedCells){
-            if(p.equals(pos1) || p.equals(pos2))
-                return false;
+    public Optional<Board> SwapRows(int row1, int row2) {
+        Skyscraper[][] auxMatrix = getMatrix();
+        Skyscraper[] auxRow = auxMatrix[row1];
+        auxMatrix[row1] = auxMatrix[row2];
+        auxMatrix[row2] = auxRow;
+        Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
+        /*if (getBoardValidator().hasConflicts(board)){
+            return Optional.empty();
         }
-        return true;
+        return Optional.of(board);*/
+        return Optional.empty();
     }
 
-    public Board swapValue(Point pos1, Point pos2) {
-        Board board = this.cloneBoard();
-
-        Skyscraper aux = this.matrix[(int) pos1.getX()][(int) pos1.getY()];
-        board.matrix[(int) pos1.getX()][(int) pos1.getY()] = this.matrix[(int) pos2.getX()][(int) pos2.getY()];
-        board.matrix[(int) pos2.getX()][(int) pos2.getY()] = aux;
-
-        return board;
+    public Optional<Board> SwapCols(int col1, int col2) {
+        Skyscraper[][] auxMatrix = getMatrix();
+        for (int i = 0; i < auxMatrix.length; i++) {
+            Skyscraper aux = auxMatrix[i][col1];
+            auxMatrix[i][col1] = auxMatrix[i][col2];
+            auxMatrix[i][col2] = aux;
+        }
+        Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
+        /*if (getBoardValidator().hasConflicts(board)){
+            return Optional.empty();
+        }
+        return Optional.of(board);*/
+        return Optional.empty();
     }
-
 
     public boolean isComplete() {
         return this.checkEmptySpaces() == 0;
@@ -153,5 +161,7 @@ public class Board{
         return rightViews;
     }
 
-
+    /*public BoardValidator getBoardValidator() {
+        return this.boardValidator;
+    }*/
 }

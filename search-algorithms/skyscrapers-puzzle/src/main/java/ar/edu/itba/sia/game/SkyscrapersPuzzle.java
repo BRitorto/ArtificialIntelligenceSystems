@@ -3,8 +3,8 @@ package ar.edu.itba.sia.game;
 import ar.edu.itba.sia.EngineFactory;
 import ar.edu.itba.sia.GPSEngine;
 import ar.edu.itba.sia.SearchStrategy;
+import ar.edu.itba.sia.game.rules.SkyscrapersSwapRowRule;
 
-import java.awt.*;
 import java.util.LinkedList;
 
 public class SkyscrapersPuzzle {
@@ -29,15 +29,9 @@ public class SkyscrapersPuzzle {
         //int bottomViews[] = {1, 4, 3, 2, 2};
         //int m[][] = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
 
-        LinkedList rules = new LinkedList<SkyscrapersFillRule>();
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[0].length; j++) {
-                for (int k = 1; k < 4; k++){
-                    SkyscrapersFillRule rule = new SkyscrapersFillRule(k, i, j);
-                    rules.add(rule);
-                }
-            }
-        }
+        LinkedList rules = new LinkedList<SkyscrapersSwapRowRule>();
+        int size = m.length;
+
 
         SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, rules);
         EngineFactory factory = new EngineFactory();

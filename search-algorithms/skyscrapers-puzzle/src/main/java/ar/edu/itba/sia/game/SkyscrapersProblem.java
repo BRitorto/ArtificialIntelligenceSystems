@@ -66,9 +66,11 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
                 updateQueueWithVisibleBuildings(bottomQueue, currHeight);
             }
-            if (counterSeen != topView[i] || bottomQueue.size() != bottomView[i]){
+            if( topView[i]!=0 && bottomView[i] != 0) {
+                if (counterSeen != topView[i] || bottomQueue.size() != bottomView[i]) {
 
-                return false;
+                    return false;
+                }
             }
             while(!bottomQueue.isEmpty()){
                 bottomQueue.poll();
@@ -103,8 +105,10 @@ public class SkyscrapersProblem implements Problem<Board> {
                 }
                 rightQueue = updateQueueWithVisibleBuildings(rightQueue, currHeight);
             }
-            if (counterSeen != leftView[i] || rightQueue.size() != rightView[i]){
-                return false;
+            if(leftView[i] != 0 && rightView[i] !=0) {
+                if (counterSeen != leftView[i] || rightQueue.size() != rightView[i]) {
+                    return false;
+                }
             }
             while(!rightQueue.isEmpty()){
                 rightQueue.poll();

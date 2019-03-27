@@ -1,5 +1,6 @@
 package ar.edu.itba.sia;
 
+import ar.edu.itba.sia.factories.BoardFactory;
 import ar.edu.itba.sia.game.Board;
 import ar.edu.itba.sia.game.Skyscraper;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
@@ -12,69 +13,48 @@ import static org.junit.Assert.assertTrue;
 
 public class SkyscrapersProblemTest {
 
-    @Before
-    public void Before(){
-
-    }
-
     @Test
     public void goalStateIsGoalTest(){
-        int leftViews[] = {2,2,1};
-        int topViews[] = {2, 2, 1};
-        int rightViews[]={1,2,3};
-        int bottomViews[]={1,2,3};
-        int m[][] = {{2, 1, 3}, {1, 3, 2}, {3, 2, 1}};
-        Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
+        Board b = BoardFactory.createCorrectBoard();
         SkyscrapersState s = new SkyscrapersState(b);
+        SkyscrapersProblem prob = new SkyscrapersProblem(b, null);
 
-        SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
         assertTrue(prob.isGoal(s));
 
     }
 
     @Test
     public void repeatedColumnNumbersStateIsNotGoalTest(){
-        int leftViews[] = {2,2,1};
-        int topViews[] = {2, 2, 1};
-        int rightViews[]={1,2,3};
-        int bottomViews[]={1,2,3};
         int m[][] = {{2, 1, 3}, {2, 3, 2}, {3, 2, 1}};
-        Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
+        Board b = BoardFactory.createWithCustomMatrix(m);
         SkyscrapersState s = new SkyscrapersState(b);
-        SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
+        SkyscrapersProblem prob = new SkyscrapersProblem(b, null);
+
+        assertFalse(prob.isGoal(s));
+    }
+
+    @Test
+    public void repeatedRowNumbersStateIsNotGoalTest(){
+        int m[][] = {{2, 2, 3}, {1, 3, 2}, {3, 2, 1}};
+        Board b = BoardFactory.createWithCustomMatrix(m);
+        SkyscrapersState s = new SkyscrapersState(b);
+        SkyscrapersProblem prob = new SkyscrapersProblem(b, null);
+
         assertFalse(prob.isGoal(s));
     }
 
     @Test
     public void incompleteStateIsNotGoalTest(){
-        int leftViews[] = {2,2,1};
-        int topViews[] = {2, 2, 1};
-        int rightViews[]={1,2,3};
-        int bottomViews[]={1,2,3};
-        int m[][] = {{2, 1, 3}, {2, 0, 0}, {3, 2, 1}};
-        Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
+        Board b = BoardFactory.createIncompleteBoard();
         SkyscrapersState s = new SkyscrapersState(b);
-        SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
+        SkyscrapersProblem prob = new SkyscrapersProblem(b, null);
 
         assertFalse(prob.isGoal(s));
 
     }
 
     @Test
-    public void repeatedRowNumbersStateIsNotGoalTest(){
-        int leftViews[] = {2,2,1};
-        int topViews[] = {2, 2, 1};
-        int rightViews[]={1,2,3};
-        int bottomViews[]={1,2,3};
-        int m[][] = {{2, 2, 3}, {1, 3, 2}, {3, 2, 1}};
-        Board b = new Board(3, topViews, bottomViews, leftViews, rightViews, m);
-        SkyscrapersState s = new SkyscrapersState(b);
-        SkyscrapersProblem prob = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, null);
-        assertFalse(prob.isGoal(s));
-    }
-
-    @Test
-    public void goalStateIsGoal2Test(){
+    public void zeroOnConstraintMeansNoConstraintTest(){
         int leftViews[] = {2,2,1};
         int topViews[] = {2, 2, 1};
         int rightViews[]={1,0,3};

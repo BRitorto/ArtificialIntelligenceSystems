@@ -5,10 +5,10 @@ import java.util.PriorityQueue;
 public class BoardValidator {
 
 //    public static void main(String[] args){
-//        int leftViews[] = {0,0,0};
-//        int topViews[] = {3,2,2};
+//        int leftViews[] = {1,0,0};
+//        int topViews[] = {3,1,2};
 //        int rightViews[] = {3,2,1};
-//        int bottomViews[] = {0,1,2};
+//        int bottomViews[] = {0,1,3};
 //        int m[][] = {{1,2,3},{2,3,1}, {3,1,2}};
 //        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
 //        BoardValidator validator=new BoardValidator();
@@ -73,16 +73,14 @@ public class BoardValidator {
         return cantConflicts;
     }
 
-    //por cada fila que este mal, sumo 1. Por cada columna que este mal, sumo 1
-    //Maxima cantidad de conflictos: fila+columas
+    //por cada fila que este mal, puedo sumar 1 por la izquierda y 1 por la derecha. Por cada columna que este mal, puedo sumar 1 por arriba y 1 por abajo
+    //Maxima cantidad de conflictos: (fila+columas)*2
     private int checkColsTopBottom(Skyscraper[][] matrix, int[] topView, int[] bottomView){
         PriorityQueue<Integer> bottomQueue = new PriorityQueue<>();
         int[] seenHeights = new int[topView.length];
         int cantConflicts=0;
-        boolean end=false;
 
         for (int j = 0; j<topView.length; j++) {
-            end=false;
             int max = 0, counterSeen = 0;
             for (int i = 0; i<topView.length; i++) {
                 int currHeight = matrix[i][j].getHeight();
@@ -98,10 +96,9 @@ public class BoardValidator {
             if(bottomView[j] != 0){
                 if(bottomQueue.size() != bottomView[j]){
                     cantConflicts++;
-                    end=true;
                 }
             }
-            if( topView[j] != 0 &&!end) {
+            if( topView[j] != 0 ) {
                 if (counterSeen != topView[j] ) {
                     cantConflicts++;
 
@@ -121,10 +118,8 @@ public class BoardValidator {
         PriorityQueue<Integer> rightQueue = new PriorityQueue<>();
         int[] seenHeights = new int[leftView.length];
         int cantConflicts=0;
-        boolean end=false;
 
         for (int i =0; i<leftView.length; i++){
-            end=false;
             int max = 0, counterSeen = 0;
             for (int j = 0; j<leftView.length; j++){
 
@@ -142,10 +137,9 @@ public class BoardValidator {
             if(rightView[i] !=0){
                 if(rightQueue.size() != rightView[i]){
                     cantConflicts++;
-                    end=true;
                 }
             }
-            if(leftView[i] != 0  && !end) {
+            if(leftView[i] != 0  ) {
                 if (counterSeen != leftView[i]  ) {
                     cantConflicts++;
                 }

@@ -4,17 +4,17 @@ import java.util.PriorityQueue;
 
 public class BoardValidator {
 
-//    public static void main(String[] args){
-//        int leftViews[] = {1,0,0};
-//        int topViews[] = {3,1,2};
-//        int rightViews[] = {3,2,1};
-//        int bottomViews[] = {0,1,3};
-//        int m[][] = {{1,2,3},{2,3,1}, {3,1,2}};
-//        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
-//        BoardValidator validator=new BoardValidator();
-//
-//        System.out.println(validator.cantConflicts(b));
-//    }
+    public static void main(String[] args){
+        int leftViews[] = {1,0,0};
+        int topViews[] = {3,2,2};
+        int rightViews[] = {3,2,1};
+        int bottomViews[] = {0,1,1};
+        int m[][] = {{3,3,3},{3,3,3}, {3,3,3}};
+        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
+        BoardValidator validator=new BoardValidator();
+
+        System.out.println(validator.cantConflicts(b));
+    }
 
     public BoardValidator(){
 
@@ -161,7 +161,7 @@ public class BoardValidator {
                 end_cond = true;
                 queue.offer(currNum);
             } else {
-                if (queue.peek() < currNum) {
+                if (queue.peek() <= currNum) {
                     queue.poll();
                 } else {
                     queue.offer(currNum);

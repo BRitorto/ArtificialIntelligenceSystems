@@ -20,11 +20,11 @@ public class SkyscrapersPuzzle {
 //        int bottomViews[] = {0,2,1};
 //        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-        int leftViews[] = {1,0,2};
-        int topViews[] = {0,0,3};
-        int rightViews[] = {3,2,1};
-        int bottomViews[] = {0,2,1};
-        int m[][] = {{1,3,2}, {2,2,1}, {2,1,3}};
+        int leftViews[] = {3,0,1};
+        int topViews[] = {3,0,1};
+        int rightViews[] = {1,2,0};
+        int bottomViews[] = {0,2,0};
+        int m[][] = {{2,3,1}, {1,2,3}, {3, 1, 2}};
 //
 //        int leftViews[] = {2,3,2,1};
 //        int topViews[] = {2,1,3,2};
@@ -59,15 +59,13 @@ public class SkyscrapersPuzzle {
     }
 
     public static List<Rule> getSwapRules(int[][] m) {
-        LinkedList rules = new LinkedList<SkyscrapersSwapRowRule>();
+        LinkedList rules = new LinkedList<Rule>();
         for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m.length; j++) {
-                if (i != j) {
-                    SkyscrapersSwapRowRule ruleRow = new SkyscrapersSwapRowRule(i, j);
-                    SkyscrapersSwapColRule ruleCol = new SkyscrapersSwapColRule(i, j);
-                    rules.add(ruleRow);
-                    rules.add(ruleCol);
-                }
+            for (int j = 0; j < i; j++) {
+                SkyscrapersSwapRowRule ruleRow = new SkyscrapersSwapRowRule(i, j);
+                SkyscrapersSwapColRule ruleCol = new SkyscrapersSwapColRule(i, j);
+                rules.add(ruleRow);
+                rules.add(ruleCol);
             }
         }
         return rules;

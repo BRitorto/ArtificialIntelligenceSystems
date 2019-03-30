@@ -44,10 +44,8 @@ public class GPSEngine {
 			//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<current depth limit =" + currentDepthLimit);
 			open.add(rootNode);
 			explosionCounter = 0;
-			int lel=0;
-			while (open.size() > 0 && lel<10) {
+			while (open.size() > 0) {
 				GPSNode currentNode = open.remove();
-				lel++;
 				// estos comentarios son importantes
 				//System.out.println(" depth = " +currentNode.getDepth());
 				System.out.println("-----------SACO DE OPEN---------------");

@@ -102,7 +102,9 @@ public class Board{
     }
 
     public Optional<Board> SwapRows(int row1, int row2) {
-        Skyscraper[][] auxMatrix = getMatrix().clone();
+        Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
+        Board auxbb=auxB.cloneBoard();
+        Skyscraper[][] auxMatrix = auxbb.getMatrix();
         Skyscraper[] auxRow = auxMatrix[row1];
         auxMatrix[row1] = auxMatrix[row2];
         auxMatrix[row2] = auxRow;
@@ -114,7 +116,9 @@ public class Board{
     }
 
     public Optional<Board> SwapCols(int col1, int col2) {
-        Skyscraper[][] auxMatrix = getMatrix().clone();
+        Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
+        Board auxbb=auxB.cloneBoard();
+        Skyscraper[][] auxMatrix = auxbb.getMatrix();
         for (int i = 0; i < auxMatrix.length; i++) {
             Skyscraper aux = auxMatrix[i][col1];
             auxMatrix[i][col1] = auxMatrix[i][col2];

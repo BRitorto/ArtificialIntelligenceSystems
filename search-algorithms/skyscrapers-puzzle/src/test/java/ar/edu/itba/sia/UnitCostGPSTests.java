@@ -1,7 +1,9 @@
 package ar.edu.itba.sia;
 
+import ar.edu.itba.sia.game.BoardValidator;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
 import ar.edu.itba.sia.game.SkyscrapersPuzzle;
+import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,8 +30,8 @@ public class UnitCostGPSTests {
         bfsEngine = new GPSEngine(problem, SearchStrategy.BFS, null);
         dfsEngine = new GPSEngine(problem, SearchStrategy.DFS, null);
         iddfsEngine = new GPSEngine(problem, SearchStrategy.IDDFS, null);
-        //aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, E8HeuristicA.instance());
-        //greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, E8HeuristicA.instance());
+        aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(new BoardValidator()));
+        greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(new BoardValidator()));
 
         System.out.println("Finding bfs solution");
         bfsEngine.findSolution();
@@ -37,12 +39,10 @@ public class UnitCostGPSTests {
         dfsEngine.findSolution();
         System.out.println("Finding iddfs solution");
         iddfsEngine.findSolution();
-        /*
         System.out.println("Finding aStar solution");
         aStarEngine.findSolution();
         System.out.println("Finding greedy solution");
         greedyEngine.findSolution();
-        */
         System.out.println("All engine ran, running the tests");
     }
 
@@ -51,8 +51,8 @@ public class UnitCostGPSTests {
         GenericTests.solutionFound(bfsEngine);
         GenericTests.solutionFound(dfsEngine);
         GenericTests.solutionFound(iddfsEngine);
-        //GenericTests.solutionFound(aStarEngine);
-        //GenericTests.solutionFound(greedyEngine);
+        GenericTests.solutionFound(aStarEngine);
+        GenericTests.solutionFound(greedyEngine);
     }
 
     private static void sameSolutions(GPSEngine engine1, GPSEngine engine2){
@@ -77,33 +77,33 @@ public class UnitCostGPSTests {
                         optimalSolutionNode.getCost(), nonOptimalSolutionNode.getCost());
     }
 
-    /*
+
     @Test
     public void sameSolutionAStarVsBFS(){
         sameSolutions(aStarEngine,bfsEngine);
     }
-    */
 
-    /*
+
+
     @Test
     public void sameSolutionAStarVsIDDFS() {
         sameSolutions(aStarEngine,iddfsEngine);
     }
-    */
 
-    /*
+
+
     @Test
     public void noSameSolutionAStarvsGreedy(){
         hasNoSameSolution(aStarEngine, greedyEngine);
 
     }
-    */
-    /*
+
+
     @Test
     public void noSameSolutionAStarVsDFS(){
         hasNoSameSolution(aStarEngine,dfsEngine);
     }
-    */
+
 
     @AfterClass
     public static void tearDown(){

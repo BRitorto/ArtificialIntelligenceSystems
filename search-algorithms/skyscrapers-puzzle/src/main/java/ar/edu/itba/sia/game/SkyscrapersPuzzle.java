@@ -4,6 +4,7 @@ import ar.edu.itba.sia.EngineFactory;
 import ar.edu.itba.sia.GPSEngine;
 import ar.edu.itba.sia.SearchStrategy;
 import ar.edu.itba.sia.api.Rule;
+import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import ar.edu.itba.sia.game.rules.SkyscrapersFillRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapColRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapRowRule;
@@ -14,6 +15,12 @@ import java.util.List;
 public class SkyscrapersPuzzle {
 
     public static void main(String args[]) {
+//        int leftViews[] = {0,0,0};
+//        int topViews[] = {0,0,0};
+//        int rightViews[] = {0,0,0};
+//        int bottomViews[] = {0,0,0};
+//        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+
 //        int leftViews[] = {1,0,2};
 //        int topViews[] = {0,0,3};
 //        int rightViews[] = {3,2,1};
@@ -41,7 +48,8 @@ public class SkyscrapersPuzzle {
         SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews,
                 getSwapRules(m), m);
         EngineFactory factory = new EngineFactory();
-        GPSEngine engine = factory.buildEngine(problem, SearchStrategy.DFS, null, 0);
+        SkyscrapersState auxState = (SkyscrapersState) problem.getInitState();
+        GPSEngine engine = factory.buildEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(auxState.getCurrentBoard().getBoardValidator()), 0);
         engine.findSolution();
     }
 

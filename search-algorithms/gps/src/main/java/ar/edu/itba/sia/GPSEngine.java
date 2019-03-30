@@ -29,7 +29,12 @@ public class GPSEngine {
 		bestCosts = new HashMap<>();
 		this.problem = problem;
 		this.strategy = strategy;
-		this.heuristic = null;
+		if(heuristic == null){
+			this.heuristic = Optional.empty();
+		}
+		else{
+			this.heuristic = Optional.of(heuristic);
+		}
 		explosionCounter = 0;
 		finished = false;
 		failed = false;
@@ -86,6 +91,7 @@ public class GPSEngine {
 
 	private void explode(GPSNode node) {
 		Collection<GPSNode> newCandidates;
+		Heuristic myHeuristic;
 		switch (strategy) {
 		case BFS:
 			if (bestCosts.containsKey(node.getState())) {
@@ -125,10 +131,14 @@ public class GPSEngine {
 			}
 			break;
 		case GREEDY:
+			if(this.heuristic.isPresent())
+				myHeuristic = this.heuristic.get();
+			else
+				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return 1;//heuristic.getValue(node1.getState()).compareTo(heuristic.getValue(node2.getState()));
+					return myHeuristic.getValue(node1.getState()).compareTo(myHeuristic.getValue(node2.getState()));
 				}
 			});
 			addCandidates(node, newCandidates);
@@ -138,10 +148,15 @@ public class GPSEngine {
 			if (!isBest(node.getState(), node.getCost())) {
 				return;
 			}
+			if(this.heuristic.isPresent())
+				myHeuristic = this.heuristic.get();
+			else
+				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return 1;//(heuristic.getValue(node1.getState())+node1.getCost()).compareTo(heuristic.getValue(node2.getState())+node2.getCost());
+					return (new Integer(myHeuristic.getValue(node1.getState())+node1.getCost())).compareTo(
+							new Integer(myHeuristic.getValue(node2.getState())+node2.getCost()));
 				}
 			});
 			addCandidates(node, newCandidates);
@@ -165,11 +180,6 @@ public class GPSEngine {
 				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
 				System.out.println("************");
 				candidates.add(newNode);
-				System.out.println("-------------------------------------Les candidates-------------------------");
-				for(GPSNode n: candidates){
-					System.out.println(newNode.getState().getRepresentation());
-				}
-				System.out.println("-------------------------------------------------------------");
 			}
 		}
 	}

@@ -11,15 +11,15 @@ import static ar.edu.itba.sia.SearchStrategy.IDDFS;
 
 public class GPSEngine {
 
-	Queue<GPSNode> open;
-	Map<State, Integer> bestCosts;
-	Problem problem;
-	long explosionCounter;
-	boolean finished;
-	boolean failed;
-	GPSNode solutionNode;
-	Optional<Heuristic> heuristic;
-	long currentDepthLimit;
+	private Queue<GPSNode> open;
+	private Map<State, Integer> bestCosts;
+	private Problem problem;
+	private long explosionCounter;
+	private boolean finished;
+	private boolean failed;
+	private GPSNode solutionNode;
+	private Optional<Heuristic> heuristic;
+	private long currentDepthLimit;
 
 	// Use this variable in open set order.
 	protected SearchStrategy strategy;

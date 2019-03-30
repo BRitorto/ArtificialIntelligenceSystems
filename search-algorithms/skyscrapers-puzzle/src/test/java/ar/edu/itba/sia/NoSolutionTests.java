@@ -1,8 +1,10 @@
 package ar.edu.itba.sia;
 
 
+import ar.edu.itba.sia.game.BoardValidator;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
 import ar.edu.itba.sia.game.SkyscrapersPuzzle;
+import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,8 +32,8 @@ public class NoSolutionTests {
         bfsEngine = new GPSEngine(problem, SearchStrategy.BFS, null);
         dfsEngine = new GPSEngine(problem, SearchStrategy.DFS, null);
         iddfsEngine = new GPSEngine(problem, SearchStrategy.IDDFS, null);
-        //aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, E8HeuristicA.instance());
-        //greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, E8HeuristicA.instance());
+        aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(new BoardValidator()));
+        greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(new BoardValidator()));
 
         System.out.println("Finding bfs solution");
         bfsEngine.findSolution();
@@ -39,12 +41,10 @@ public class NoSolutionTests {
         dfsEngine.findSolution();
         System.out.println("Finding iddfs solution");
         iddfsEngine.findSolution();
-        /*
         System.out.println("Finding aStar solution");
         aStarEngine.findSolution();
         System.out.println("Finding greedy solution");
         greedyEngine.findSolution();
-        */
         System.out.println("All engine ran, running the tests");
     }
 
@@ -83,12 +83,12 @@ public class NoSolutionTests {
                                 "{0} explosion count: {2}, {1} explosion count: {3}", engineGreater.getStrategy().name(), engineLesser.getStrategy().name(),
                         engineGreater.getExplosionCounter(), engineLesser.getExplosionCounter());
     }
-/*
+
     @Test
     public void noSolutionFoundAStar(){
         noSolutionFound(aStarEngine);
     }
-*/
+
     @Test
     public void noSolutionFoundBFS(){
         noSolutionFound(bfsEngine);
@@ -98,17 +98,17 @@ public class NoSolutionTests {
     public void noSolutionFoundDFS(){
         noSolutionFound(dfsEngine);
     }
-/*
+
     @Test
     public void noSolutionFoundGreedy(){
         noSolutionFound(greedyEngine);
     }
-*/
+
     @Test
     public void noSolutionFoundIDDFS(){
         noSolutionFound(iddfsEngine);
     }
-/*
+
     @Test
     public void noSolutionAStarVsDFS(){
         noSolutionSameExplosionCount(aStarEngine,dfsEngine);
@@ -126,7 +126,7 @@ public class NoSolutionTests {
         noSolutionDifferExplosionCount(aStarEngine, greedyEngine);
         noSolutionSameStatesCount(aStarEngine,greedyEngine);
     }
-*/
+
     @Test
     public void noSolutionDFSVsIDDFS(){
         noSolutionStrictDifferExplosionCount(dfsEngine, iddfsEngine);

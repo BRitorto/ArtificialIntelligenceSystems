@@ -5,15 +5,16 @@ import java.util.PriorityQueue;
 public class BoardValidator {
 
     public static void main(String[] args){
-        int leftViews[] = {1,0,0};
-        int topViews[] = {3,2,2};
-        int rightViews[] = {3,2,1};
-        int bottomViews[] = {0,1,1};
-        int m[][] = {{3,3,3},{3,3,3}, {3,3,3}};
-        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
-        BoardValidator validator=new BoardValidator();
-
-        System.out.println(validator.cantConflicts(b));
+//        int leftViews[] = {0,0,0};
+//
+//        int topViews[] = {3,2,2};
+//        int rightViews[] = {3,2,1};
+//        int bottomViews[] = {0,1,1};
+//        int m[][] = {{3,3,3},{3,3,3}, {3,3,3}};
+//        Board b=new Board(3,topViews,bottomViews,leftViews,rightViews,m);
+//        BoardValidator validator=new BoardValidator();
+//
+//        System.out.println(validator.cantConflicts(b));
     }
 
     public BoardValidator(){
@@ -32,16 +33,16 @@ public class BoardValidator {
         int rows=checkRowsLeftRight(b.getMatrix(),leftView,rightView);
         int cols=checkColsTopBottom(b.getMatrix(),topView,bottomView);
 
-        System.out.println("Cant repetidos:"+repetidos);
-        System.out.println("Cant mal rows:"+rows);
-        System.out.println("Cant mal cols:"+cols);
+//        System.out.println("Cant repetidos:"+repetidos);
+//        System.out.println("Cant mal rows:"+rows);
+//        System.out.println("Cant mal cols:"+cols);
         return repetidos+cols+rows;
 
     }
 
     //por cada numero con conflictos de repetidos en la fila o la columna, sumo 1.
     //Maxima cantidad de conflictos: NxN
-    private int checkRowsCols(Board b){
+    public int checkRowsCols(Board b){
         int lenght=b.getMatrix().length;
         int currNum=0;
         int cantConflicts=0;
@@ -75,7 +76,7 @@ public class BoardValidator {
 
     //por cada fila que este mal, puedo sumar 1 por la izquierda y 1 por la derecha. Por cada columna que este mal, puedo sumar 1 por arriba y 1 por abajo
     //Maxima cantidad de conflictos: (fila+columas)*2
-    private int checkColsTopBottom(Skyscraper[][] matrix, int[] topView, int[] bottomView){
+    public int checkColsTopBottom(Skyscraper[][] matrix, int[] topView, int[] bottomView){
         PriorityQueue<Integer> bottomQueue = new PriorityQueue<>();
         int[] seenHeights = new int[topView.length];
         int cantConflicts=0;

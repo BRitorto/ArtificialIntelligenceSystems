@@ -102,26 +102,26 @@ public class Board{
     }
 
     public Optional<Board> SwapRows(int row1, int row2) {
-        Skyscraper[][] auxMatrix = getMatrix();
+        Skyscraper[][] auxMatrix = getMatrix().clone();
         Skyscraper[] auxRow = auxMatrix[row1];
         auxMatrix[row1] = auxMatrix[row2];
         auxMatrix[row2] = auxRow;
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().cantConflicts(board) != 0){
+        if (getBoardValidator().checkRowsCols(board) != 0){
             return Optional.empty();
         }
         return Optional.of(board);
     }
 
     public Optional<Board> SwapCols(int col1, int col2) {
-        Skyscraper[][] auxMatrix = getMatrix();
+        Skyscraper[][] auxMatrix = getMatrix().clone();
         for (int i = 0; i < auxMatrix.length; i++) {
             Skyscraper aux = auxMatrix[i][col1];
             auxMatrix[i][col1] = auxMatrix[i][col2];
             auxMatrix[i][col2] = aux;
         }
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().cantConflicts(board) != 0){
+        if (getBoardValidator().checkRowsCols(board) != 0){
             return Optional.empty();
         }
         return Optional.of(board);

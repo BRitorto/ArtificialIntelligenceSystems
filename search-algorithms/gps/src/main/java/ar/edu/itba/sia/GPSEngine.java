@@ -41,23 +41,26 @@ public class GPSEngine {
 		long lastExplosionCounter = explosionCounter;
 		do {
 			GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null);
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<current depth limit =" + currentDepthLimit);
+			//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<current depth limit =" + currentDepthLimit);
 			open.add(rootNode);
 			explosionCounter = 0;
-			while (open.size() > 0) {
+			int lel=0;
+			while (open.size() > 0 && lel<10) {
 				GPSNode currentNode = open.remove();
-				System.out.println(" depth = " +currentNode.getDepth());
+				lel++;
 				// estos comentarios son importantes
-				System.out.println("-----------SACO DE OPEN---------------");
+				//System.out.println(" depth = " +currentNode.getDepth());
+				//System.out.println("-----------SACO DE OPEN---------------");
 				System.out.println(currentNode.getState().getRepresentation());
 				System.out.println("--------------------------");
 				if (problem.isGoal(currentNode.getState())) {
+					System.out.println("Entro isGoal de engine");
 					finished = true;
 					solutionNode = currentNode;
 					if(strategy == IDDFS)
 						explosionCounter = iddfsTotalExplosionCounter;
 					System.out.println("GANAMOS!");
-					System.out.println("exploded nodes = "+explosionCounter);
+					//System.out.println("exploded nodes = "+explosionCounter);
 					return;
 				} else {
 					explode(currentNode);
@@ -67,7 +70,7 @@ public class GPSEngine {
 				if(lastExplosionCounter == explosionCounter){
 					failed = true;
 					finished = true;
-					System.out.println("exploded nodes = "+explosionCounter);
+					//System.out.println("exploded nodes = "+explosionCounter);
 				}else{
 					open.clear();
 					currentDepthLimit++;
@@ -78,7 +81,7 @@ public class GPSEngine {
 			else{
 				failed = true;
 				finished = true;
-				System.out.println("exploded nodes = "+explosionCounter);
+				//System.out.println("exploded nodes = "+explosionCounter);
 			}
 		}while(strategy == IDDFS && !finished);
 	}
@@ -103,6 +106,7 @@ public class GPSEngine {
 
 			Stack<GPSNode> auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
 			auxStack.addAll(newCandidates);
+
 			while(!auxStack.isEmpty()){
 				((LinkedList<GPSNode>)open).push(auxStack.pop());
 			}
@@ -157,7 +161,7 @@ public class GPSEngine {
 			if (newState.isPresent()) {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth()+1, rule);
 				newNode.setParent(node);
-				// estos comentarios son importantes
+				 //estos comentarios son importantes
 				System.out.println("******NEW NODE CANDIDATE******");
 				System.out.println(newNode.getState().getRepresentation());
 				System.out.println( ">>>>>> depth = "+newNode.getDepth() );

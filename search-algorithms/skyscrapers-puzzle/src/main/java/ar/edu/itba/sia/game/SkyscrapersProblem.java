@@ -36,23 +36,27 @@ public class SkyscrapersProblem implements Problem<Board> {
 
     @Override
     public boolean isGoal(State state) {
-
-
+        System.out.println("Entro is goal");
 
         SkyscrapersState currState = (SkyscrapersState) state;
         Board board = currState.getCurrentBoard();
 
 
         if (!board.isComplete()){
+            System.out.println("Salio por no complete");
             return false;
         }
 
         if (!checkColsTopBottom(currState,board.getTopViews(), board.getBottomViews())){
+            System.out.println("Salio por topbottom");
+
             return false;
         }
         if (!checkRowsLeftRight(currState, board.getLeftViews(), board.getRightViews())) {
+            System.out.println("Salio por left right");
             return false;
         }
+        System.out.println("Salio true de isGoal!!!");
         return true;
 
     }
@@ -79,11 +83,16 @@ public class SkyscrapersProblem implements Problem<Board> {
                     counterSeen++;
                     max = currHeight;
                 }
+
                 updateQueueWithVisibleBuildings(bottomQueue, currHeight);
             }
-            if( topView[j]!=0 && bottomView[j] != 0) {
-                if (counterSeen != topView[j] || bottomQueue.size() != bottomView[j]) {
-
+            if( topView[j]!=0  ) {
+                if (counterSeen != topView[j] ) {
+                    return false;
+                }
+            }
+            if(bottomView[j] != 0){
+                if(bottomQueue.size() != bottomView[j]){
                     return false;
                 }
             }
@@ -118,12 +127,19 @@ public class SkyscrapersProblem implements Problem<Board> {
                     counterSeen++;
                     max = currHeight;
                 }
-                rightQueue = updateQueueWithVisibleBuildings(rightQueue, currHeight);
+
+                updateQueueWithVisibleBuildings(rightQueue, currHeight);
             }
-            if(leftView[i] != 0 && rightView[i] !=0) {
-                if (counterSeen != leftView[i] || rightQueue.size() != rightView[i]) {
+            if(leftView[i] != 0) {
+                if (counterSeen != leftView[i]) {
                     return false;
                 }
+            }
+            if(rightView[i] !=0){
+                if(rightQueue.size() != rightView[i]){
+                    return false;
+                }
+
             }
             while(!rightQueue.isEmpty()){
                 rightQueue.poll();

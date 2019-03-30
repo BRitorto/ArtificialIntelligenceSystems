@@ -50,7 +50,7 @@ public class GPSEngine {
 				lel++;
 				// estos comentarios son importantes
 				//System.out.println(" depth = " +currentNode.getDepth());
-				//System.out.println("-----------SACO DE OPEN---------------");
+				System.out.println("-----------SACO DE OPEN---------------");
 				System.out.println(currentNode.getState().getRepresentation());
 				System.out.println("--------------------------");
 				if (problem.isGoal(currentNode.getState())) {
@@ -167,6 +167,11 @@ public class GPSEngine {
 				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
 				System.out.println("************");
 				candidates.add(newNode);
+				System.out.println("-------------------------------------Les candidates-------------------------");
+				for(GPSNode n: candidates){
+					System.out.println(newNode.getState().getRepresentation());
+				}
+				System.out.println("-------------------------------------------------------------");
 			}
 		}
 	}

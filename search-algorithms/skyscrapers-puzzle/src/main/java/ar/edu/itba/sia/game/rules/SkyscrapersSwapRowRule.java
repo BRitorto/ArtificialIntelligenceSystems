@@ -36,10 +36,7 @@ public class SkyscrapersSwapRowRule implements Rule {
     @Override
     public Optional<State> apply(State state) {
         final Board board = ((SkyscrapersState) state).getCurrentBoard();
-        Optional auxBoard = board.SwapRows(this.row1, this.row2);
-        if (!auxBoard.isPresent()) {
-            return Optional.empty();
-        }
-        return Optional.of(new SkyscrapersState((Board) auxBoard.get()));
+        Board auxBoard = board.SwapRows(this.row1, this.row2);
+        return Optional.of(new SkyscrapersState(auxBoard));
     }
 }

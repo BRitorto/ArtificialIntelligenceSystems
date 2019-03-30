@@ -35,10 +35,7 @@ public class SkyscrapersSwapColRule implements Rule {
     @Override
     public Optional<State> apply(State state) {
         final Board board = ((SkyscrapersState) state).getCurrentBoard();
-        Optional auxBoard = board.SwapCols(col1, col2);
-        if (!auxBoard.isPresent()) {
-            return Optional.empty();
-        }
-        return Optional.of(new SkyscrapersState((Board) auxBoard.get()));
+        Board auxBoard = board.SwapCols(col1, col2);
+        return Optional.of(new SkyscrapersState(auxBoard));
     }
 }

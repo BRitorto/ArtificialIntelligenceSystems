@@ -101,7 +101,7 @@ public class Board{
         return count;
     }
 
-    public Optional<Board> SwapRows(int row1, int row2) {
+    public Board SwapRows(int row1, int row2) {
         Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
         Board auxbb=auxB.cloneBoard();
         Skyscraper[][] auxMatrix = auxbb.getMatrix();
@@ -109,13 +109,10 @@ public class Board{
         auxMatrix[row1] = auxMatrix[row2];
         auxMatrix[row2] = auxRow;
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().checkRowsCols(board) != 0){
-            return Optional.empty();
-        }
-        return Optional.of(board);
+        return board;
     }
 
-    public Optional<Board> SwapCols(int col1, int col2) {
+    public Board SwapCols(int col1, int col2) {
         Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
         Board auxbb=auxB.cloneBoard();
         Skyscraper[][] auxMatrix = auxbb.getMatrix();
@@ -125,10 +122,7 @@ public class Board{
             auxMatrix[i][col2] = aux;
         }
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().checkRowsCols(board) != 0){
-            return Optional.empty();
-        }
-        return Optional.of(board);
+        return board;
     }
 
     public boolean isComplete() {

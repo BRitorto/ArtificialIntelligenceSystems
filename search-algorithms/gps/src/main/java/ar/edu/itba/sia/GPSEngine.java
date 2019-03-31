@@ -6,6 +6,7 @@ import ar.edu.itba.sia.api.Heuristic;
 import ar.edu.itba.sia.api.Problem;
 import ar.edu.itba.sia.api.Rule;
 import ar.edu.itba.sia.api.State;
+import ar.edu.itba.sia.game.exceptions.NoHeuristicFoundException;
 
 import static ar.edu.itba.sia.SearchStrategy.IDDFS;
 
@@ -138,7 +139,7 @@ public class GPSEngine {
 			if(this.heuristic.isPresent())
 				myHeuristic = this.heuristic.get();
 			else
-				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
+				throw new NoHeuristicFoundException();
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
@@ -158,7 +159,7 @@ public class GPSEngine {
 			if(this.heuristic.isPresent())
 				myHeuristic = this.heuristic.get();
 			else
-				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
+				throw new NoHeuristicFoundException();
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {

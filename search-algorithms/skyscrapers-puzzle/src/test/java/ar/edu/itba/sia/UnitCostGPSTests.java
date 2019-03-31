@@ -30,10 +30,9 @@ public class UnitCostGPSTests {
         SkyscrapersProblem problemSwap = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getSwapRules(m1), m1);
         SkyscrapersProblem problemFill = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getFillRules(m2), m2);
 
-
-        bfsEngine = new GPSEngine(problemSwap, SearchStrategy.BFS, null);
-        dfsEngine = new GPSEngine(problemSwap, SearchStrategy.DFS, null);
-        iddfsEngine = new GPSEngine(problemSwap, SearchStrategy.IDDFS, null);
+        bfsEngine = new GPSEngine(problemFill, SearchStrategy.BFS, null);
+        dfsEngine = new GPSEngine(problemFill, SearchStrategy.DFS, null);
+        iddfsEngine = new GPSEngine(problemFill, SearchStrategy.IDDFS, null);
         aStarEngine = new GPSEngine(problemSwap, SearchStrategy.ASTAR, new AdmissibleHeuristic());
         greedyEngine = new GPSEngine(problemSwap, SearchStrategy.GREEDY, new AdmissibleHeuristic());
 

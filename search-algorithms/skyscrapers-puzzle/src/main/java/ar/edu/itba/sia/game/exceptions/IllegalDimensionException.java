@@ -1,4 +1,4 @@
-package ar.edu.itba.sia.game;
+package ar.edu.itba.sia.game.exceptions;
 
 public class IllegalDimensionException extends RuntimeException {
     IllegalDimensionException(){

@@ -1,9 +1,10 @@
 package ar.edu.itba.sia.game;
 
+import ar.edu.itba.sia.game.exceptions.IllegalDimensionException;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class Board{
     private int[] topViews;
@@ -85,9 +86,7 @@ public class Board{
         this.matrix = matrix;
     }
 
-    public Skyscraper[][] getMatrix() {
-        return matrix;
-    }
+    public Skyscraper[][] getMatrix() { return matrix; }
 
     public int checkEmptySpaces(){
         int rows = this.matrix.length;
@@ -129,7 +128,6 @@ public class Board{
     public boolean isComplete() {
         return this.checkEmptySpaces() == 0;
     }
-
 
     //GETTERS FOR THE PEOPLE
 

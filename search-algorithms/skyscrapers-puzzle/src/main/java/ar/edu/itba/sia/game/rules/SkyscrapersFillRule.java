@@ -41,40 +41,25 @@ public class SkyscrapersFillRule implements Rule {
         while(!canSeeBottom.isEmpty()){
             canSeeBottom.poll();
         }
-
         while(!canSeeRight.isEmpty()){
             canSeeRight.poll();
         }
         SkyscrapersState myState = (SkyscrapersState) state;
         List<int[]> view = myState.getCurrentBoard().getViews();
-
         Point aux=((SkyscrapersState) state).lastPositionToFill();
         if(aux==null || aux.x!=this.position.x || aux.y!=this.position.y){
             return Optional.empty();
         }
-
         if (!checkRowsLeftRight(myState, view)) {
             return Optional.empty();
         }
-
         if (!checkColsTopBottom(myState, view)) {
             return Optional.empty();
         }
-
         Board rta = myState.getCurrentBoard().cloneBoard();
         rta.getMatrix()[this.position.x][this.position.y] = new Skyscraper(this.position.x, this.position.y, this.height);
         return Optional.of(new SkyscrapersState(rta));
     }
-
-    /*private boolean checkRows(SkyscrapersState state) {
-        for (int i = 0; i < state.getCurrentBoard().getMatrix().length ; i++) {
-            if (state.getCurrentBoard().getMatrix()[i][this.position.y].getHeight() != 0) {
-                if (this.height == state.getCurrentBoard().getMatrix()[i][this.position.y].getHeight())
-                    return false;
-            }
-        }
-        return true;
-    }*/
 
     private boolean checkRowsLeftRight(SkyscrapersState state, List<int[]> view) {
         int currMaxRow = 0, currNum, RView, LView = 0;
@@ -83,7 +68,7 @@ public class SkyscrapersFillRule implements Rule {
                 currNum = this.height;
             } else {
                 currNum = state.getCurrentBoard().getMatrix()[this.position.x][i].getHeight();
-                if (this.height == currNum) {//casillero no vacio
+                if (this.height == currNum) {
                     return false;
                 }
             }
@@ -97,7 +82,7 @@ public class SkyscrapersFillRule implements Rule {
         }
         RView = canSeeRight.size();
         if (view.get(3)[this.position.x] != 0) {
-            if (this.position.y + 1 == state.getCurrentBoard().getMatrix().length) { //analizo el ultimo numero de la derecha
+            if (this.position.y + 1 == state.getCurrentBoard().getMatrix().length) {
                 if (RView != view.get(3)[this.position.x]) {
                     return false;
                 }
@@ -107,7 +92,7 @@ public class SkyscrapersFillRule implements Rule {
             if ((view.get(2)[this.position.x]) - LView < 0) {
                 return false;
             }
-            if ((state.getCurrentBoard().getMatrix().length - currMaxRow) < ((view.get(2)[this.position.x]) - LView)) {//get 2 porque estoy analizando las restricciones de la izq
+            if ((state.getCurrentBoard().getMatrix().length - currMaxRow) < ((view.get(2)[this.position.x]) - LView)) {
                 return false;
             }
         }
@@ -139,7 +124,7 @@ public class SkyscrapersFillRule implements Rule {
             if ((view.get(0)[this.position.y]) - TView < 0) {
                 return false;
             }
-            if ((state.getCurrentBoard().getMatrix().length - currMaxCol) < ((view.get(0)[this.position.y]) - TView)) {//get o porque estoy analizando las restricciones de arriba
+            if ((state.getCurrentBoard().getMatrix().length - currMaxCol) < ((view.get(0)[this.position.y]) - TView)) {
                 return false;
             }
         }

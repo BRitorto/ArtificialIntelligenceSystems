@@ -22,11 +22,9 @@ public class Skyscraper {
         if (obj == this){
             return true;
         }
-
         if (obj == null){
             return true;
         }
-
         Skyscraper otherSkyscraper = (Skyscraper) obj;
         return this.position.equals(otherSkyscraper.getPosition())
                 && this.height == otherSkyscraper.getHeight();

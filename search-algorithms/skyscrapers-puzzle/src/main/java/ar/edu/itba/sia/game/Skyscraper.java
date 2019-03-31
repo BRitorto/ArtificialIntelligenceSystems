@@ -27,11 +27,21 @@ public class Skyscraper {
             return true;
         }
 
-
         Skyscraper otherSkyscraper = (Skyscraper) obj;
         return this.position.equals(otherSkyscraper.getPosition())
                 && this.height == otherSkyscraper.getHeight();
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (height ^ (height >>> 32));
+        result = prime * result + (int) (position.getY());
+        result = prime * result + (int) (position.getX());
+        return result;
+    }
+
 
     //Getters for the people
     public Point getPosition() {

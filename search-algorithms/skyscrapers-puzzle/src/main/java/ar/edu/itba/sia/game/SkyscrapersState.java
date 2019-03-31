@@ -75,4 +75,26 @@ public class SkyscrapersState implements State {
         }
         return null;
     }
+
+    @Override
+    public boolean equals(Object state) {
+        if (!(state instanceof SkyscrapersState)) {
+            return false;
+        }
+        SkyscrapersState myState = (SkyscrapersState) state;
+        Skyscraper[][] matrix = this.getCurrentBoard().getMatrix();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (!(matrix[i][j].getHeight() == myState.getCurrentBoard().getMatrix()[i][j].getHeight())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return getCurrentBoard().hashCode();
+    }
 }

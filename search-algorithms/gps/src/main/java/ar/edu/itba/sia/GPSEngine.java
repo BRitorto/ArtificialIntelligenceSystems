@@ -54,16 +54,11 @@ public class GPSEngine {
 				GPSNode currentNode = open.remove();
 				// estos comentarios son importantes
 //				//System.out.println(" depth = " +currentNode.getDepth());
-				System.out.println("-----------SACO DE OPEN---------------");
-				System.out.println(currentNode.getState().getRepresentation());
-				System.out.println("--------------------------");
-				System.out.println("cost = "+ currentNode.getCost());
-				System.out.println("depth = "+ currentNode.getDepth());
-				if(this.heuristic.isPresent())
-					myHeuristic = this.heuristic.get();
-				else
-					throw new RuntimeException();
-				System.out.println("h ="+ myHeuristic.getValue(currentNode.getState()));
+//				System.out.println("-----------SACO DE OPEN---------------");
+//				System.out.println(currentNode.getState().getRepresentation());
+//				System.out.println("--------------------------");
+//				System.out.println("cost = "+ currentNode.getCost());
+//				System.out.println("depth = "+ currentNode.getDepth());
 				if (problem.isGoal(currentNode.getState())) {
 //					System.out.println("Entro isGoal de engine");
 					finished = true;
@@ -117,10 +112,8 @@ public class GPSEngine {
 			}
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
-
-			auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			auxStack = new Stack<>();
 			auxStack.addAll(newCandidates);
-
 			while(!auxStack.isEmpty()){
 				((LinkedList<GPSNode>)open).push(auxStack.pop());
 			}
@@ -133,7 +126,7 @@ public class GPSEngine {
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
 			if(!newCandidates.isEmpty() && ((ArrayList<GPSNode>) newCandidates).get(0).getDepth()<=currentDepthLimit) {
-				Stack<GPSNode> auxStack2 = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+				Stack<GPSNode> auxStack2 = new Stack<>();
 				auxStack2.addAll(newCandidates);
 				while (!auxStack2.isEmpty()) {
 					((LinkedList<GPSNode>) open).push(auxStack2.pop());
@@ -152,7 +145,7 @@ public class GPSEngine {
 				}
 			});
 			addCandidates(node, newCandidates);
-			auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			auxStack = new Stack<>();
 			auxStack.addAll(newCandidates);
 
 			while(!auxStack.isEmpty()){
@@ -175,9 +168,8 @@ public class GPSEngine {
 				}
 			});
 			addCandidates(node, newCandidates);
-			auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			auxStack = new Stack<>();
 			auxStack.addAll(newCandidates);
-
 			while(!auxStack.isEmpty()){
 				((LinkedList<GPSNode>)open).push(auxStack.pop());
 			}
@@ -196,15 +188,9 @@ public class GPSEngine {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth()+1, rule);
 				newNode.setParent(node);
 				 //estos comentarios son importantes
-				System.out.println("******NEW NODE CANDIDATE******");
-				System.out.println(newNode.getState().getRepresentation());
-				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
-				if(this.heuristic.isPresent())
-					myHeuristic = this.heuristic.get();
-				else
-					throw new RuntimeException();
-				System.out.println("h ="+ myHeuristic.getValue(newNode.getState()));
-				System.out.println("************");
+//				System.out.println("******NEW NODE CANDIDATE******");
+//				System.out.println(newNode.getState().getRepresentation());
+//				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
 				candidates.add(newNode);
 			}
 		}

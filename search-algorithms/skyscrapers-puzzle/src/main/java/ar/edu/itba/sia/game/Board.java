@@ -1,5 +1,6 @@
 package ar.edu.itba.sia.game;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -159,5 +160,29 @@ public class Board{
 
     public BoardValidator getBoardValidator() {
         return this.boardValidator;
+    }
+
+    @Override
+    public boolean equals(Object board) {
+        if (!(board instanceof Board)) {
+            return false;
+        }
+        Board myBoard = (Board) board;
+        Skyscraper[][] matrix = this.getMatrix();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (!(matrix[i][j].equals((myBoard).getMatrix()[i][j]))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + Arrays.deepHashCode(this.getMatrix());
+        return result;
     }
 }

@@ -32,8 +32,8 @@ public class NoSolutionTests {
         bfsEngine = new GPSEngine(problem, SearchStrategy.BFS, null);
         dfsEngine = new GPSEngine(problem, SearchStrategy.DFS, null);
         iddfsEngine = new GPSEngine(problem, SearchStrategy.IDDFS, null);
-        aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(new BoardValidator()));
-        greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(new BoardValidator()));
+        aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic());
+        greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic());
 
         System.out.println("Finding bfs solution");
         bfsEngine.findSolution();

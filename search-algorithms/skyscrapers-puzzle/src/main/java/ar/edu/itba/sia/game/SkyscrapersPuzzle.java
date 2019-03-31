@@ -48,8 +48,7 @@ public class SkyscrapersPuzzle {
         SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews,
                 getSwapRules(m), m);
         EngineFactory factory = new EngineFactory();
-        SkyscrapersState auxState = (SkyscrapersState) problem.getInitState();
-        GPSEngine engine = factory.buildEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(auxState.getCurrentBoard().getBoardValidator()), 0);
+        GPSEngine engine = factory.buildEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(), 0);
         engine.findSolution();
     }
 

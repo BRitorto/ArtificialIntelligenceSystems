@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public class SkyscrapersSwapColRule implements Rule {
-    public static final int COST = 12;
+    public static final int COST = 1;
     private static final String RULE_NAME = "SWAPCOL";
     private final String name;
 

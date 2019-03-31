@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class SkyscrapersSwapRowRule implements Rule {
-    public static final int COST = 12;
+    public static final int COST = 1;
     private static final String RULE_NAME = "SWAPROW";
     private final String name;
     private int row1;

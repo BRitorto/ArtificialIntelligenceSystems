@@ -32,6 +32,7 @@ public class UnitCostGPSTests {
 
 
         bfsEngine = new GPSEngine(problemFill, SearchStrategy.BFS, null);
+
         dfsEngine = new GPSEngine(problemFill, SearchStrategy.DFS, null);
         iddfsEngine = new GPSEngine(problemSwap, SearchStrategy.IDDFS, null);
         aStarEngine = new GPSEngine(problemSwap, SearchStrategy.ASTAR, new AdmissibleHeuristic());

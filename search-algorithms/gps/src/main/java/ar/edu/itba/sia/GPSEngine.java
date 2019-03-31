@@ -80,6 +80,7 @@ public class GPSEngine {
 					//System.out.println("exploded nodes = "+explosionCounter);
 				}else{
 					open.clear();
+					bestCosts.clear();
 					currentDepthLimit++;
 					lastExplosionCounter = explosionCounter;
 					iddfsTotalExplosionCounter += explosionCounter;
@@ -177,7 +178,7 @@ public class GPSEngine {
 	private void addCandidates(GPSNode node, Collection<GPSNode> candidates) {
 		explosionCounter++;
 		updateBest(node);
-		Heuristic myHeuristic;
+		//Heuristic myHeuristic;
 		for (Rule rule : (List<Rule>)problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
@@ -187,6 +188,7 @@ public class GPSEngine {
 //				System.out.println("******NEW NODE CANDIDATE******");
 //				System.out.println(newNode.getState().getRepresentation());
 //				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
+//				System.out.println("******************************");
 				candidates.add(newNode);
 
 			}

@@ -141,15 +141,13 @@ public class GPSEngine {
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return myHeuristic.getValue(node1.getState()).compareTo(myHeuristic.getValue(node2.getState()));
+					return myHeuristic.getValue(node2.getState()).compareTo(myHeuristic.getValue(node1.getState()));
 				}
 			});
 			addCandidates(node, newCandidates);
-			auxStack = new Stack<>();
-			auxStack.addAll(newCandidates);
 
-			while(!auxStack.isEmpty()){
-				((LinkedList<GPSNode>)open).push(auxStack.pop());
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
 			}
 			break;
 		case ASTAR:
@@ -163,15 +161,13 @@ public class GPSEngine {
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return (new Integer(myHeuristic.getValue(node1.getState())+node1.getCost())).compareTo(
-							new Integer(myHeuristic.getValue(node2.getState())+node2.getCost()));
+					return (new Integer(myHeuristic.getValue(node2.getState())+node1.getCost())).compareTo(
+							new Integer(myHeuristic.getValue(node1.getState())+node2.getCost()));
 				}
 			});
 			addCandidates(node, newCandidates);
-			auxStack = new Stack<>();
-			auxStack.addAll(newCandidates);
-			while(!auxStack.isEmpty()){
-				((LinkedList<GPSNode>)open).push(auxStack.pop());
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
 			}
 			break;
 		}
@@ -192,6 +188,7 @@ public class GPSEngine {
 //				System.out.println(newNode.getState().getRepresentation());
 //				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
 				candidates.add(newNode);
+
 			}
 		}
 	}

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class SkyscrapersSwapRowRule implements Rule {
-    public static final int COST = 12;
+    public static final int COST = 1;
     private static final String RULE_NAME = "SWAPROW";
     private final String name;
     private int row1;
@@ -36,10 +36,7 @@ public class SkyscrapersSwapRowRule implements Rule {
     @Override
     public Optional<State> apply(State state) {
         final Board board = ((SkyscrapersState) state).getCurrentBoard();
-        Optional auxBoard = board.SwapRows(this.row1, this.row2);
-        if (!auxBoard.isPresent()) {
-            return Optional.empty();
-        }
-        return Optional.of(new SkyscrapersState((Board) auxBoard.get()));
+        Board auxBoard = board.SwapRows(this.row1, this.row2);
+        return Optional.of(new SkyscrapersState(auxBoard));
     }
 }

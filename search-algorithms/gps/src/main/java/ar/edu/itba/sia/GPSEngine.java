@@ -6,6 +6,7 @@ import ar.edu.itba.sia.api.Heuristic;
 import ar.edu.itba.sia.api.Problem;
 import ar.edu.itba.sia.api.Rule;
 import ar.edu.itba.sia.api.State;
+import ar.edu.itba.sia.game.exceptions.NoHeuristicFoundException;
 
 import static ar.edu.itba.sia.SearchStrategy.IDDFS;
 
@@ -44,6 +45,7 @@ public class GPSEngine {
 	public void findSolution() {
 		long iddfsTotalExplosionCounter = 0;
 		long lastExplosionCounter = explosionCounter;
+		Heuristic myHeuristic;
 		do {
 			GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null);
 			//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<current depth limit =" + currentDepthLimit);
@@ -52,18 +54,20 @@ public class GPSEngine {
 			while (open.size() > 0) {
 				GPSNode currentNode = open.remove();
 				// estos comentarios son importantes
-				//System.out.println(" depth = " +currentNode.getDepth());
-				System.out.println("-----------SACO DE OPEN---------------");
-				System.out.println(currentNode.getState().getRepresentation());
-				System.out.println("--------------------------");
+//				//System.out.println(" depth = " +currentNode.getDepth());
+//				System.out.println("-----------SACO DE OPEN---------------");
+//				System.out.println(currentNode.getState().getRepresentation());
+//				System.out.println("--------------------------");
+//				System.out.println("cost = "+ currentNode.getCost());
+//				System.out.println("depth = "+ currentNode.getDepth());
 				if (problem.isGoal(currentNode.getState())) {
-					System.out.println("Entro isGoal de engine");
+//					System.out.println("Entro isGoal de engine");
 					finished = true;
 					solutionNode = currentNode;
 					if(strategy == IDDFS)
 						explosionCounter = iddfsTotalExplosionCounter;
 					System.out.println("GANAMOS!");
-					//System.out.println("exploded nodes = "+explosionCounter);
+					System.out.println("exploded nodes = "+explosionCounter);
 					return;
 				} else {
 					explode(currentNode);
@@ -73,9 +77,11 @@ public class GPSEngine {
 				if(lastExplosionCounter == explosionCounter){
 					failed = true;
 					finished = true;
+					explosionCounter = iddfsTotalExplosionCounter;
 					//System.out.println("exploded nodes = "+explosionCounter);
 				}else{
 					open.clear();
+					bestCosts.clear();
 					currentDepthLimit++;
 					lastExplosionCounter = explosionCounter;
 					iddfsTotalExplosionCounter += explosionCounter;
@@ -92,6 +98,7 @@ public class GPSEngine {
 	private void explode(GPSNode node) {
 		Collection<GPSNode> newCandidates;
 		Heuristic myHeuristic;
+		Stack<GPSNode> auxStack;
 		switch (strategy) {
 		case BFS:
 			if (bestCosts.containsKey(node.getState())) {
@@ -107,10 +114,8 @@ public class GPSEngine {
 			}
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
-
-			Stack<GPSNode> auxStack = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+			auxStack = new Stack<>();
 			auxStack.addAll(newCandidates);
-
 			while(!auxStack.isEmpty()){
 				((LinkedList<GPSNode>)open).push(auxStack.pop());
 			}
@@ -123,7 +128,7 @@ public class GPSEngine {
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
 			if(!newCandidates.isEmpty() && ((ArrayList<GPSNode>) newCandidates).get(0).getDepth()<=currentDepthLimit) {
-				Stack<GPSNode> auxStack2 = new Stack<>(); // consultar si es grave que esto lo haga un poco mas ineficiente
+				Stack<GPSNode> auxStack2 = new Stack<>();
 				auxStack2.addAll(newCandidates);
 				while (!auxStack2.isEmpty()) {
 					((LinkedList<GPSNode>) open).push(auxStack2.pop());
@@ -134,15 +139,18 @@ public class GPSEngine {
 			if(this.heuristic.isPresent())
 				myHeuristic = this.heuristic.get();
 			else
-				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
+				throw new NoHeuristicFoundException();
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return myHeuristic.getValue(node1.getState()).compareTo(myHeuristic.getValue(node2.getState()));
+					return myHeuristic.getValue(node2.getState()).compareTo(myHeuristic.getValue(node1.getState()));
 				}
 			});
 			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
+
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
+			}
 			break;
 		case ASTAR:
 			if (!isBest(node.getState(), node.getCost())) {
@@ -151,16 +159,18 @@ public class GPSEngine {
 			if(this.heuristic.isPresent())
 				myHeuristic = this.heuristic.get();
 			else
-				throw new RuntimeException(); //nachito hace una exception para cuando falta la heuristica;
+				throw new NoHeuristicFoundException();
 			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
 				@Override
 				public int compare(GPSNode node1, GPSNode node2) {
-					return (new Integer(myHeuristic.getValue(node1.getState())+node1.getCost())).compareTo(
-							new Integer(myHeuristic.getValue(node2.getState())+node2.getCost()));
+					return (new Integer(myHeuristic.getValue(node2.getState())+node1.getCost())).compareTo(
+							new Integer(myHeuristic.getValue(node1.getState())+node2.getCost()));
 				}
 			});
 			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
+			}
 			break;
 		}
 	}
@@ -169,17 +179,19 @@ public class GPSEngine {
 	private void addCandidates(GPSNode node, Collection<GPSNode> candidates) {
 		explosionCounter++;
 		updateBest(node);
+		//Heuristic myHeuristic;
 		for (Rule rule : (List<Rule>)problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), node.getDepth()+1, rule);
 				newNode.setParent(node);
 				 //estos comentarios son importantes
-				System.out.println("******NEW NODE CANDIDATE******");
-				System.out.println(newNode.getState().getRepresentation());
-				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
-				System.out.println("************");
+//				System.out.println("******NEW NODE CANDIDATE******");
+//				System.out.println(newNode.getState().getRepresentation());
+//				System.out.println( ">>>>>> depth = "+newNode.getDepth() );
+//				System.out.println("******************************");
 				candidates.add(newNode);
+
 			}
 		}
 	}

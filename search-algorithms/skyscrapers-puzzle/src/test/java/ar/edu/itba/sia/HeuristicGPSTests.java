@@ -27,8 +27,8 @@ public class HeuristicGPSTests {
         int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         SkyscrapersProblem betterHeuristicProblem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getSwapRules(m), m);
         SkyscrapersProblem worseHeuristicProblem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getSwapRules(m), m);
-        betterHeuristicEngine = new GPSEngine(betterHeuristicProblem , SearchStrategy.ASTAR, new AdmissibleHeuristic(new BoardValidator()));
-        worseHeuristicEngine = new GPSEngine(worseHeuristicProblem, SearchStrategy.ASTAR, new NonAdmissibleHeuristic(new BoardValidator()));
+        betterHeuristicEngine = new GPSEngine(betterHeuristicProblem , SearchStrategy.ASTAR, new AdmissibleHeuristic());
+        worseHeuristicEngine = new GPSEngine(worseHeuristicProblem, SearchStrategy.ASTAR, new NonAdmissibleHeuristic());
 
         System.out.println("Finding solution for the better heuristic");
         betterHeuristicEngine.findSolution();

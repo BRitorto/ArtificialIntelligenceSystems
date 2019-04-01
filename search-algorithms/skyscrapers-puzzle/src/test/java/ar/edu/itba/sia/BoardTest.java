@@ -5,11 +5,9 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 import ar.edu.itba.sia.game.Board;
-import ar.edu.itba.sia.game.IllegalDimensionException;
+import ar.edu.itba.sia.game.exceptions.IllegalDimensionException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 
 public class BoardTest {

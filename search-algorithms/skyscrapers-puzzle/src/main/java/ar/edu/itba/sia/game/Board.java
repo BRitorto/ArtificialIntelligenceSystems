@@ -1,8 +1,10 @@
 package ar.edu.itba.sia.game;
 
+import ar.edu.itba.sia.game.exceptions.IllegalDimensionException;
+
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class Board{
     private int[] topViews;
@@ -84,9 +86,7 @@ public class Board{
         this.matrix = matrix;
     }
 
-    public Skyscraper[][] getMatrix() {
-        return matrix;
-    }
+    public Skyscraper[][] getMatrix() { return matrix; }
 
     public int checkEmptySpaces(){
         int rows = this.matrix.length;
@@ -101,7 +101,7 @@ public class Board{
         return count;
     }
 
-    public Optional<Board> SwapRows(int row1, int row2) {
+    public Board SwapRows(int row1, int row2) {
         Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
         Board auxbb=auxB.cloneBoard();
         Skyscraper[][] auxMatrix = auxbb.getMatrix();
@@ -109,13 +109,10 @@ public class Board{
         auxMatrix[row1] = auxMatrix[row2];
         auxMatrix[row2] = auxRow;
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().checkRowsCols(board) != 0){
-            return Optional.empty();
-        }
-        return Optional.of(board);
+        return board;
     }
 
-    public Optional<Board> SwapCols(int col1, int col2) {
+    public Board SwapCols(int col1, int col2) {
         Board auxB=new Board(this.getMatrix().length,this.topViews,this.bottomViews,this.leftViews,this.rightViews,getMatrix());
         Board auxbb=auxB.cloneBoard();
         Skyscraper[][] auxMatrix = auxbb.getMatrix();
@@ -125,16 +122,12 @@ public class Board{
             auxMatrix[i][col2] = aux;
         }
         Board board = new Board(auxMatrix.length, topViews, bottomViews, leftViews, rightViews, auxMatrix);
-        if (getBoardValidator().checkRowsCols(board) != 0){
-            return Optional.empty();
-        }
-        return Optional.of(board);
+        return board;
     }
 
     public boolean isComplete() {
         return this.checkEmptySpaces() == 0;
     }
-
 
     //GETTERS FOR THE PEOPLE
 
@@ -165,5 +158,29 @@ public class Board{
 
     public BoardValidator getBoardValidator() {
         return this.boardValidator;
+    }
+
+    @Override
+    public boolean equals(Object board) {
+        if (!(board instanceof Board)) {
+            return false;
+        }
+        Board myBoard = (Board) board;
+        Skyscraper[][] matrix = this.getMatrix();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (!(matrix[i][j].equals((myBoard).getMatrix()[i][j]))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + Arrays.deepHashCode(this.getMatrix());
+        return result;
     }
 }

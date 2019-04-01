@@ -36,24 +36,18 @@ public class SkyscrapersProblem implements Problem<Board> {
 
     @Override
     public boolean isGoal(State state) {
-
         SkyscrapersState currState = (SkyscrapersState) state;
         Board board = currState.getCurrentBoard();
-
-
         if (!board.isComplete()){
             return false;
         }
-
         if (!checkColsTopBottom(currState,board.getTopViews(), board.getBottomViews())){
-
             return false;
         }
         if (!checkRowsLeftRight(currState, board.getLeftViews(), board.getRightViews())) {
             return false;
         }
         return true;
-
     }
 
     //TODO: Ver si hay una forma más eficiente de checkear que no hayan repetidos
@@ -66,19 +60,15 @@ public class SkyscrapersProblem implements Problem<Board> {
             int max = 0, counterSeen = 0;
             for (int i = 0; i<topView.length; i++) {
                 int currHeight = matrix[i][j].getHeight();
-
-                //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
                 if (seenHeights[currHeight - 1] != 0){
                     return false;
                 }else{
                     seenHeights[currHeight - 1]++;
                 }
-
                 if (currHeight > max) {
                     counterSeen++;
                     max = currHeight;
                 }
-
                 updateQueueWithVisibleBuildings(bottomQueue, currHeight);
             }
             if( topView[j]!=0  ) {
@@ -105,24 +95,19 @@ public class SkyscrapersProblem implements Problem<Board> {
         PriorityQueue<Integer> rightQueue = new PriorityQueue<>();
         Skyscraper[][] matrix = state.getCurrentBoard().getMatrix();
         int[] seenHeights = new int[leftView.length];
-
         for (int i =0; i<leftView.length; i++){
             int max = 0, counterSeen = 0;
             for (int j = 0; j<leftView.length; j++){
-
                 int currHeight = matrix[i][j].getHeight();
-                //Si esto se cumple, quiere decir que hay 2 alturas iguales en una misma columna
                 if (seenHeights[currHeight - 1] != 0){
                     return false;
                 }else{
                     seenHeights[currHeight - 1]++;
                 }
-
                 if(currHeight > max){
                     counterSeen++;
                     max = currHeight;
                 }
-
                 updateQueueWithVisibleBuildings(rightQueue, currHeight);
             }
             if(leftView[i] != 0) {
@@ -134,7 +119,6 @@ public class SkyscrapersProblem implements Problem<Board> {
                 if(rightQueue.size() != rightView[i]){
                     return false;
                 }
-
             }
             while(!rightQueue.isEmpty()){
                 rightQueue.poll();
@@ -164,12 +148,8 @@ public class SkyscrapersProblem implements Problem<Board> {
         return queue;
     }
 
-
-
     @Override
     public List<Rule> getRules() {
         return rules;
     }
-
-
 }

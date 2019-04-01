@@ -9,18 +9,12 @@ import ar.edu.itba.sia.game.rules.SkyscrapersSwapColRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapRowRule;
 
 public class NonAdmissibleHeuristic implements Heuristic {
-    private final BoardValidator boardValidator;
-
-    public NonAdmissibleHeuristic(final BoardValidator boardValidator) {
-        this.boardValidator = boardValidator;
-    }
 
     @Override
     public Integer getValue(State state) {
         final SkyscrapersState ssState = (SkyscrapersState) state;
         final Board board = ssState.getCurrentBoard();
-
-        return boardValidator.cantConflicts(board) * (SkyscrapersSwapColRule.COST + SkyscrapersSwapRowRule.COST);
+        return board.getBoardValidator().cantConflicts(board) * (SkyscrapersSwapColRule.COST + SkyscrapersSwapRowRule.COST);
     }
 
     public boolean isAdmissible() {

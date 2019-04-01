@@ -20,18 +20,21 @@ public class UnitCostGPSTests {
 
     @BeforeClass
     public static void setUp(){
-        int leftViews[] = {2,2,1};
-        int topViews[] = {2, 2, 1};
-        int rightViews[]={1,2,3};
-        int bottomViews[]={1,2,3};
-        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-        SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getFillRules(m), m);
+        int leftViews[] = {3,0,1};
+        int topViews[] = {3,0,1};
+        int rightViews[] = {1,2,0};
+        int bottomViews[] = {0,2,0};
+        int m1[][] = {{2,3,1}, {3, 1, 2}, {1,2,3}};
+        int m2[][] = {{0,0,0}, {0,0,0}, {0, 0, 0}};
 
-        bfsEngine = new GPSEngine(problem, SearchStrategy.BFS, null);
-        dfsEngine = new GPSEngine(problem, SearchStrategy.DFS, null);
-        iddfsEngine = new GPSEngine(problem, SearchStrategy.IDDFS, null);
-        aStarEngine = new GPSEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(new BoardValidator()));
-        greedyEngine = new GPSEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(new BoardValidator()));
+        SkyscrapersProblem problemSwap = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getSwapRules(m1), m1);
+        SkyscrapersProblem problemFill = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getFillRules(m2), m2);
+
+        bfsEngine = new GPSEngine(problemSwap, SearchStrategy.BFS, null);
+        dfsEngine = new GPSEngine(problemSwap, SearchStrategy.DFS, null);
+        iddfsEngine = new GPSEngine(problemSwap, SearchStrategy.IDDFS, null);
+        aStarEngine = new GPSEngine(problemSwap, SearchStrategy.ASTAR, new AdmissibleHeuristic());
+        greedyEngine = new GPSEngine(problemSwap, SearchStrategy.GREEDY, new AdmissibleHeuristic());
 
         System.out.println("Finding bfs solution");
         bfsEngine.findSolution();

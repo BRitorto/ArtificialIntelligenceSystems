@@ -6,7 +6,6 @@ import ar.edu.itba.sia.api.Heuristic;
 import ar.edu.itba.sia.api.Problem;
 import ar.edu.itba.sia.api.Rule;
 import ar.edu.itba.sia.api.State;
-import ar.edu.itba.sia.game.exceptions.NoHeuristicFoundException;
 
 import static ar.edu.itba.sia.SearchStrategy.IDDFS;
 

@@ -1,4 +1,4 @@
-package ar.edu.itba.sia.game.exceptions;
+package ar.edu.itba.sia;
 
 public class NoHeuristicFoundException extends RuntimeException {
     public NoHeuristicFoundException(){

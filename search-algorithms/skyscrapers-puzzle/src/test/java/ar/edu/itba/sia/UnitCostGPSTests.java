@@ -1,6 +1,5 @@
 package ar.edu.itba.sia;
 
-import ar.edu.itba.sia.game.BoardValidator;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
 import ar.edu.itba.sia.game.SkyscrapersPuzzle;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
@@ -20,15 +19,61 @@ public class UnitCostGPSTests {
 
     @BeforeClass
     public static void setUp(){
-        int leftViews[] = {3,0,1};
-        int topViews[] = {3,0,1};
-        int rightViews[] = {1,2,0};
-        int bottomViews[] = {0,2,0};
-        int m1[][] = {{2,3,1}, {3, 1, 2}, {1,2,3}};
-        int m2[][] = {{0,0,0}, {0,0,0}, {0, 0, 0}};
+        int leftViews3[] = {3, 0, 1};
+        int topViews3[] = {3, 0, 1};
+        int rightViews3[] = {1, 2, 0};
+        int bottomViews3[] = {0, 2, 0};
+        int mSwap3[][] = {
+                {2, 3, 1},
+                {3, 1, 2},
+                {1, 2, 3}
+        };
 
-        SkyscrapersProblem problemSwap = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getSwapRules(m1), m1);
-        SkyscrapersProblem problemFill = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getFillRules(m2), m2);
+        int topViewsSwap4[] = {2, 1, 2, 2};
+        int rightViewsSwap4[] = {3, 4, 1, 2};
+        int leftViewsSwap4[] = {2, 1, 2, 2};
+        int bottomViewsSwap4[] = {3, 4, 1, 2};
+        int mSwap4[][] = {
+                {1, 2, 3, 4},
+                {2, 3, 4, 1},
+                {3, 4, 1, 2},
+                {4, 1, 2, 3}
+        };
+
+        int topViewsSwap5[] = {4, 2, 1, 2, 3};
+        int rightViewsSwap5[] = {3, 4, 1, 2, 2};
+        int leftViewsSwap5[] = {3, 2, 3, 2, 1};
+        int bottomViewsSwap5[] = {1, 4, 3, 2, 2};
+        int views[] = {0, 0, 0, 0, 0};
+        int mSwap5[][] = {
+                {1, 2, 3, 4, 5},
+                {2, 3, 4, 5, 1},
+                {3, 4, 5, 1, 2},
+                {4, 5, 1, 2, 3},
+                {5, 1, 2, 3, 4}
+        };
+
+        int topViewsSwap9[] = {2, 1, 2, 3, 3, 3, 4, 2, 6};
+        int rightViewsSwap9[] = {5, 6, 2, 3, 2, 3, 2, 3, 1};
+        int leftViewsSwap9[] = {2, 1, 6, 3, 3, 2, 3, 4, 3};
+        int bottomViewsSwap9[] = {3, 4, 3, 2, 2, 3, 3, 4, 1};
+        int mSwap9[][] = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {2, 3, 4, 5, 6, 7, 8, 9, 1},
+                {3, 4, 5, 6, 7, 8, 9, 1, 2},
+                {4, 5, 6, 7, 8, 9, 1, 2, 3},
+                {5, 6, 7, 8, 9, 1, 2, 3, 4},
+                {6, 7, 8, 9, 1, 2, 3, 4, 5},
+                {7, 8, 9, 1, 2, 3, 4, 5, 6},
+                {8, 9, 1, 2, 3, 4, 5, 6, 7},
+                {9, 1, 2, 3, 4, 5, 6, 7, 8}
+        };
+
+        SkyscrapersProblem problemSwap = new SkyscrapersProblem(5, topViewsSwap5, views, leftViewsSwap5, views,
+                SkyscrapersPuzzle.getSwapRules(mSwap5), mSwap5);
+        //SkyscrapersProblem problemSwap = new SkyscrapersProblem(4, topViewsSwap4, bottomViewsSwap4, leftViewsSwap4, rightViewsSwap4,
+                //SkyscrapersPuzzle.getSwapRules(mSwap4), mSwap4);
+        //SkyscrapersProblem problemFill = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews, SkyscrapersPuzzle.getFillRules(m2), m2);
 
         bfsEngine = new GPSEngine(problemSwap, SearchStrategy.BFS, null);
         dfsEngine = new GPSEngine(problemSwap, SearchStrategy.DFS, null);

@@ -25,7 +25,6 @@ public class GPSEngine {
 	protected SearchStrategy strategy;
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
-		open = new LinkedList<>();
 		bestCosts = new HashMap<>();
 		this.problem = problem;
 		this.strategy = strategy;
@@ -39,6 +38,30 @@ public class GPSEngine {
 		finished = false;
 		failed = false;
 		currentDepthLimit = strategy == IDDFS ? 1 : Integer.MAX_VALUE;
+		switch (strategy){
+			case BFS:
+			case DFS:
+			case IDDFS:
+				open = new LinkedList<>();
+				break;
+			case GREEDY:
+				open = new PriorityQueue<>(new Comparator<GPSNode>() {
+					@Override
+					public int compare(GPSNode node1, GPSNode node2) {
+						return heuristic.getValue(node1.getState()).compareTo(heuristic.getValue(node2.getState()));
+					}
+				});
+				break;
+			case ASTAR:
+				open = new PriorityQueue<>(new Comparator<GPSNode>() {
+					@Override
+					public int compare(GPSNode node1, GPSNode node2) {
+						return (new Integer(heuristic.getValue(node1.getState())+node1.getCost())).compareTo(
+								new Integer(heuristic.getValue(node2.getState())+node2.getCost()));
+					}
+				});
+				break;
+		}
 	}
 
 	public void findSolution() {
@@ -89,7 +112,7 @@ public class GPSEngine {
 			else{
 				failed = true;
 				finished = true;
-				//System.out.println("exploded nodes = "+explosionCounter);
+				System.out.println("exploded nodes = "+explosionCounter);
 			}
 		}while(strategy == IDDFS && !finished);
 	}
@@ -135,41 +158,16 @@ public class GPSEngine {
 			}
 			break;
 		case GREEDY:
-			if(this.heuristic.isPresent())
-				myHeuristic = this.heuristic.get();
-			else
-				throw new NoHeuristicFoundException();
-			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
-				@Override
-				public int compare(GPSNode node1, GPSNode node2) {
-					return myHeuristic.getValue(node2.getState()).compareTo(myHeuristic.getValue(node1.getState()));
-				}
-			});
-			addCandidates(node, newCandidates);
-
-			while(!newCandidates.isEmpty()){
-				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
+			if (!isBest(node.getState(), node.getCost())) {
+				return;
 			}
+			addCandidates(node, open);
 			break;
 		case ASTAR:
 			if (!isBest(node.getState(), node.getCost())) {
 				return;
 			}
-			if(this.heuristic.isPresent())
-				myHeuristic = this.heuristic.get();
-			else
-				throw new NoHeuristicFoundException();
-			newCandidates = new PriorityQueue<>(new Comparator<GPSNode>() {
-				@Override
-				public int compare(GPSNode node1, GPSNode node2) {
-					return (new Integer(myHeuristic.getValue(node2.getState())+node1.getCost())).compareTo(
-							new Integer(myHeuristic.getValue(node1.getState())+node2.getCost()));
-				}
-			});
-			addCandidates(node, newCandidates);
-			while(!newCandidates.isEmpty()){
-				((LinkedList<GPSNode>)open).push(((PriorityQueue<GPSNode>) newCandidates).remove());
-			}
+			addCandidates(node, open);
 			break;
 		}
 	}

@@ -1,1 +1,13 @@
-/home/bianca/Desktop/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/SkyscrapersPuzzle.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/SkyscrapersRule.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/rules/SkyscrapersSwapRowRule.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/SkyscrapersProblem.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/heuristics/AdmissibleHeuristic.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/rules/SkyscrapersFillRule.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/exceptions/IllegalDimensionException.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/heuristics/NonAdmissibleHeuristic.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/Board.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/Skyscraper.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/rules/SkyscrapersSwapColRule.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/SkyscrapersState.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/BoardValidator.java
+/home/elodin/Documents/ITBA/cuarto/SIA/sia-2019-1c-05/search-algorithms/skyscrapers-puzzle/src/main/java/ar/edu/itba/sia/game/SkyscrapersPuzzle.java

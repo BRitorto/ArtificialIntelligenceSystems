@@ -15,7 +15,7 @@
   </properties>
 
   <modules>
-    <module>skyscrapers-puzzle</module>
-    <module>gps</module>
+      <module>skyscrapers-puzzle</module>
+      <module>gps</module>
   </modules>
 </project>

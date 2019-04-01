@@ -13,7 +13,7 @@ import java.text.MessageFormat;
 import java.util.Objects;
 
 public class NoSolutionTests {
-
+/*
     private static GPSEngine bfsEngine;
     private static GPSEngine dfsEngine;
     private static GPSEngine iddfsEngine;
@@ -138,4 +138,5 @@ public class NoSolutionTests {
     public static void tearDown(){
         System.out.println("Not solution OK");
     }
+    */
 }

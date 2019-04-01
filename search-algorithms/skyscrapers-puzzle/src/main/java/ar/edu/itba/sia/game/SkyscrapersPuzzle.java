@@ -1,9 +1,9 @@
 package ar.edu.itba.sia.game;
 
-import ar.edu.itba.sia.EngineFactory;
-import ar.edu.itba.sia.GPSEngine;
-import ar.edu.itba.sia.SearchStrategy;
-import ar.edu.itba.sia.api.Rule;
+import ar.edu.itba.sia.gps.EngineFactory;
+import ar.edu.itba.sia.gps.GPSEngine;
+import ar.edu.itba.sia.gps.SearchStrategy;
+import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import ar.edu.itba.sia.game.rules.SkyscrapersFillRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapColRule;

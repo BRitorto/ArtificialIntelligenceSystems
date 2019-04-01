@@ -1,13 +1,13 @@
-package ar.edu.itba.sia;
+package ar.edu.itba.sia.gps;
 
 import java.util.*;
+import ar.edu.itba.sia.gps.GPSNode;
+import ar.edu.itba.sia.gps.api.Heuristic;
+import ar.edu.itba.sia.gps.api.Problem;
+import ar.edu.itba.sia.gps.api.Rule;
+import ar.edu.itba.sia.gps.api.State;
 
-import ar.edu.itba.sia.api.Heuristic;
-import ar.edu.itba.sia.api.Problem;
-import ar.edu.itba.sia.api.Rule;
-import ar.edu.itba.sia.api.State;
-
-import static ar.edu.itba.sia.SearchStrategy.IDDFS;
+import static ar.edu.itba.sia.gps.SearchStrategy.IDDFS;
 
 public class GPSEngine {
 

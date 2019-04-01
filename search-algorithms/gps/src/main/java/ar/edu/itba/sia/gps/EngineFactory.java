@@ -1,7 +1,8 @@
-package ar.edu.itba.sia;
+package ar.edu.itba.sia.gps;
 
-import ar.edu.itba.sia.api.Heuristic;
-import ar.edu.itba.sia.api.Problem;
+import ar.edu.itba.sia.gps.GPSEngine;
+import ar.edu.itba.sia.gps.api.Heuristic;
+import ar.edu.itba.sia.gps.api.Problem;
 
 public class EngineFactory {
 

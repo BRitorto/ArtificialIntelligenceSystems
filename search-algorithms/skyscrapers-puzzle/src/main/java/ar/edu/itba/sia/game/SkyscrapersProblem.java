@@ -1,8 +1,8 @@
 package ar.edu.itba.sia.game;
 
-import ar.edu.itba.sia.api.Problem;
-import ar.edu.itba.sia.api.Rule;
-import ar.edu.itba .sia.api.State;
+import ar.edu.itba.sia.gps.api.Problem;
+import ar.edu.itba.sia.gps.api.Rule;
+import ar.edu.itba .sia.gps.api.State;
 
 import java.util.List;
 import java.util.PriorityQueue;

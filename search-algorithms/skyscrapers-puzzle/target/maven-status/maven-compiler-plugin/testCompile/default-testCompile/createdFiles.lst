@@ -1,1 +1,9 @@
-ar/edu/itba/sia/AppTest.class
+ar/edu/itba/sia/factories/BoardFactory.class
+ar/edu/itba/sia/SkyscrapersProblemTest.class
+ar/edu/itba/sia/UnitCostGPSTests.class
+ar/edu/itba/sia/GenericTests.class
+ar/edu/itba/sia/NoSolutionTests.class
+ar/edu/itba/sia/BoardValidatorTests.class
+ar/edu/itba/sia/SkyscrapersFillRuleTest.class
+ar/edu/itba/sia/HeuristicGPSTests.class
+ar/edu/itba/sia/BoardTest.class

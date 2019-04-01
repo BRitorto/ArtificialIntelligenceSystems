@@ -1,7 +1,7 @@
 package ar.edu.itba.sia.game.heuristics;
 
-import ar.edu.itba.sia.api.Heuristic;
-import ar.edu.itba.sia.api.State;
+import ar.edu.itba.sia.gps.api.Heuristic;
+import ar.edu.itba.sia.gps.api.State;
 import ar.edu.itba.sia.game.Board;
 import ar.edu.itba.sia.game.SkyscrapersState;
 

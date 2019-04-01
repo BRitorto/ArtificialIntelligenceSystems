@@ -1,6 +1,6 @@
 package ar.edu.itba.sia.game;
 
-import ar.edu.itba.sia.api.State;
+import ar.edu.itba.sia.gps.api.State;
 
 import java.awt.*;
 

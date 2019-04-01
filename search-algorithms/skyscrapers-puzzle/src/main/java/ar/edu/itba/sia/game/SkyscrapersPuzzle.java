@@ -9,6 +9,8 @@ import ar.edu.itba.sia.game.rules.SkyscrapersFillRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapColRule;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapRowRule;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,11 +29,21 @@ public class SkyscrapersPuzzle {
 //        int bottomViews[] = {0,2,1};
 //        int m[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-        int leftViews[] = {3,0,1};
-        int topViews[] = {3,0,1};
-        int rightViews[] = {1,2,0};
-        int bottomViews[] = {0,2,0};
+        //facil 1 mov
+//        int leftViews[] = {3,0,1};
+//        int topViews[] = {3,0,1};
+//        int rightViews[] = {1,2,0};
+//        int bottomViews[] = {0,2,0};
+//        int m[][] = {{2,3,1}, {1,2,3}, {3, 1, 2}};
+
+        //2mov
+        int leftViews[] = {2,1,2};
+        int topViews[] = {2,3,1};
+        int rightViews[] = {1,3,2};
+        int bottomViews[] = {2,0,2};
         int m[][] = {{2,3,1}, {1,2,3}, {3, 1, 2}};
+
+
 //
 //        int leftViews[] = {2,3,2,1};
 //        int topViews[] = {2,1,3,2};
@@ -47,10 +59,23 @@ public class SkyscrapersPuzzle {
 
         SkyscrapersProblem problem = new SkyscrapersProblem(3, topViews, bottomViews, leftViews, rightViews,
                 getSwapRules(m), m);
+        System.out.println("Inicial:");
+        System.out.println(problem.getInitState().getRepresentation() );
+
         EngineFactory factory = new EngineFactory();
         SkyscrapersState auxState = (SkyscrapersState) problem.getInitState();
         GPSEngine engine = factory.buildEngine(problem, SearchStrategy.ASTAR, new AdmissibleHeuristic(auxState.getCurrentBoard().getBoardValidator()), 0);
-        engine.findSolution();
+        long durationInNano=0;
+        int i=0;
+        while(i<10) {
+            long startTimeAux = System.nanoTime();
+            engine.findSolution();
+            long endTimeAux = System.nanoTime();
+            durationInNano+=(endTimeAux - startTimeAux);
+            i++;
+        }
+
+        System.out.println("Duration:"+durationInNano);
     }
 
     public static List<Rule> getFillRules(int[][] m) {

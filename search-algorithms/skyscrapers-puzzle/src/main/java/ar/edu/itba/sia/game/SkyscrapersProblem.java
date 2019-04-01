@@ -36,27 +36,22 @@ public class SkyscrapersProblem implements Problem<Board> {
 
     @Override
     public boolean isGoal(State state) {
-        System.out.println("Entro is goal");
 
         SkyscrapersState currState = (SkyscrapersState) state;
         Board board = currState.getCurrentBoard();
 
 
         if (!board.isComplete()){
-            System.out.println("Salio por no complete");
             return false;
         }
 
         if (!checkColsTopBottom(currState,board.getTopViews(), board.getBottomViews())){
-            System.out.println("Salio por topbottom");
 
             return false;
         }
         if (!checkRowsLeftRight(currState, board.getLeftViews(), board.getRightViews())) {
-            System.out.println("Salio por left right");
             return false;
         }
-        System.out.println("Salio true de isGoal!!!");
         return true;
 
     }

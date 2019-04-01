@@ -20,6 +20,7 @@ public class GPSEngine {
 	private GPSNode solutionNode;
 	private Optional<Heuristic> heuristic;
 	private long currentDepthLimit;
+	private final static long TIMELIMIT = 9000;
 
 	// Use this variable in open set order.
 	protected SearchStrategy strategy;
@@ -67,7 +68,8 @@ public class GPSEngine {
 	public void findSolution() {
 		long iddfsTotalExplosionCounter = 0;
 		long lastExplosionCounter = explosionCounter;
-		Heuristic myHeuristic;
+		long initTime = System.currentTimeMillis();
+		long endTime;
 		do {
 			GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null);
 			//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<current depth limit =" + currentDepthLimit);
@@ -90,17 +92,19 @@ public class GPSEngine {
 						explosionCounter = iddfsTotalExplosionCounter;
 					System.out.println("GANAMOS!");
 					System.out.println("exploded nodes = "+explosionCounter);
+					System.out.println("cost = "+currentNode.getCost());
 					return;
 				} else {
 					explode(currentNode);
 				}
 			}
 			if(strategy == IDDFS){
-				if(lastExplosionCounter == explosionCounter){
+				endTime = System.currentTimeMillis();
+				if(lastExplosionCounter == explosionCounter || endTime-initTime >= TIMELIMIT){
 					failed = true;
 					finished = true;
 					explosionCounter = iddfsTotalExplosionCounter;
-					//System.out.println("exploded nodes = "+explosionCounter);
+					System.out.println("exploded nodes = "+explosionCounter);
 				}else{
 					open.clear();
 					bestCosts.clear();
@@ -134,27 +138,24 @@ public class GPSEngine {
 			if (bestCosts.containsKey(node.getState())) {
 				return;
 			}
-			newCandidates = new ArrayList<>();
+			newCandidates = new ArrayDeque<>();
 			addCandidates(node, newCandidates);
-			auxStack = new Stack<>();
-			auxStack.addAll(newCandidates);
-			while(!auxStack.isEmpty()){
-				((LinkedList<GPSNode>)open).push(auxStack.pop());
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((ArrayDeque<GPSNode>) newCandidates).removeLast());
 			}
 
 			break;
 		case IDDFS:
-			if (bestCosts.containsKey(node.getState())) {
+			if (bestCosts.containsKey(node.getState()) && node.getCost() >= bestCosts.get(node.getState())) {
 				return;
 			}
-			newCandidates = new ArrayList<>();
+			if(node.getDepth() == currentDepthLimit){
+				return;
+			}
+			newCandidates = new ArrayDeque<>();
 			addCandidates(node, newCandidates);
-			if(!newCandidates.isEmpty() && ((ArrayList<GPSNode>) newCandidates).get(0).getDepth()<=currentDepthLimit) {
-				Stack<GPSNode> auxStack2 = new Stack<>();
-				auxStack2.addAll(newCandidates);
-				while (!auxStack2.isEmpty()) {
-					((LinkedList<GPSNode>) open).push(auxStack2.pop());
-				}
+			while(!newCandidates.isEmpty()){
+				((LinkedList<GPSNode>)open).push(((ArrayDeque<GPSNode>) newCandidates).removeLast());
 			}
 			break;
 		case GREEDY:

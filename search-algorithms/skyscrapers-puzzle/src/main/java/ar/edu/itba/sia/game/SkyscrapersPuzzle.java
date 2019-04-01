@@ -180,7 +180,7 @@ public class SkyscrapersPuzzle {
         LinkedList rules = new LinkedList<SkyscrapersFillRule>();
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
-                for (int k = 1; k <= 4; k++){
+                for (int k = 1; k <= m.length-1; k++){
                     SkyscrapersFillRule rule = new SkyscrapersFillRule(k, i, j);
                     rules.add(rule);
                 }
@@ -192,7 +192,7 @@ public class SkyscrapersPuzzle {
     public static List<Rule> getSwapRules(int[][] m) {
         LinkedList rules = new LinkedList<Rule>();
         for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < i; j++) {
+            for (int j = i+1; j < m.length; j++) {
                 SkyscrapersSwapRowRule ruleRow = new SkyscrapersSwapRowRule(i, j);
                 SkyscrapersSwapColRule ruleCol = new SkyscrapersSwapColRule(i, j);
                 rules.add(ruleRow);

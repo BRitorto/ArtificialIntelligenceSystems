@@ -30,7 +30,7 @@ public class SkyscrapersPuzzle {
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getFillRules(matrix), matrix);
             factory = new EngineFactory();
-            engine = factory.buildEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(), 0);
+            engine = factory.buildEngine(problem, SearchStrategy.BFS, new AdmissibleHeuristic(), 0);
             engine.findSolution();
         }else{
             matrix = initializeMatrix(dimensions);
@@ -58,7 +58,7 @@ public class SkyscrapersPuzzle {
         LinkedList rules = new LinkedList<SkyscrapersFillRule>();
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
-                for (int k = 1; k <= m.length-1; k++){
+                for (int k = 1; k <= m.length; k++){
                     SkyscrapersFillRule rule = new SkyscrapersFillRule(k, i, j);
                     rules.add(rule);
                 }

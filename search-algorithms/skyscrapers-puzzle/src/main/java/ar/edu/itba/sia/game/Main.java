@@ -60,7 +60,7 @@ public class Main {
         if( solutionNode == null){
             System.out.println("The given board had no solution.");
         }else{
-            System.out.printf("Game ended, winning board: ");
+            System.out.println("Game ended, winning board: ");
             System.out.println(solutionNode.getState().getRepresentation());
         }
 

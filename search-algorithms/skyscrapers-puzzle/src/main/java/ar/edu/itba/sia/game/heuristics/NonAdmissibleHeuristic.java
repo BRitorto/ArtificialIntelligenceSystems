@@ -14,7 +14,7 @@ public class NonAdmissibleHeuristic implements Heuristic {
     public Integer getValue(State state) {
         final SkyscrapersState ssState = (SkyscrapersState) state;
         final Board board = ssState.getCurrentBoard();
-        return board.getBoardValidator().cantConflicts(board) * (SkyscrapersSwapColRule.COST + SkyscrapersSwapRowRule.COST);
+        return board.getBoardValidator().cantConflicts(board);
     }
 
     public boolean isAdmissible() {

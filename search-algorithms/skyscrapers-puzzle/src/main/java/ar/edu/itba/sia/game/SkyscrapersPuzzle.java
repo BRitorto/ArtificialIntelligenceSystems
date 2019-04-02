@@ -28,7 +28,7 @@ public class SkyscrapersPuzzle {
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getFillRules(matrix), matrix);
             factory = new EngineFactory();
-            engine = factory.buildEngine(problem, SearchStrategy.BFS, new AdmissibleHeuristic(), 0);
+            engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
             engine.findSolution();
         }else{
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,

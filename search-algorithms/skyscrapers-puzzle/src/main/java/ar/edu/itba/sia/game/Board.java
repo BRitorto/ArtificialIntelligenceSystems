@@ -179,8 +179,12 @@ public class Board{
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = 31 * result + Arrays.deepHashCode(this.getMatrix());
+        int result = 1, i, j;
+        for (i= 0; i< this.getMatrix().length; i++){
+            for (j = 0; j< this.getMatrix().length; j++) {
+                result += result*this.getMatrix()[i][j].hashCode()*(int)(Math.pow(2, i)*Math.pow(3, j));
+            }
+        }
         return result;
     }
 }

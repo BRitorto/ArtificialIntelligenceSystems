@@ -34,12 +34,10 @@ public class Skyscraper {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (height ^ (height >>> 32));
-        result = prime * result + (int) (position.getY());
-        result = prime * result + (int) (position.getX());
+        result = prime * result + (int) Math.pow(2, height);
+        result = prime * result + position.hashCode();
         return result;
     }
-
 
     //Getters for the people
     public Point getPosition() {

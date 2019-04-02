@@ -1,6 +1,6 @@
 package ar.edu.itba.sia;
 
-import ar.edu.itba.sia.GPSEngine;
+import ar.edu.itba.sia.gps.GPSEngine;
 
 import java.util.Objects;
 

@@ -89,4 +89,42 @@ public class Helpers {
         return Optional.of(verifiedArray);
     }
 
+    public static boolean askInteractive(Scanner inputScanner) {
+        System.out.println("Write I if you want to play it in interactive mode or L to play it by level of difficulty");
+        boolean ended = false;
+        String input;
+        do {
+            input = inputScanner.nextLine();
+            if(input.equals("L") || input.equals("I")){
+                ended = true;
+            }
+        }while(!ended);
+
+        return input.equals("I");
+
+    }
+
+    public static int askDifficultyLevel(Scanner inputScanner) {
+        System.out.println("Insert a difficulty level from 1 to 5");
+        int level=0;
+        boolean correctInput;
+        do {
+            if(inputScanner.hasNextInt()) {
+                level = inputScanner.nextInt();
+                if ( level >= 1 && level <=3){
+                    correctInput = true;
+                }else{
+                    System.out.println("Wrong input, difficulty level range must be between 1 and 5");
+                    correctInput = false;
+                }
+            }else{
+                inputScanner.next(); //"Flush" input. TODO: w
+                correctInput = false;
+                System.out.println("Wrong input, please remember that the dimension must be a number" +
+                        " and if the board is NxN, just write N");
+            }
+        }while(!correctInput);
+
+        return level;
+    }
 }

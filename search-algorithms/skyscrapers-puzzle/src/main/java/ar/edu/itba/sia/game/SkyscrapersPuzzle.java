@@ -15,25 +15,22 @@ import java.text.ParseException;
 import java.util.*;
 
 public class SkyscrapersPuzzle {
-    private static final String FILL_MODE = "F";
-    private static final String SWAP_MODE = "S";
+    public static final String FILL_MODE = "F";
+    public static final String SWAP_MODE = "S";
 
 
-    public static GPSNode solvePuzzle(String gameMode, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView) {
+    public static GPSNode solvePuzzle(String gameMode, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView, int[][] matrix) {
         SkyscrapersProblem problem;
         EngineFactory factory;
         GPSEngine engine;
-        int[][] matrix;
 
         if(gameMode.equals(FILL_MODE)){
-            matrix = new int[dimensions][dimensions];
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getFillRules(matrix), matrix);
             factory = new EngineFactory();
             engine = factory.buildEngine(problem, SearchStrategy.BFS, new AdmissibleHeuristic(), 0);
             engine.findSolution();
         }else{
-            matrix = initializeMatrix(dimensions);
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getSwapRules(matrix), matrix);
             factory = new EngineFactory();
@@ -43,16 +40,6 @@ public class SkyscrapersPuzzle {
 
         return engine.getSolutionNode();
     }
-    //Hacer este método más piola más adelante
-    private static int[][] initializeMatrix(int dimensions) {
-        int m[][] = {{2,1,4,3},{3,4,1,2},{4,2,3,1},{1,3,2,4}};
-
-        return m;
-    }
-
-
-
-
 
     public static List<Rule> getFillRules(int[][] m) {
         LinkedList rules = new LinkedList<SkyscrapersFillRule>();
@@ -86,5 +73,16 @@ public class SkyscrapersPuzzle {
         int leftViews[] = {2,3,2,1};
         int rightViews[] = {2,1,2,3};
         int m[][] = {{2,1,4,3},{3,4,1,2},{4,2,3,1},{1,3,2,4}};
+
+       // int leftViews[] = {3, 2, 3, 2, 1};
+//        int topViews[] = {4, 2, 1, 2, 3};
+//        int rightViews[] = {3, 4, 1, 2, 2};
+//        int bottomViews[] = {1, 4, 3, 2, 2}
+
+        //int topViews[] = {4,3,2,1};
+//        int leftViews[] = {0,0,0,0};
+//        int rightViews[] = {1,2,2,2};
+//        int bottomViews[]={0,0,0,0};
+//        int m[][] = {{3,4,1,2}, {1,3,2,4}, {2,1,4,3},{4,2,3,1}};
     }
 }

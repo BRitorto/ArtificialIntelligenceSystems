@@ -20,7 +20,7 @@ public class GPSEngine {
 	private GPSNode solutionNode;
 	private Optional<Heuristic> heuristic;
 	private long currentDepthLimit;
-	private final static long TIMELIMIT = 9000;
+	private final static long TIMELIMIT = 10000;
 
 	// Use this variable in open set order.
 	protected SearchStrategy strategy;
@@ -179,6 +179,21 @@ public class GPSEngine {
 
 	private void updateBest(GPSNode node) {
 		bestCosts.put(node.getState(), node.getCost());
+	}
+
+	public void printSolutionPath(){
+		if(solutionNode == null)
+			return;
+		Stack<GPSNode> stack = new Stack<>();
+		GPSNode currentNode = solutionNode;
+		while(currentNode.getParent() != null){
+			stack.push(currentNode);
+			currentNode = currentNode.getParent();
+		}
+		while (!stack.isEmpty()){
+			System.out.println("-----------------------------------------------");
+			System.out.println(stack.pop().getState().getRepresentation());
+		}
 	}
 
 	// GETTERS FOR THE PEOPLE!

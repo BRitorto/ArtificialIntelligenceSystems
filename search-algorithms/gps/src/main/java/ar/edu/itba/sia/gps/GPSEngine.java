@@ -77,7 +77,8 @@ public class GPSEngine {
 			while (open.size() > 0) {
 				GPSNode currentNode = open.remove();
 				if (problem.isGoal(currentNode.getState())) {
-
+					System.out.println("Ganamos");
+					System.out.println(currentNode.getState().getRepresentation());
 					finished = true;
 					solutionNode = currentNode;
 					if(strategy == IDDFS)

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public class SkyscrapersSwapRule implements Rule {
-    public static final int COST = 1;
+    public int cost = 1;
     private static final String RULE_NAME = "SWAP";
     private final String name;
 
@@ -26,7 +26,7 @@ public class SkyscrapersSwapRule implements Rule {
     }
     @Override
     public Integer getCost() {
-        return null;
+        return this.cost;
     }
 
     @Override
@@ -41,7 +41,8 @@ public class SkyscrapersSwapRule implements Rule {
             return Optional.empty();
         }
         Board auxBoard = swapValue(board, x, y1, y2);
-        return Optional.of(new SkyscrapersState(auxBoard));
+        SkyscrapersState auxState = new SkyscrapersState(auxBoard);
+        return Optional.of(auxState);
     }
 
     private Board swapValue(Board board, int x, int y1, int y2) {

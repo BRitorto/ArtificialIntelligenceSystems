@@ -7,7 +7,7 @@ Para compilar y ejecutar el .jar, basta con asegurarse de estar parado en _searc
 ```
         execute.sh
 ```
-El cual se encarga  correr el programa.
+El cual se encarga buildear y correr el programa.
 
 ### Formas de Jugar
 Dependiendo con qué argumentos corra el usuario el script *execute.sh* se abrirá un modo de juego. Corriendo el script sin argumentos:

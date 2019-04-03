@@ -19,7 +19,7 @@ public class SkyscrapersPuzzle {
     public static final String SWAP_MODE = "S";
 
 
-    public static GPSNode solvePuzzle(String gameMode, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView, int[][] matrix) {
+    public static GPSEngine solvePuzzle(String gameMode, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView, int[][] matrix) {
         SkyscrapersProblem problem;
         EngineFactory factory;
         GPSEngine engine;
@@ -38,7 +38,7 @@ public class SkyscrapersPuzzle {
             engine.findSolution();
         }
 
-        return engine.getSolutionNode();
+        return engine;
     }
 
     public static List<Rule> getFillRules(int[][] m) {

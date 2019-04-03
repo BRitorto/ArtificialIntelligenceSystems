@@ -2,6 +2,7 @@ package ar.edu.itba.sia.game.UI;
 
 import ar.edu.itba.sia.game.Board;
 import ar.edu.itba.sia.game.Permute;
+import ar.edu.itba.sia.gps.GPSEngine;
 import ar.edu.itba.sia.gps.GPSNode;
 
 import java.util.ArrayList;
@@ -50,12 +51,14 @@ public class NonInteractiveGame {
             matrix = new int[dimensions][dimensions];
         }*/
       //Initialized to get rid of "might not be initialized" error
-      GPSNode solutionNode = null;
+      GPSEngine engine = null;
+      long delta = 0;
         if (gameMode.equals("S")) {
             Permute p = new Permute(dimensions);
             HashSet<Integer[]> permutations = p.getPermutations();
             Iterator<Integer[]> it = permutations.iterator();
             int counter=permutations.size();
+            long start = System.nanoTime();
             while(it.hasNext()) {
                 Integer[] aux = it.next();
                 matrix = new int[dimensions][dimensions];
@@ -66,30 +69,38 @@ public class NonInteractiveGame {
                     }
                     index++;
                 }
-                solutionNode = solvePuzzle(gameMode, dimensions, generated_board.getTopViews(),
+                engine = solvePuzzle(gameMode, dimensions, generated_board.getTopViews(),
                         generated_board.getBottomViews(), generated_board.getLeftViews(),
                         generated_board.getRightViews(), matrix);
 
-                if(solutionNode != null){
+                if(engine.getSolutionNode() != null){
                     break;
                 }
             }
+            delta = System.nanoTime() - start;
 
         }else {
-
+            long start = System.nanoTime();
             matrix = new int[dimensions][dimensions];
-            solutionNode = solvePuzzle(gameMode, dimensions, generated_board.getTopViews(),
+            engine = solvePuzzle(gameMode, dimensions, generated_board.getTopViews(),
                     generated_board.getBottomViews(), generated_board.getLeftViews(),
                     generated_board.getRightViews(), matrix);
+            delta = System.nanoTime() - start;
         }
 
         //Resuelvo
 
-        if( solutionNode == null){
+        if( engine.getSolutionNode() == null){
             System.out.println("The given board had no solution.");
         }else{
             System.out.println("Game ended, winning board: ");
-            System.out.println(solutionNode.getState().getRepresentation());
+            System.out.println(engine.getSolutionNode().getState().getRepresentation());
+            System.out.println("Depth of the solution: " + engine.getSolutionNode().getDepth());
+            System.out.println("Total solution cost: " + engine.getSolutionNode().getCost());
+            System.out.println("Qty of exploded nodes: " + engine.getExplosionCounter());
+            System.out.println("Analized states # : " + engine.getBestCosts().size());
+            System.out.println("# Frontier Nodes " + engine.getOpen().size());
+            System.out.println("Time expended " + delta + " ns");
         }
 
     }

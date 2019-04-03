@@ -29,7 +29,11 @@ public class Main {
             gameMode = Helpers.getGameMode(inputScanner);
 
             int dimensions = Helpers.getDimensions(inputScanner);
-            NonInteractiveGame.playGame(gameMode, dimensions, inputScanner);
+            if (Helpers.askInteractive(inputScanner)) {
+                InteractiveGame.playGame(gameMode, dimensions, inputScanner);
+            } else {
+                NonInteractiveGame.playGame(gameMode, dimensions, inputScanner);
+            }
 
             inputScanner.close();
             return;

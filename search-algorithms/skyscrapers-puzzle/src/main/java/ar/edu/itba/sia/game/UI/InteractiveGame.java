@@ -1,9 +1,13 @@
 package ar.edu.itba.sia.game.UI;
 
+import ar.edu.itba.sia.game.Permute;
 import ar.edu.itba.sia.gps.GPSNode;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
+import static ar.edu.itba.sia.game.SkyscrapersPuzzle.FILL_MODE;
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.solvePuzzle;
 
 public class InteractiveGame {
@@ -38,9 +42,34 @@ public class InteractiveGame {
                     break;
             }
         }
+        GPSNode solutionNode = null;
+        int matrix[][];
+        if( gameMode.equals(FILL_MODE)) {
+            matrix = new int[dimensions][dimensions];
+            solutionNode = solvePuzzle(gameMode, dimensions, topView, bottomView, leftView, rightView, matrix);
+        }else{
+            Permute p = new Permute(dimensions);
+            HashSet<Integer[]> permutations = p.getPermutations();
+            Iterator<Integer[]> it = permutations.iterator();
+            int counter=permutations.size();
+            while(it.hasNext()) {
+                Integer[] aux = it.next();
+                matrix = new int[dimensions][dimensions];
+                int index = 0;
+                for (int i = 0; i < dimensions; i++) {
+                    for (int j = 0; j < dimensions; j++) {
+                        matrix[i][j] = aux[(j + index) % dimensions];
+                    }
+                    index++;
+                }
+                solutionNode = solvePuzzle(gameMode, dimensions, topView,
+                        bottomView,leftView, rightView, matrix);
 
-        int matrix[][] = initializeMatrix(dimensions);
-        GPSNode solutionNode = solvePuzzle(gameMode,dimensions, topView, bottomView, leftView, rightView, matrix);
+                if(solutionNode != null){
+                    break;
+                }
+            }
+        }
 
         if( solutionNode == null){
             System.out.println("The given board had no solution.");
@@ -52,16 +81,4 @@ public class InteractiveGame {
 
     }
 
-    //Hacer este método más piola más adelante
-    private static int[][] initializeMatrix(int dimensions) {
-        //int m[][] = {{2,1,4,3},{3,4,1,2},{4,2,3,1},{1,3,2,4}};
-        int m[][];
-        if(dimensions == 4) {
-            m = new int[][]{{3, 4, 1, 2}, {1, 3, 2, 4}, {2, 1, 4, 3}, {4, 2, 3, 1}};
-        }else{
-            m = new int[][]{{1, 2, 3}, {2, 3, 1}, {3, 1, 2}};
-        }
-
-        return m;
-    }
 }

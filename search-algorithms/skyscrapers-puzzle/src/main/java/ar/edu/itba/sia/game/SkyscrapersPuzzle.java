@@ -28,7 +28,7 @@ public class SkyscrapersPuzzle {
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getFillRules(matrix), matrix);
             factory = new EngineFactory();
-            engine = factory.buildEngine(problem, SearchStrategy.BFS, null, 0);
+            engine = factory.buildEngine(problem, SearchStrategy.DFS, null, 0);
             engine.findSolution();
         }else{
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
@@ -67,22 +67,4 @@ public class SkyscrapersPuzzle {
         return rules;
     }
 
-    private void garbage(){
-        int topViews[] = {2,1,3,2};
-        int bottomViews[]={1,3,2,3};
-        int leftViews[] = {2,3,2,1};
-        int rightViews[] = {2,1,2,3};
-        int m[][] = {{2,1,4,3},{3,4,1,2},{4,2,3,1},{1,3,2,4}};
-
-       // int leftViews[] = {3, 2, 3, 2, 1};
-//        int topViews[] = {4, 2, 1, 2, 3};
-//        int rightViews[] = {3, 4, 1, 2, 2};
-//        int bottomViews[] = {1, 4, 3, 2, 2}
-
-        //int topViews[] = {4,3,2,1};
-//        int leftViews[] = {0,0,0,0};
-//        int rightViews[] = {1,2,2,2};
-//        int bottomViews[]={0,0,0,0};
-//        int m[][] = {{3,4,1,2}, {1,3,2,4}, {2,1,4,3},{4,2,3,1}};
-    }
 }

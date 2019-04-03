@@ -5,6 +5,9 @@ import ar.edu.itba.sia.game.Permute;
 import ar.edu.itba.sia.gps.GPSEngine;
 import ar.edu.itba.sia.gps.GPSNode;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -92,16 +95,20 @@ public class NonInteractiveGame {
 
         if( engine.getSolutionNode() == null){
             System.out.println("The given board had no solution.");
-        }else{
+        }else {
             System.out.println("Game ended, winning board: ");
             System.out.println(engine.getSolutionNode().getState().getRepresentation());
+            System.out.println("Game mode " + gameMode);
+            System.out.println("Dimensions " + dimensions);
             System.out.println("Depth of the solution: " + engine.getSolutionNode().getDepth());
             System.out.println("Total solution cost: " + engine.getSolutionNode().getCost());
             System.out.println("Qty of exploded nodes: " + engine.getExplosionCounter());
             System.out.println("Analized states # : " + engine.getBestCosts().size());
             System.out.println("# Frontier Nodes " + engine.getOpen().size());
             System.out.println("Time expended " + delta + " ns");
+            engine.printSolutionPath();
         }
+
 
     }
 

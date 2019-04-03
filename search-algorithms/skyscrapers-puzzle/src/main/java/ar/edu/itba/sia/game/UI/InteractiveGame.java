@@ -4,6 +4,8 @@ import ar.edu.itba.sia.game.Permute;
 import ar.edu.itba.sia.gps.GPSEngine;
 import ar.edu.itba.sia.gps.GPSNode;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -86,6 +88,17 @@ public class InteractiveGame {
             System.out.println("Analized states # : " + engine.getBestCosts().size());
             System.out.println("# Frontier Nodes " + engine.getOpen().size());
             System.out.println("Time expended " + delta + " ns");
+
+
+        try {
+            PrintStream fileOut = new PrintStream("./solutionPath.txt");
+            System.setOut(fileOut);
+            engine.printSolutionPath();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         }
 
 

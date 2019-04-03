@@ -105,7 +105,7 @@ public class Helpers {
     }
 
     public static int askDifficultyLevel(Scanner inputScanner) {
-        System.out.println("Insert a difficulty level from 1 to 5");
+        System.out.println("Insert a difficulty level from 1 to 3");
         int level=0;
         boolean correctInput;
         do {

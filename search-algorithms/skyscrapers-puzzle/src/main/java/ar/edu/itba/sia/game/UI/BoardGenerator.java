@@ -53,10 +53,24 @@ public class BoardGenerator {
             case 4:
                 return createMediumBoarDim4(gameMode);
             case 5:
-                //TODO
+                return createMediumBoardDim5(gameMode);
         }
 
         return null;
+    }
+
+    private static Board createMediumBoardDim5(String gameMode) {
+        int[] topView = {5, 4, 3, 2, 1};
+        int[] bottomView = {1, 0, 0, 2, 2};
+        int[] leftView = {5, 0, 3, 2, 0};
+        int[] rightView = {1, 0, 2, 2, 0};
+
+        if(isFillMode(gameMode)){
+            return new Board(5, topView, bottomView, leftView, rightView);
+        }else{
+            return new Board(5, topView, bottomView, leftView, rightView, validMatrix4);
+        }
+
     }
 
     private static Board createHardBoard(String gameMode, int dimensions) {
@@ -140,10 +154,10 @@ public class BoardGenerator {
     }
 
     private static Board createHardBoarDim4(String gameMode) {
-        int[] topView = {1, 2, 3, 4};
-        int[] bottomView = {2, 2, 2, 1};
-        int[] leftView = {1, 2, 3, 4};
-        int[] rightView = {4, 3, 2, 1};
+        int[] topView = {3, 1, 2, 0};
+        int[] bottomView = {1, 0, 3, 2};
+        int[] leftView = {0, 2, 4, 0};
+        int[] rightView = {2, 0, 1, 4};
 
         if(isFillMode(gameMode)){
             return new Board(4, topView, bottomView, leftView, rightView);

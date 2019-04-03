@@ -36,11 +36,7 @@ public class UnitCostGPSTests {
                 {1, 2, 3}
         };
 
-//        int topViewsSwap4[] = {2, 1, 2, 2};
-//        int rightViewsSwap4[] = {3, 4, 1, 2};
-//        int leftViewsSwap4[] = {2, 1, 2, 2};
-//        int bottomViewsSwap4[] = {3, 4, 1, 2};
-        
+
         int topViewsSwap4[] = {4, 3, 2, 1};
         int rightViewsSwap4[] = {1, 2, 2, 2};
         int leftViewsSwap4[] = {0, 0, 0, 0};
@@ -52,70 +48,9 @@ public class UnitCostGPSTests {
                 {4, 1, 2, 3}
         };
 
-        int topViewsSwap5[] = {4, 2, 1, 2, 3};
-        int rightViewsSwap5[] = {3, 4, 1, 2, 2};
-        int leftViewsSwap5[] = {3, 2, 3, 2, 1};
-        int bottomViewsSwap5[] = {1, 4, 3, 2, 2};
-        int views[] = {0, 0, 0, 0, 0};
-        int mSwap5[][] = {
-                {1, 2, 3, 4, 5},
-                {2, 3, 4, 5, 1},
-                {3, 4, 5, 1, 2},
-                {4, 5, 1, 2, 3},
-                {5, 1, 2, 3, 4}
-        };
-
-//          ESTO ES EL GENERADOR DE MATRICES PASANDOLE LA DIMENSION N Y LAS VIEWS CORRESPONIENTES EN EL CONSTRUCTOR DEL PROBLEMA
-//        int n = 5;
-//        Permute p = new Permute(n);
-//
-//        HashSet<Integer[]> permutations = (HashSet<Integer[]>) p.getPermutations();
-//        Iterator<Integer[]> it = permutations.iterator();
-//        int lel = permutations.size();
-//        while(it.hasNext()){
-//            Integer[] aux = it.next();
-//            int m[][] = new int[n][n];
-//            int index = 0;
-//            for(int i=0 ; i< n ; i++){
-//                for(int j=0 ; j< n ; j++){
-//                    m[i][j] = aux[(j+index)%n];
-//                }
-//                index++;
-//            }
-//
-//            System.out.println("-------------------------");
-//            for (int i = 0; i < m.length; i++) {
-//                for (int j = 0; j < m[i].length; j++) {
-//                    System.out.print(m[i][j] + " ");
-//                }
-//                System.out.println();
-//            }
-//            System.out.println("quedan esta cantidad de matrices = "+lel--);
-//            SkyscrapersProblem problemSwap = new SkyscrapersProblem(n, topViewsSwap5, bottomViewsSwap5, leftViewsSwap5, rightViewsSwap5,
-//                    SkyscrapersPuzzle.getSwapRules(m), m);
-//
-//            bfsEngine = new GPSEngine(problemSwap, SearchStrategy.BFS, null);
-//            dfsEngine = new GPSEngine(problemSwap, SearchStrategy.DFS, null);
-////            iddfsEngine = new GPSEngine(problemSwap, SearchStrategy.IDDFS, null);
-//           // aStarEngine = new GPSEngine(problemSwap, SearchStrategy.ASTAR, new AdmissibleHeuristic());
-//           // greedyEngine = new GPSEngine(problemSwap, SearchStrategy.GREEDY, new AdmissibleHeuristic());
-//
-//            System.out.println("Finding bfs solution");
-//            bfsEngine.findSolution();
-//            System.out.println("Finding dfs solution");
-//            dfsEngine.findSolution();
-////            System.out.println("Finding iddfs solution");
-////            iddfsEngine.findSolution();
-////            System.out.println("Finding aStar solution");
-////            aStarEngine.findSolution();
-////            System.out.println("Finding greedy solution");
-////            greedyEngine.findSolution();
-//            System.out.println("All engine ran, running the tests");
-//        }
 
 
-//        SkyscrapersProblem problemSwap = new SkyscrapersProblem(5, topViewsSwap5, bottomViewsSwap5, leftViewsSwap5, rightViewsSwap5,
-//                SkyscrapersPuzzle.getSwapRules(mSwap5), mSwap5);
+
 //        SkyscrapersProblem problemSwap = new SkyscrapersProblem(4, topViewsSwap4, bottomViewsSwap4, leftViewsSwap4, rightViewsSwap4,
 //                SkyscrapersPuzzle.getSwapRules(mSwap4), mSwap4);
         SkyscrapersProblem problemSwap = new SkyscrapersProblem(3, topViews3, bottomViews3, leftViews3, rightViews3, SkyscrapersPuzzle.getSwapRules(mSwap3), mSwap3);

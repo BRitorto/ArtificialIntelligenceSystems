@@ -1,5 +1,6 @@
 package ar.edu.itba.sia.game;
 
+import ar.edu.itba.sia.game.rules.SkyscrapersSwapRule;
 import ar.edu.itba.sia.gps.EngineFactory;
 import ar.edu.itba.sia.gps.GPSEngine;
 import ar.edu.itba.sia.gps.GPSNode;
@@ -7,12 +8,10 @@ import ar.edu.itba.sia.gps.SearchStrategy;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import ar.edu.itba.sia.game.rules.SkyscrapersFillRule;
-import ar.edu.itba.sia.game.rules.SkyscrapersSwapColRule;
-import ar.edu.itba.sia.game.rules.SkyscrapersSwapRowRule;
 
-import javax.swing.text.html.Option;
-import java.text.ParseException;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class SkyscrapersPuzzle {
     public static final String FILL_MODE = "F";
@@ -57,14 +56,11 @@ public class SkyscrapersPuzzle {
     public static List<Rule> getSwapRules(int[][] m) {
         LinkedList rules = new LinkedList<Rule>();
         for (int i = 0; i < m.length; i++) {
-            for (int j = i+1; j < m.length; j++) {
-                SkyscrapersSwapRowRule ruleRow = new SkyscrapersSwapRowRule(i, j);
-                SkyscrapersSwapColRule ruleCol = new SkyscrapersSwapColRule(i, j);
-                rules.add(ruleRow);
-                rules.add(ruleCol);
+            for (int j = 0; j < m.length; j++) {
+                Rule rule = new SkyscrapersSwapRule(new Point(i, j), new Point(i, (j+1)%m.length));
+                rules.add(rule);
             }
         }
         return rules;
     }
-
 }

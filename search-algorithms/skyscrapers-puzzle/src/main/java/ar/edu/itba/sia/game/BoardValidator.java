@@ -9,7 +9,7 @@ public class BoardValidator {
         int[] bottomView=b.getBottomViews();
         int[] leftView=b.getLeftViews();
         int[] rightView=b.getRightViews();
-        int repetidos=checkRowsCols(b);
+        int repetidos=checkRows(b) + checkCols(b);
         int rows=checkRowsLeftRight(b.getMatrix(),leftView,rightView);
         int cols=checkColsTopBottom(b.getMatrix(),topView,bottomView);
         return repetidos+cols+rows;
@@ -17,29 +17,37 @@ public class BoardValidator {
 
     //por cada numero con conflictos de repetidos en la fila o la columna, sumo 1.
     //Maxima cantidad de conflictos: NxN
-    public int checkRowsCols(Board b){
-        int lenght=b.getMatrix().length;
-        int currNum=0;
-        int cantConflicts=0;
-        boolean end=false;
-        for(int i=0;i<lenght;i++){
-            for(int j=0;j<lenght;j++){
-                end=false;
-                currNum=b.getMatrix()[i][j].getHeight();
-                for(int m=0;m<lenght ;m++){//chequeo fila
-                    if(m!=j) {
+    public int checkRows(Board b) {
+        int lenght = b.getMatrix().length;
+        int currNum = 0;
+        int cantConflicts = 0;
+        for (int i = 0; i < lenght; i++) {
+            for (int j = 0; j < lenght; j++) {
+                currNum = b.getMatrix()[i][j].getHeight();
+                for (int m = 0; m < lenght; m++) {//chequeo fila
+                    if (m != j) {
                         if (currNum == b.getMatrix()[i][m].getHeight()) {
                             cantConflicts++;
-                            end = true; //ya encontre conflicto para ese numero
                             break;
                         }
                     }
                 }
-                for(int m=0;m<lenght && !end;m++){//chequeo columna
+            }
+        }
+        return cantConflicts;
+    }
+
+    public int checkCols(Board b) {
+        int lenght = b.getMatrix().length;
+        int currNum = 0;
+        int cantConflicts = 0;
+        for (int i = 0; i < lenght; i++) {
+            for (int j = 0; j < lenght; j++) {
+                currNum = b.getMatrix()[i][j].getHeight();
+                for(int m=0;m<lenght ;m++){//chequeo columna
                     if(m!=i) {
                         if (currNum == b.getMatrix()[m][j].getHeight()) {
                             cantConflicts++;
-                            end = true;
                             break;
                         }
                     }

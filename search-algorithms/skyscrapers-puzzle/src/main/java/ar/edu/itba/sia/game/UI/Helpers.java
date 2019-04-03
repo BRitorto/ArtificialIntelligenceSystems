@@ -31,6 +31,7 @@ public class Helpers {
         do{
 
             gameMode = scanner.next();
+            gameMode = gameMode.toUpperCase();
             if (!(gameMode.equals("F") || gameMode.equals("S"))){
                 System.out.println("Wrong Input, please remember to enter F or S");
             }else{

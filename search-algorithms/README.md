@@ -10,7 +10,7 @@ Para compilar y ejecutar el .jar, basta con asegurarse de estar parado en _searc
 El cual se encarga buildear y correr el programa.
 
 ### Formas de Jugar
-Dependiendo con qué argumentos corra el usuario el script *execute.sh* se abrirá un modo de juego. Corriendo el script sin argumentos:
+Dependiendo con qué argumentos corra el usuario el script *execute.sh* se abrirá un modo de juego. Si se elije el modo Fill Rule, el tablero se resuelve con DFS, ya que es la estrategia mas rapida. Con Swap Rule, se resuelve utilizando estrategia Greedy. Corriendo el script sin argumentos:
 ```bash
     ./execute.sh
 ```

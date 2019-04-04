@@ -37,11 +37,11 @@ public class MesureTest {
 
         //4x4
 
-//        int topViews[] = {2, 1, 3, 2};
-//        int leftViews[] = {0, 3, 2, 1};
-//        int rightViews[] = {2, 1, 2, 3};
-//        int bottomViews[] = {0, 0, 0, 0};
-//        int m[][] = {{1, 2, 3, 4}, {2, 3, 4, 1}, {3, 4, 1, 2}, {4, 1, 2, 3}};
+        int topViews[] = {2, 1, 3, 2};
+        int leftViews[] = {0, 3, 2, 1};
+        int rightViews[] = {2, 1, 2, 3};
+        int bottomViews[] = {0, 0, 0, 0};
+        int m[][] = {{1, 2, 3, 4}, {2, 3, 4, 1}, {3, 4, 1, 2}, {4, 1, 2, 3}};
 
         AdmissibleHeuristic ad = new AdmissibleHeuristic();
         NonAdmissibleHeuristic nad= new NonAdmissibleHeuristic();

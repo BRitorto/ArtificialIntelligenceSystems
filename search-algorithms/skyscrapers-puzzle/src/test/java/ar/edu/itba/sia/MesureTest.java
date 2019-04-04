@@ -28,24 +28,29 @@ public class MesureTest {
 //        int bottomViews[] = {0,2,1};
 //        int m[][] = {{1,2,3},{2,3,1},{3,1,2}};
 
-//        int topViews[] = {0,1,0};
-//        int leftViews[] = {2,2,0};
-//        int rightViews[] = {0,1,3};
-//        int bottomViews[] = {1,2,2};
-//        int m[][] = {{1,2,3},{2,3,1},{3,1,2}};
+        int topViews[] = {0,1,0};
+        int leftViews[] = {2,2,0};
+        int rightViews[] = {0,1,3};
+        int bottomViews[] = {1,2,2};
+        //int m[][] = {{1,2,3},{2,3,1},{3,1,2}};
+        int m[][] = {{1,2,3},{2,3,1},{2,1,3}};
+
 
 
         //4x4
+//
+//        int topViews[] = {2, 1, 3, 2};
+//        int leftViews[] = {0, 3, 2, 1};
+//        int rightViews[] = {2, 1, 2, 3};
+//        int bottomViews[] = {0, 0, 0, 0};
+//        //int m[][] = {{1, 2, 3, 4}, {2, 3, 4, 1}, {3, 4, 1, 2}, {4, 1, 2, 3}};
+//        int m[][] = {{1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}};
 
-        int topViews[] = {2, 1, 3, 2};
-        int leftViews[] = {0, 3, 2, 1};
-        int rightViews[] = {2, 1, 2, 3};
-        int bottomViews[] = {0, 0, 0, 0};
-        int m[][] = {{1, 2, 3, 4}, {2, 3, 4, 1}, {3, 4, 1, 2}, {4, 1, 2, 3}};
 
         AdmissibleHeuristic ad = new AdmissibleHeuristic();
         NonAdmissibleHeuristic nad= new NonAdmissibleHeuristic();
         Board board = new Board(m.length, topViews, bottomViews, leftViews, rightViews, m);
+        System.out.println("CONFLICTOs:"+board.getBoardValidator().cantConflicts(board));
         SkyscrapersProblem problem = new SkyscrapersProblem(board, SkyscrapersPuzzle.getSwapRules(m));
         GPSEngine engine = EngineFactory.buildEngine(problem, SearchStrategy.BFS, null, 0);
         long delta;

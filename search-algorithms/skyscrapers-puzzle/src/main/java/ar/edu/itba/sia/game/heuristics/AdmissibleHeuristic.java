@@ -11,7 +11,7 @@ public class AdmissibleHeuristic implements Heuristic {
     public Integer getValue(State state) {
         final SkyscrapersState ssState = (SkyscrapersState) state;
         final Board board = ssState.getCurrentBoard();
-        return board.getBoardValidator().cantConflicts(board)/6;
+        return board.getBoardValidator().cantConflicts(board)/8;
     }
 
     public boolean isAdmissible() {

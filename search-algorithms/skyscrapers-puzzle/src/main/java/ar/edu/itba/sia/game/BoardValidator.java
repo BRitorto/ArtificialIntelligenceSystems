@@ -12,7 +12,7 @@ public class BoardValidator {
         int repetidos = checkCols(b);
         int rows = checkRowsLeftRight(b.getMatrix(), leftView, rightView);
         int cols = checkColsTopBottom(b.getMatrix(), topView, bottomView);
-        System.out.println("REP:" + repetidos + " LR:" + rows + " TB:" + cols);
+        //System.out.println("REP:" + repetidos + " LR:" + rows + " TB:" + cols);
         return repetidos + cols + rows;
     }
 

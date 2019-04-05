@@ -30,10 +30,43 @@ public class BoardGenerator {
             case 4:
                 return createEasyBoardDim4(gameMode);
             case 5:
-               //TODO
+                return createEasyBoardDim5(gameMode);
         }
 
         return null;
+    }
+
+    private static Board createEasyBoardDim3(String gameMode) {
+        int[] topView = {3, 0, 1};
+        int[] bottomView = {1, 2, 0};
+        int[] leftView = {3, 0, 0};
+        int[] rightView = {1, 0, 2};
+
+
+        return new Board(3, topView, bottomView, leftView, rightView);
+
+
+    }
+
+    private static Board createEasyBoardDim4(String gameMode) {
+        int[] topView = {1, 0, 3, 0};
+        int[] bottomView = {0, 2, 0, 1};
+        int[] leftView = {1, 2, 0, 4};
+        int[] rightView = {4, 0, 2, 1};
+
+        return new Board(4, topView, bottomView, leftView, rightView);
+
+    }
+
+    private static Board createEasyBoardDim5(String gameMode) {
+        int[] topView = {5, 0, 0, 2, 1};
+        int[] bottomView = {1, 0, 0, 2, 2};
+        int[] leftView = {0, 0, 3, 2, 0};
+        int[] rightView = {1, 0, 2, 0, 0};
+
+
+        return new Board(5, topView, bottomView, leftView, rightView);
+
     }
 
     private static Board createMediumBoard(String gameMode, int dimensions) {
@@ -49,17 +82,33 @@ public class BoardGenerator {
         return null;
     }
 
+    private static Board createMediumBoardDim3(String gameMode) {
+        int[] topView = {2, 1, 3};
+        int[] bottomView = {2, 1, 0};
+        int[] leftView = {2, 0, 2};
+        int[] rightView = {1, 3, 0};
+
+        return new Board(3, topView, bottomView, leftView, rightView);
+
+    }
+
+    private static Board createMediumBoarDim4(String gameMode) {
+        int[] topView = {2, 0, 3, 1};
+        int[] bottomView = {2, 1, 2, 3};
+        int[] leftView = {0, 1, 3, 2};
+        int[] rightView = {1, 0, 2, 3};
+
+        return new Board(4, topView, bottomView, leftView, rightView);
+
+    }
+
     private static Board createMediumBoardDim5(String gameMode) {
         int[] topView = {5, 4, 3, 2, 1};
         int[] bottomView = {1, 0, 0, 2, 2};
         int[] leftView = {5, 0, 3, 2, 0};
         int[] rightView = {1, 0, 2, 2, 0};
 
-        if(isFillMode(gameMode)){
-            return new Board(5, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(5, topView, bottomView, leftView, rightView);
-        }
+        return new Board(5, topView, bottomView, leftView, rightView);
 
     }
 
@@ -70,65 +119,12 @@ public class BoardGenerator {
             case 4:
                 return createHardBoarDim4(gameMode);
             case 5:
-                //TODO
+                return createHardBoardDim5(gameMode);
         }
 
         return null;
     }
 
-    private static Board createEasyBoardDim4(String gameMode) {
-        int[] topView = {1, 0, 3, 0};
-        int[] bottomView = {0, 2, 0, 1};
-        int[] leftView = {1, 2, 0, 4};
-        int[] rightView = {4, 0, 2, 1};
-
-        if(isFillMode(gameMode)){
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }
-    }
-
-
-    private static Board createEasyBoardDim3(String gameMode) {
-        int[] topView = {3, 0, 1};
-        int[] bottomView = {1, 2, 0};
-        int[] leftView = {3, 0, 0};
-        int[] rightView = {1, 0, 2};
-        if(isFillMode(gameMode)){
-           return new Board(3, topView, bottomView, leftView, rightView);
-        }else{
-
-            return new Board(3, topView, bottomView, leftView, rightView);
-        }
-
-    }
-
-    private static Board createMediumBoardDim3(String gameMode) {
-        int[] topView = {2, 1, 3};
-        int[] bottomView = {2, 1, 0};
-        int[] leftView = {2, 0, 2};
-        int[] rightView = {1, 3, 0};
-
-        if(isFillMode(gameMode)){
-            return new Board(3, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(3, topView, bottomView, leftView, rightView);
-        }
-    }
-
-    private static Board createMediumBoarDim4(String gameMode) {
-        int[] topView = {2, 0, 3, 1};
-        int[] bottomView = {2, 1, 2, 3};
-        int[] leftView = {0, 1, 3, 2};
-        int[] rightView = {1, 0, 2, 3};
-
-        if(isFillMode(gameMode)){
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }
-    }
 
     private static Board createHardBoardDim3(String gameMode) {
         int[] topView = {1, 2, 3};
@@ -136,11 +132,9 @@ public class BoardGenerator {
         int[] leftView = {1, 2, 2};
         int[] rightView = {3, 2, 1};
 
-        if(isFillMode(gameMode)){
-            return new Board(3, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(3, topView, bottomView, leftView, rightView);
-        }
+
+        return new Board(3, topView, bottomView, leftView, rightView);
+
     }
 
     private static Board createHardBoarDim4(String gameMode) {
@@ -149,16 +143,20 @@ public class BoardGenerator {
         int[] leftView = {0, 2, 4, 0};
         int[] rightView = {2, 0, 1, 4};
 
-        if(isFillMode(gameMode)){
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }else{
-            return new Board(4, topView, bottomView, leftView, rightView);
-        }
+
+        return new Board(4, topView, bottomView, leftView, rightView);
+
     }
 
-    private static boolean isFillMode(String gameMode){
-        return gameMode.equals(SkyscrapersPuzzle.FILL_MODE);
+    private static Board createHardBoardDim5(String gameMode) {
+        int[] topView = {5, 4, 3, 2, 1};
+        int[] bottomView = {1, 2, 2, 2, 2};
+        int[] leftView = {5, 4, 3, 2, 1};
+        int[] rightView = {1, 2, 2, 2, 2};
+
+        return new Board(5, topView, bottomView, leftView, rightView);
     }
+
 
 
 }

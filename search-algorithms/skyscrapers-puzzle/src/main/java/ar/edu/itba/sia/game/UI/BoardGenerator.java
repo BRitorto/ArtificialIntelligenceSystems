@@ -10,16 +10,6 @@ public class BoardGenerator {
     private static int[][] validMatrix5;
 
     public static Board create(String gameMode, int dimensions, int difficultyLevel) {
-            validMatrix3 = new int[][]
-                    {{1, 2, 3},
-                     {2, 3, 1},
-                     {3, 1, 2}};
-
-            validMatrix4 = new int[][]
-                    {{1, 2, 3, 4},
-                     {2, 3, 4, 1},
-                     {3, 4, 1, 2},
-                     {4, 1, 2, 3}};
 
         switch (difficultyLevel){
             case 1:
@@ -68,7 +58,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(5, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(5, topView, bottomView, leftView, rightView, validMatrix4);
+            return new Board(5, topView, bottomView, leftView, rightView);
         }
 
     }
@@ -95,7 +85,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(4, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(4, topView, bottomView, leftView, rightView, validMatrix4);
+            return new Board(4, topView, bottomView, leftView, rightView);
         }
     }
 
@@ -109,7 +99,7 @@ public class BoardGenerator {
            return new Board(3, topView, bottomView, leftView, rightView);
         }else{
 
-            return new Board(3, topView, bottomView, leftView, rightView, validMatrix3);
+            return new Board(3, topView, bottomView, leftView, rightView);
         }
 
     }
@@ -123,7 +113,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(3, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(3, topView, bottomView, leftView, rightView, validMatrix3);
+            return new Board(3, topView, bottomView, leftView, rightView);
         }
     }
 
@@ -136,7 +126,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(4, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(4, topView, bottomView, leftView, rightView, validMatrix4);
+            return new Board(4, topView, bottomView, leftView, rightView);
         }
     }
 
@@ -149,7 +139,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(3, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(3, topView, bottomView, leftView, rightView, validMatrix3);
+            return new Board(3, topView, bottomView, leftView, rightView);
         }
     }
 
@@ -162,7 +152,7 @@ public class BoardGenerator {
         if(isFillMode(gameMode)){
             return new Board(4, topView, bottomView, leftView, rightView);
         }else{
-            return new Board(4, topView, bottomView, leftView, rightView, validMatrix4);
+            return new Board(4, topView, bottomView, leftView, rightView);
         }
     }
 

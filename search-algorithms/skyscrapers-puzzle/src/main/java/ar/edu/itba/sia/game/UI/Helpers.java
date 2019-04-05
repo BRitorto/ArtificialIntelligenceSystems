@@ -128,4 +128,22 @@ public class Helpers {
 
         return level;
     }
+
+    //Creates a valid dimensionsxdimensions matrix for SWAP game mode
+    public static int[][] createSwapMatrix(int dimensions) {
+        int[][] startMatrix = new int[dimensions][dimensions];
+        int auxNum;
+        for( int i = 0; i< dimensions; i++){
+            for(int j=0; j< dimensions; j++){
+                auxNum = (i + j +1) % dimensions;
+                // We want 4 to be a valid number
+                if (auxNum == 0){
+                    auxNum = 4;
+                }
+                startMatrix[i][j]= auxNum;
+            }
+        }
+
+        return startMatrix;
+    }
 }

@@ -1,16 +1,13 @@
 package ar.edu.itba.sia.game.UI;
 
-import ar.edu.itba.sia.game.Permute;
 import ar.edu.itba.sia.gps.GPSEngine;
-import ar.edu.itba.sia.gps.GPSNode;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.FILL_MODE;
+import static ar.edu.itba.sia.game.SkyscrapersPuzzle.SWAP_MODE;
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.solvePuzzle;
 
 public class InteractiveGame {
@@ -48,34 +45,14 @@ public class InteractiveGame {
         GPSEngine engine = null;
         long delta = 0;
         int matrix[][];
-        if( gameMode.equals(FILL_MODE)) {
+        if (gameMode.equals(SWAP_MODE))
+            matrix = Helpers.createSwapMatrix(dimensions);
+        else
             matrix = new int[dimensions][dimensions];
-            engine = solvePuzzle(gameMode, dimensions, topView, bottomView, leftView, rightView, matrix);
-        }else{
-            Permute p = new Permute(dimensions);
-            HashSet<Integer[]> permutations = p.getPermutations();
-            Iterator<Integer[]> it = permutations.iterator();
-            int counter=permutations.size();
-            long start = System.nanoTime();
-            while(it.hasNext()) {
-                Integer[] aux = it.next();
-                matrix = new int[dimensions][dimensions];
-                int index = 0;
-                for (int i = 0; i < dimensions; i++) {
-                    for (int j = 0; j < dimensions; j++) {
-                        matrix[i][j] = aux[(j + index) % dimensions];
-                    }
-                    index++;
-                }
-                engine = solvePuzzle(gameMode, dimensions, topView,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      bottomView,leftView, rightView, matrix);
 
-                if(engine.getSolutionNode() != null){
-                    break;
-                }
-            }
-            delta = System.nanoTime() - start;
-        }
+        long start = System.nanoTime();
+        engine = solvePuzzle(gameMode, dimensions, topView, bottomView, leftView, rightView, matrix);
+        delta = System.nanoTime() - start;
 
         if( engine.getSolutionNode() == null){
             System.out.println("The given board had no solution.");
@@ -103,5 +80,7 @@ public class InteractiveGame {
 
 
     }
+
+
 
 }

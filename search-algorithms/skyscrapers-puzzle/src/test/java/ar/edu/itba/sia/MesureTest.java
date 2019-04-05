@@ -3,6 +3,8 @@ package ar.edu.itba.sia;
 import ar.edu.itba.sia.game.Board;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
 import ar.edu.itba.sia.game.SkyscrapersPuzzle;
+import ar.edu.itba.sia.game.UI.Helpers;
+import ar.edu.itba.sia.game.UI.InteractiveGame;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import ar.edu.itba.sia.game.heuristics.NonAdmissibleHeuristic;
 import ar.edu.itba.sia.gps.EngineFactory;
@@ -70,6 +72,17 @@ public class MesureTest {
         System.out.println("Analized states # : " + engine.getBestCosts().size());
         System.out.println("# Frontier Nodes " + engine.getOpen().size());
         System.out.println("Time expended " + delta + " ns");
+    }
+
+    @Test
+    public void createNewMatrixTest(){
+        int[][] hola = Helpers.createSwapMatrix(4);
+        for (int i = 0; i< 4; i++){
+            for(int j = 0; j<4; j++){
+                System.out.printf(hola[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
     }
 }
 

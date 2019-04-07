@@ -2,7 +2,12 @@
 
 ### Instrucciones de compilación y ejecución
 
-Para compilar y ejecutar el .jar, basta con asegurarse de estar parado en _search-algorithms_ y correr el siguiente script
+Para crear los .jar, primero parados dentro de search algorithms correr el comando
+```bash
+    mvn install
+```
+
+y luego, para correr el programa, ejecutar el siguiente script:
 
 ```
         execute.sh

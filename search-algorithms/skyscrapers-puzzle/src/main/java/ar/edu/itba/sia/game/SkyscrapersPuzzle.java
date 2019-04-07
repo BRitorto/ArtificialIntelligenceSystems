@@ -3,7 +3,6 @@ package ar.edu.itba.sia.game;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapRule;
 import ar.edu.itba.sia.gps.EngineFactory;
 import ar.edu.itba.sia.gps.GPSEngine;
-import ar.edu.itba.sia.gps.GPSNode;
 import ar.edu.itba.sia.gps.SearchStrategy;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
@@ -18,7 +17,7 @@ public class SkyscrapersPuzzle {
     public static final String SWAP_MODE = "S";
 
 
-    public static GPSEngine solvePuzzle(String gameMode, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView, int[][] matrix) {
+    public static GPSEngine solvePuzzle(String gameMode, SearchStrategy strategy, int dimensions, int[] topView, int[] bottomView, int[] leftView, int[] rightView, int[][] matrix) {
         SkyscrapersProblem problem;
         EngineFactory factory;
         GPSEngine engine;
@@ -27,13 +26,13 @@ public class SkyscrapersPuzzle {
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getFillRules(matrix), matrix);
             factory = new EngineFactory();
-            engine = factory.buildEngine(problem, SearchStrategy.DFS, null, 0);
+            engine = factory.buildEngine(problem, strategy, null, 0);
             engine.findSolution();
         }else{
             problem = new SkyscrapersProblem(dimensions, topView, bottomView, leftView, rightView,
                     getSwapRules(matrix), matrix);
             factory = new EngineFactory();
-            engine = factory.buildEngine(problem, SearchStrategy.GREEDY, new AdmissibleHeuristic(), 0);
+            engine = factory.buildEngine(problem, strategy, new AdmissibleHeuristic(), 0);
             engine.findSolution();
         }
 

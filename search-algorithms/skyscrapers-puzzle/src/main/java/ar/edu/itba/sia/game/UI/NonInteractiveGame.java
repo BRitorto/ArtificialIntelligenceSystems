@@ -1,16 +1,11 @@
 package ar.edu.itba.sia.game.UI;
 
 import ar.edu.itba.sia.game.Board;
-import ar.edu.itba.sia.game.Permute;
 import ar.edu.itba.sia.gps.GPSEngine;
-import ar.edu.itba.sia.gps.GPSNode;
+import ar.edu.itba.sia.gps.SearchStrategy;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.solvePuzzle;
@@ -21,21 +16,21 @@ public class NonInteractiveGame {
 
         // Le pido nivel de dificultad --> Obtengo Los límites
         int difficultyLevel = Helpers.askDifficultyLevel(inputScanner);
+        SearchStrategy strategy = Helpers.requestStrategy(gameMode, inputScanner);
 
-        playGame(gameMode, dimensions, difficultyLevel);
+        playGame(gameMode, strategy, dimensions, difficultyLevel);
 
 
 
     }
 
-    public static void playGame(String gameMode, int dimensions, int difficultyLevel){
+    public static void playGame(String gameMode, SearchStrategy strategy,int dimensions, int difficultyLevel){
         Board generated_board = BoardGenerator.create(gameMode, dimensions, difficultyLevel);
 
         int[][] matrix;
 
         GPSEngine engine;
         long delta = 0;
-
         if( gameMode.equals("S"))
           matrix = Helpers.createSwapMatrix(dimensions);
         else
@@ -43,7 +38,7 @@ public class NonInteractiveGame {
 
         long start = System.nanoTime();
 
-        engine = solvePuzzle(gameMode, dimensions, generated_board.getTopViews(),
+        engine = solvePuzzle(gameMode, strategy, dimensions, generated_board.getTopViews(),
                             generated_board.getBottomViews(), generated_board.getLeftViews(),
                             generated_board.getRightViews(), matrix);
 
@@ -64,7 +59,15 @@ public class NonInteractiveGame {
             System.out.println("Analized states # : " + engine.getBestCosts().size());
             System.out.println("# Frontier Nodes " + engine.getOpen().size());
             System.out.println("Time expended " + delta + " ns");
-        //    engine.printSolutionPath();
+
+            //solutionPath.txt will be created on "target" directory of skyscrapers-puzzle module
+            try {
+                PrintStream fileOut = new PrintStream("./solutionPath.txt");
+                System.setOut(fileOut);
+                engine.printSolutionPath();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
 
 

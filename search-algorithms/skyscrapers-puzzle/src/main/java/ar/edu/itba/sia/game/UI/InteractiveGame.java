@@ -1,12 +1,12 @@
 package ar.edu.itba.sia.game.UI;
 
 import ar.edu.itba.sia.gps.GPSEngine;
+import ar.edu.itba.sia.gps.SearchStrategy;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static ar.edu.itba.sia.game.SkyscrapersPuzzle.FILL_MODE;
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.SWAP_MODE;
 import static ar.edu.itba.sia.game.SkyscrapersPuzzle.solvePuzzle;
 
@@ -42,6 +42,8 @@ public class InteractiveGame {
                     break;
             }
         }
+
+        SearchStrategy strategy = Helpers.requestStrategy(gameMode, inputScanner);
         GPSEngine engine = null;
         long delta = 0;
         int matrix[][];
@@ -51,7 +53,7 @@ public class InteractiveGame {
             matrix = new int[dimensions][dimensions];
 
         long start = System.nanoTime();
-        engine = solvePuzzle(gameMode, dimensions, topView, bottomView, leftView, rightView, matrix);
+        engine = solvePuzzle(gameMode, strategy, dimensions, topView, bottomView, leftView, rightView, matrix);
         delta = System.nanoTime() - start;
 
         if( engine.getSolutionNode() == null){
@@ -66,7 +68,7 @@ public class InteractiveGame {
             System.out.println("# Frontier Nodes " + engine.getOpen().size());
             System.out.println("Time expended " + delta + " ns");
 
-
+        //solutionPath.txt will be created on "target" directory of skyscrapers-puzzle module
         try {
             PrintStream fileOut = new PrintStream("./solutionPath.txt");
             System.setOut(fileOut);

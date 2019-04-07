@@ -3,15 +3,9 @@ package ar.edu.itba.sia.game;
 import ar.edu.itba.sia.game.UI.Helpers;
 import ar.edu.itba.sia.game.UI.InteractiveGame;
 import ar.edu.itba.sia.game.UI.NonInteractiveGame;
-import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
-import ar.edu.itba.sia.gps.EngineFactory;
-import ar.edu.itba.sia.gps.GPSEngine;
-import ar.edu.itba.sia.gps.GPSNode;
 import ar.edu.itba.sia.gps.SearchStrategy;
 
 import java.util.Scanner;
-
-import static ar.edu.itba.sia.game.SkyscrapersPuzzle.solvePuzzle;
 
 public class Main {
 
@@ -44,20 +38,20 @@ public class Main {
 
         switch (args[0]){
             case "1":
-                System.out.println("SOLVING 3X3 BOARD IN EASY MODE WITH FILL RULE");
-                NonInteractiveGame.playGame("F", 3, 1);
+                System.out.println("SOLVING 3X3 BOARD IN EASY MODE WITH FILL RULE DFS");
+                NonInteractiveGame.playGame("F", SearchStrategy.DFS, 3, 1);
                 break;
             case "2":
-                System.out.println("SOLVING 4X4 BOARD IN HARD MODE WITH SWAP RULE");
-                NonInteractiveGame.playGame("S", 4, 3);
+                System.out.println("SOLVING 4X4 BOARD IN HARD MODE WITH SWAP RULE, GREEDY");
+                NonInteractiveGame.playGame("S",SearchStrategy.GREEDY, 4, 3);
                 break;
             case "3":
-                System.out.println("SOLVING 5X5 BOARD IN MEDIUM MODE WITH SWAP RULE");
-                NonInteractiveGame.playGame("S", 5, 2);
+                System.out.println("SOLVING 5X5 BOARD IN MEDIUM MODE WITH SWAP RULE ASTAR");
+                NonInteractiveGame.playGame("S",SearchStrategy.ASTAR, 5, 2);
                 break;
             default:
-                System.out.println("SOLVING 4X4 BOARD IN HARD MODE WITH FILL RULE");
-                NonInteractiveGame.playGame("F", 4, 3);
+                System.out.println("SOLVING 4X4 BOARD IN HARD MODE WITH FILL RULE, IDDFS");
+                NonInteractiveGame.playGame("F", SearchStrategy.IDDFS, 4, 3);
                 break;
         }
     }

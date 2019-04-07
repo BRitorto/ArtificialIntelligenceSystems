@@ -1,5 +1,8 @@
 package ar.edu.itba.sia.game.UI;
 
+import ar.edu.itba.sia.gps.SearchStrategy;
+
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
@@ -145,5 +148,51 @@ public class Helpers {
         }
 
         return startMatrix;
+    }
+
+    public static SearchStrategy requestStrategy(String gameMode, Scanner inputScanner) {
+        boolean finished = false;
+
+        SearchStrategy strategy = null;
+        String input;
+        do{
+            System.out.println("Enter search strategy: ");
+            input = inputScanner.nextLine();
+            switch(input){
+                case "BFS":
+                    strategy = SearchStrategy.BFS;
+                    finished = true;
+                    break;
+                case "DFS":
+                    strategy = SearchStrategy.DFS;
+                    finished = true;
+                    break;
+                case "IDDFS":
+                    strategy = SearchStrategy.IDDFS;
+                    finished = true;
+                    break;
+                case "ASTAR":
+                    if(gameMode.equals("S")){
+                        strategy = SearchStrategy.ASTAR;
+                        finished = true;
+                    }else{
+                        System.out.println("Game mode must be Swap in order to use the ASTAR strategy");
+                    }
+                    break;
+                case "GREEDY":
+                    if(gameMode.equals("S")){
+                        strategy = SearchStrategy.GREEDY;
+                        finished = true;
+                    }else{
+                        System.out.println("Game mode must be Swap in order to use the GREEDY strategy");
+                    }
+                    break;
+                default:
+                    System.out.println("No entiendo nada");
+            }
+        }while(!finished);
+
+        System.out.println("Selected " + strategy.toString());
+        return strategy;
     }
 }

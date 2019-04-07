@@ -1,7 +1,10 @@
+package ar.edu.itba.sia;
+
 import ar.edu.itba.sia.game.Board;
 import ar.edu.itba.sia.game.SkyscrapersProblem;
 import ar.edu.itba.sia.game.SkyscrapersPuzzle;
 import ar.edu.itba.sia.game.SkyscrapersState;
+import ar.edu.itba.sia.game.UI.Helpers;
 import ar.edu.itba.sia.game.heuristics.AdmissibleHeuristic;
 import ar.edu.itba.sia.game.rules.SkyscrapersSwapRule;
 import ar.edu.itba.sia.gps.EngineFactory;
@@ -10,6 +13,8 @@ import ar.edu.itba.sia.gps.SearchStrategy;
 import ar.edu.itba.sia.gps.api.Rule;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class swapRuleTest {
     @Before
@@ -35,5 +40,16 @@ public class swapRuleTest {
             System.out.println("No hay solucion");
         else
             System.out.println(engine.getSolutionNode().getState().getRepresentation());
+    }
+
+    @Test
+    public void createSwapBoardWorksTest(){
+        int[][] dim3 = {{1, 2, 3}, {2, 3, 1}, {3, 1 , 2}};
+        int[][] dim4 = {{1, 2, 3, 4}, {2, 3, 4, 1}, {3, 4, 1 , 2}, {4, 1, 2, 3}};
+        int[][] dim5 = {{1, 2, 3, 4, 5}, {2, 3, 4, 5, 1}, {3, 4, 5, 1 , 2}, {4, 5, 1, 2, 3}, {5, 1, 2, 3, 4}};
+
+        assertEquals(dim3, Helpers.createSwapMatrix(3));
+        assertEquals(dim4, Helpers.createSwapMatrix(4));
+        assertEquals(dim5, Helpers.createSwapMatrix(5));
     }
 }

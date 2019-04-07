@@ -138,7 +138,7 @@ public class Helpers {
                 auxNum = (i + j +1) % dimensions;
                 // We want 4 to be a valid number
                 if (auxNum == 0){
-                    auxNum = 4;
+                    auxNum = dimensions;
                 }
                 startMatrix[i][j]= auxNum;
             }

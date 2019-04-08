@@ -83,10 +83,10 @@ public class BoardGenerator {
     }
 
     private static Board createMediumBoardDim3(String gameMode) {
-        int[] topView = {2, 1, 3};
-        int[] bottomView = {2, 1, 0};
-        int[] leftView = {2, 0, 2};
-        int[] rightView = {1, 3, 0};
+        int[] topView = {3,1,2};
+        int[] bottomView = {1,2,2};
+        int[] leftView = {0,0,1};
+        int[] rightView = {0,0,3};
 
         return new Board(3, topView, bottomView, leftView, rightView);
 

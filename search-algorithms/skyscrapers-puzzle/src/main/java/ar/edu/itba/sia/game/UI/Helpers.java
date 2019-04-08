@@ -156,7 +156,7 @@ public class Helpers {
         SearchStrategy strategy = null;
         String input;
         do{
-            System.out.println("Enter search strategy: ");
+            System.out.println("Enter search strategy (BFS/DFS/IDDF/ASTAR/GREEDY): ");
             input = inputScanner.nextLine();
             switch(input){
                 case "BFS":
@@ -188,7 +188,7 @@ public class Helpers {
                     }
                     break;
                 default:
-                    System.out.println("No entiendo nada");
+                    System.out.println("Wrong strategy, remember, the choices are (BFS/DFS/IDDF/ASTAR/GREEDY)");
             }
         }while(!finished);
 

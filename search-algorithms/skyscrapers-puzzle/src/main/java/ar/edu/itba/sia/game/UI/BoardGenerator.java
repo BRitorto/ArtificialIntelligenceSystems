@@ -49,10 +49,10 @@ public class BoardGenerator {
     }
 
     private static Board createEasyBoardDim4(String gameMode) {
-        int[] topView = {1, 0, 3, 0};
-        int[] bottomView = {0, 2, 0, 1};
-        int[] leftView = {1, 2, 0, 4};
-        int[] rightView = {4, 0, 2, 1};
+        int[] topView = {4,2,2,1};
+        int[] bottomView = {1,2,2,4};
+        int[] leftView = {3,2,2,1};
+        int[] rightView = {1,2,2,3};
 
         return new Board(4, topView, bottomView, leftView, rightView);
 

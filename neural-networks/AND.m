@@ -1,25 +1,42 @@
-clear all;
-1;
-function step= unit_step(v)
-    step=0;
-    if(v >= 0)
-        step=1;
-    else
-        step=-1;
+#Make sure octave realizes this is a script file;
+clear all
+
+addpath('./utility_functions')
+addpath('./activation_functions')
+# Initialize variables
+maximum_epochs = 4;
+current_epoch = 1;
+weights = rand(1,3); # Generates a 1x3 matrix of random numbers
+learning_factor = 0.1;
+
+# We are going to use random training data which we are 
+# going to call training_input
+printf("STARTING TRAINING with %d epochs\n", maximum_epochs);
+while(current_epoch != maximum_epochs)
+    training_input = [-1; random_input() ; random_input()];
+    expected_output = get_expected_output(training_input);
+    obtained_output = step(weights * training_input);
+    if (obtained_output != expected_output)
+        for index= 1: 3
+            weights(1, index) = weights(1, index) + learning_factor * (1- expected_output*obtained_output) * expected_output * training_input(index, 1);
+        endfor
     endif
-endfunction
+    current_epoch = current_epoch + 1;
+endwhile
 
+printf("TRAINING ENDED\n");
 
-function p_return = perceptron(x, w)
-    v = x*w
-    for i = 1:rows(v(:))
-        y = unit_step(v(i))
-    endfor
-    p_return = y;
-endfunction
+printf("TESTING OBTAINED WEIGHTS:\n");
+test_qty = 10000;
+failed_tests = 0;
 
-x = [-1 0 0; -1 0 1; -1 1 0; -1 1 1];
-w = [1.5; 1;1];
-val = perceptron(x, w)
+for test_num=1 : test_qty
+    test_input = [-1; random_input(); random_input()];
+    expected_output = get_expected_output(test_input);
+    obtained_output = step(weights* test_input);
+    if(obtained_output != expected_output)
+        failed_tests = failed_tests + 1;
+    endif
+endfor
 
-
+printf("FAILED %d / %d\n", failed_tests, test_qty)

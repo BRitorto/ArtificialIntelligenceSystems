@@ -3,41 +3,9 @@ clear all
 
 addpath('./utility_functions')
 addpath('./activation_functions')
-# Initialize variables
-maximum_epochs = 15
-current_epoch = 1;
-number_of_ands = 5
-weights = rand(1,number_of_ands+1); # Generates a 1x(number_of_ands + 1c) matrix of random numbers
-learning_factor = 0.1
 
-# We are going to use random training data which we are 
-# going to call training_input
-printf("STARTING TRAINING with %d epochs of training\n", maximum_epochs);
-while(current_epoch <= maximum_epochs)
-    training_input = random_input(number_of_ands);
-    expected_output = get_expected_output(training_input, number_of_ands);
-    obtained_output = step(weights * training_input);
-    if (obtained_output != expected_output)
-        for index= 1: number_of_ands+1
-            weights(1, index) = weights(1, index) + learning_factor * (1- expected_output*obtained_output) * expected_output * training_input(index, 1);
-        endfor
-    endif
-    current_epoch = current_epoch + 1;
-endwhile
+input_number = 4;
+get_output = @get_expected_output_and;
+activation_fun = @step;
 
-printf("TRAINING ENDED\n");
-
-printf("TESTING OBTAINED WEIGHTS:\n");
-test_qty = 10000;
-failed_tests = 0;
-
-for test_num=1 : test_qty
-    test_input = random_input(number_of_ands);
-    expected_output = get_expected_output(test_input, number_of_ands);
-    obtained_output = step(weights* test_input);
-    if(obtained_output != expected_output)
-        failed_tests = failed_tests + 1;
-    endif
-endfor
-
-printf("FAILED %d / %d\n", failed_tests, test_qty)
+single_layer_perceptron(input_number, get_output, activation_fun)

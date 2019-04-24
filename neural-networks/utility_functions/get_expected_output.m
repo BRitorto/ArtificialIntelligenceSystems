@@ -1,6 +1,6 @@
 
-function ret = get_expected_output(training_input)
-    if( training_input(2,1) == 1 && training_input(3,1) == 1)
+function ret = get_expected_output(training_input, number_of_ands)
+    if(sum(training_input) == number_of_ands)
         ret = 1;
     else
         ret = -1;

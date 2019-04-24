@@ -1,5 +1,5 @@
 function single_layer_perceptron(input_number, get_expected_output, activation_fun)
-    maximum_epochs = 2
+    maximum_epochs = 15
     current_epoch = 1;
     weights = rand(1, input_number+1); # Generates a 1x( input_number + 1) matrix of random numbers
     learning_factor = 0.1

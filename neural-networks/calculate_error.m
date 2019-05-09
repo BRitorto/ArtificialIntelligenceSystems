@@ -1,22 +1,13 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This function takes a neural network and a series of patterns and returns the 
-% overall error
-%
+
+% Agarra red neuronal, patrones de entrada y retorna el error 
 % Parameters:
 %
-% W is a cell array of matrices. W{m}(j, i) holds the weight of the
-% connection from unit i in the m-1 layer to unit j in the m layer
+% W es una matriz W{m}(i,j) que guarda los pesos de las conecciones de i en la capa m-1 a j en la capa m
+% g guarda las funciones de activacion y su derivada para cada capa
 %
-% patterns is a two dimentional cell array. patterns{i}{1} contains and input 
-% pattern; patterns{i}{2} holds the expected output
+% Retorna V{m}(i) que contiene el output de i en la capa m-1
 %
-% g is a two dimentional cell array of function handles. g{m}{1} is the the 
-% activation function for layer m
-%
-% Return value:
-%
-% V is a cell array of column vectors. V{m}(i) holds the output of unit i at
-% layer m-1
+
 function error = calculate_error(W, patterns, g)
   cant_layers = numel(W);
   outsize = rows(W{cant_layers});

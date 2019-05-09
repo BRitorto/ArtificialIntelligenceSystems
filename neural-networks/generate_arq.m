@@ -14,7 +14,6 @@ function out=generate_arq()
         arq(k) = randi(30);
       endfor
       arq
-       # network_setup(terrain,max_epochs, sample_number, arq);
     endfor
   endfor
   

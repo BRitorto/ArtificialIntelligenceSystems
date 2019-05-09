@@ -1,21 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This function takes a neural network and an input pattern and returns the 
-% output at every layer
-%
+
+% Agarra una red neuronal, una input de patterns y retorna output en cada capa
 % Parameters:
 %
-% W is a cell array of matrices. W{m}(j, i) holds the weight of the
-% connection from unit i in the m-1 layer to unit j in the m layer
+% W es una matriz W{m}(i,j) que guarda los pesos de las conecciones de i en la capa m-1 a j en la capa m
+% g guarda las funciones de activacion y su derivada para cada capa
+% E(i) guarda el inpuut de la unidad i
 %
-% E is a column vector. E(i) holds the input for unit i
+% Retorna V{m{(i) que contiene el output de i en la capa m-1
 %
-% g is a two dimentional cell array of function handles. g{m}{1} is the the 
-% activation function for layer m
-%
-% Return value:
-%
-% V is a cell array of column vectors. V{m}(i) holds the output of unit i at
-% layer m-1
+
 function V = run_pattern(W, E, g)
   cant_layers = numel(W);
   V = cell(cant_layers+1, 1);

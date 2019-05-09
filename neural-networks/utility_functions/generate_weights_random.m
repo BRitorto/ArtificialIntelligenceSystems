@@ -7,4 +7,5 @@ function W = generate_weights_random(network)
   for m = [1:cant_layers] 
     W(m) = rand(network(m+1), (network(m)+1));
   endfor
+  
 endfunction

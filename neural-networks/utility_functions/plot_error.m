@@ -1,0 +1,10 @@
+function plot_error(error_array)
+    cant=numel(error_array);
+    x=[1:1:cant];
+    
+    figure(2)
+    plot(x,error_array)
+    title("Grafico del error")
+    ylabel("Error")
+
+endfunction

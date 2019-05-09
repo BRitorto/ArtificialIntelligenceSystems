@@ -34,7 +34,13 @@ function plot_nn(result, full_patterns, g)
       yo(i) = full_patterns{i}{1}(2);
       zo(i) = full_patterns{i}{2};
     endfor
-   surf(x, y, z);
+    figure(1)
+    surf(x, y, z)
+    title("Terreno realizado por la red")
+    xlabel("X")
+    ylabel("Y")
+    zlabel("Z")
+
    %hold on;
    %plot3(xo, yo, zo, ".");
 

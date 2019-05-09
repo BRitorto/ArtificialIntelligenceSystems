@@ -79,6 +79,8 @@ function answer = learn(W, patterns, g, eta, cant_epochs, is_batch, is_random_ap
       endif
       last_error = error;
     endif
+      plot_error(error_array)
+
       error;
   endfor
   

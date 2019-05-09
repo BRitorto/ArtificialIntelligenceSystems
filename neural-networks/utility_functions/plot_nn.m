@@ -13,24 +13,29 @@
 % patterns is a two dimentional cell array. patterns{i}{1} contains and input 
 %   pattern.
 
-function plot_nn(W, patterns, g)
-  x = [];
-  y = [];
-  z = [];
-  z_n = [];
-  for k = [1:numel(patterns)]
-    x(k) = patterns{k}{1}(1);
-    y(k) = patterns{k}{1}(2);
-    V = run_pattern(W, [x(k);y(k)], g);
-    z_n(k) = V{numel(V)};
-    z(k) = patterns{k}{2};
-  end
-  [X, Y] = meshgrid(x, y);
+function plot_nn(result, full_patterns, g)
+  x = [-2:0.01:2];
+  y = x;
+  for i = [1: length(x)]
+    for j = [1: length(y)]
+      V = run_pattern(result, [x(i);y(j)], g);
+      z(i, j) = V{numel(V)};
+    endfor
+  endfor
+ 
   %title ("Neural network's interpretation");
    %subplot (2, 1, 1)
-   %plot3(x, y, z, ".");
    %subplot (2, 1, 2)
    %plot3(x, y, z_n, ".");
    %rotate3d
-   %surf(X, Y, z)
+   %surf(x, y, z_n)
+   for i = [1: 441]
+      xo(i) = full_patterns{i}{1}(1);
+      yo(i) = full_patterns{i}{1}(2);
+      zo(i) = full_patterns{i}{2};
+    endfor
+   surf(x, y, z);
+   %hold on;
+   %plot3(xo, yo, zo, ".");
+
 end

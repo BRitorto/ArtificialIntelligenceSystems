@@ -1,9 +1,5 @@
 function out = network_setup()
-    global arq;
-    global W;
-    global g;
-    global eta;
-    global momentum;
+
     global terrain_file;
     global sample_number;
 

@@ -5,6 +5,7 @@ addpath('./activation_functions')
 addpath('./utility_functions')
 addpath('./terrains')
 
+debug_on_interrupt(1);
 source('network_parameters.bin');
 
 network_setup();

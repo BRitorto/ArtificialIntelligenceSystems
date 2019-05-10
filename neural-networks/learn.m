@@ -1,13 +1,16 @@
 function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, record_error)
-  global W;
-  global max_epochs;
-  global momentum;
-  global g;
-  global eta;
   
+  global W;
+  global cant_layers;
+  global eta;
+  global max_epochs;
+  global g;
+  global arq;
+  global momentum;
+
   cant_layers = numel(W);
   cant_patterns = numel(patterns);
-  
+
   batch_delta_W = cell(cant_layers, 1);
   last_delta_W = cell(cant_layers,1);
   last_error = Inf;
@@ -19,7 +22,8 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
     last_delta_W{i} = zeros(rows(W{i}), columns(W{i}));
   endfor
   
-  for k = [1:max_epochs] 
+  for k = [1:max_epochs]
+
     if (is_random_approach)
       for i = [cant_patterns:-1:2]
         j = floor((unifrnd(1, cant_patterns+1)-1)*0.99999+1);

@@ -1,0 +1,8 @@
+global terrain_file='./terrains/terrain05.data';
+global max_epochs = 100;
+global sample_number = 300;
+global arq = [2 10 10 1];
+global eta = 0.03;
+global g = {{@tanh, @dtanh}, {@tanh, @dtanh}, {@(x) x, @(x) 1}};
+global W = generate_weights_random(arq);
+global momentum = 0.9;                                

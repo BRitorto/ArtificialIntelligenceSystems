@@ -1,4 +1,5 @@
 1;# Script file?? Maybe this should be a function file
+clear all;
 addpath('./activation_derivatives')
 addpath('./activation_functions')
 addpath('./utility_functions')

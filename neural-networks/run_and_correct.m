@@ -38,4 +38,5 @@ function derivatives = apply_derivative(derivatives, V, g, cant_layers)
     derivatives{k} = arrayfun(g{k-1}{2}, V{k}(2:end));
   endfor
   derivatives{cant_layers+1} = arrayfun(g{cant_layers}{2}, V{cant_layers+1});
+  
 endfunction

@@ -8,6 +8,7 @@ function out = randomize_patterns(patterns,n)
     patterns{i} = patterns{j};
     patterns{j} = temp;
   endfor  
-  out = ceil(n);
-  out = {patterns{1:n}};
+  out{1} = ceil(n);
+  out{1} = {patterns{1:n}};
+  out{2} = {patterns{n+1:m}};
 endfunction

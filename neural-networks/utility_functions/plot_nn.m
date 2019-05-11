@@ -13,8 +13,8 @@
 % patterns is a two dimentional cell array. patterns{i}{1} contains and input 
 %   pattern.
 
-function plot_nn(result, full_patterns, g)
-  x = [-2:0.01:2];
+function plot_nn(result, test_patterns, g)
+  x = [-2:0.2:2];
   y = x;
   for i = [1: length(x)]
     for j = [1: length(y)]
@@ -30,9 +30,9 @@ function plot_nn(result, full_patterns, g)
    %rotate3d
    %surf(x, y, z_n)
    for i = [1: 441]
-      xo(i) = full_patterns{i}{1}(1);
-      yo(i) = full_patterns{i}{1}(2);
-      zo(i) = full_patterns{i}{2};
+      xo(i) = test_patterns{i}{1}(1);
+      yo(i) = test_patterns{i}{1}(2);
+      zo(i) = test_patterns{i}{2};
     endfor
     figure(1)
     surf(x, y, z)

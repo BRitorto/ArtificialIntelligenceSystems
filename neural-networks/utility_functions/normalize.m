@@ -10,11 +10,9 @@ function out= normalize(patterns)
         aux_value = patterns{i}{1}(2);
         patterns{i}{1}(2) = (aux_value - min_value) / (max_value - min_value);
         
-
         aux_value = patterns{i}{2};
         patterns{i}{2} = (aux_value - min_value) / (max_value - min_value);
-
-        
+   
     endfor 
     out = patterns;
 endfunction

@@ -6,7 +6,7 @@ function plot_original(terrain_file)
     z = data(length*2 + 1: length*3);
   
    figure(3)
-   plot3(x,y,z,'o')
+   plot3(y,x,z,'o')
    title("Terreno original")
    xlabel("X")
    ylabel("Y")

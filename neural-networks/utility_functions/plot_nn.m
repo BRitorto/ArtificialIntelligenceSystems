@@ -14,7 +14,7 @@
 %   pattern.
 
 function plot_nn(trained_weights, test_patterns, g, terrain_file)
-  x = [-2:0.2:2];
+  x = [-3:0.2:3];
   y = x;
   for i = [1: length(x)]
     for j = [1: length(y)]
@@ -25,14 +25,22 @@ function plot_nn(trained_weights, test_patterns, g, terrain_file)
  
   data =dlmread(terrain_file,'',1,0);
   length = length(data / 3);
-    xo = data(1:length);
-    yo = data(length+1: length*2);
-    zo = data(length*2 + 1: length*3);
-
+  xo = data(1:length);
+  yo = data(length+1: length*2);
+  zo = data(length*2 + 1: length*3);
+  
+  for i = [1:numel(test_patterns)]
+    xt(i) = test_patterns{i}{1}(1);
+    yt(i) = test_patterns{i}{1}(2);
+    zt(i) = test_patterns{i}{2}(1);
+  endfor
+  
   figure(1)
   surf(x, y, z)
+  %hold on;
+  %plot3(yo, xo, zo,'ob')
   hold on;
-  plot3(xo,yo,zo,'o')
+  plot3(yt, xt, zt, 'or')
   title("Terreno realizado por la red")
   xlabel("X")
   ylabel("Y")

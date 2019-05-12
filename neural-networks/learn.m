@@ -7,6 +7,7 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
   global g;
   global arq;
   global momentum;
+  global max_error;
 
   cant_layers = numel(W);
   cant_patterns = numel(patterns);
@@ -52,7 +53,6 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
         last_delta_W = delta_W;
       endif
     endfor
-
     
     if (is_batch)
       for j = [1:cant_layers]
@@ -66,8 +66,13 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
     if (record_error)
       error = calculate_error(W, patterns, g);
       error_array(k) = error;
+      if (error <= max_error)
+        answer = cell(2,1);
+        answer{1} = W;
+        answer{2} = error_array;
+        return;
+      endif
     endif
-
 
     if (adaptative_eta)
       if (record_error)
@@ -90,7 +95,6 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
       last_error = error;
     endif
       plot_error(error_array)
-
       error;
   endfor
   

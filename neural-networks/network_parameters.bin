@@ -1,7 +1,7 @@
 global terrain_file='./terrains/terrain05.data';
-global max_epochs = 50;
-global sample_number = 200;
-global arq = [2 4 6 1];
+global max_epochs = 200;
+global sample_number = 397; #90%
+global arq = [2 6 10 1];
 global eta = 0.03;
 global g = {{@tanh, @dtanh}, {@tanh, @dtanh}, {@(x) x, @(x) 1}};
 global W = generate_weights_random(arq);

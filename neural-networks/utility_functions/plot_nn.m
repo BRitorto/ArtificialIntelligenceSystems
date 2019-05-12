@@ -14,6 +14,9 @@
 %   pattern.
 
 function plot_nn(trained_weights, test_patterns, g, terrain_file)
+  global general_error;
+  global z_calculated;
+  
   x = [-3:0.2:3];
   y = x;
   for i = [1: length(x)]
@@ -35,6 +38,12 @@ function plot_nn(trained_weights, test_patterns, g, terrain_file)
     zt(i) = test_patterns{i}{2}(1);
   endfor
   
+  for k = [1: numel(test_patterns)]
+    test_results = run_pattern(trained_weights, [test_patterns{k}{1}(1);test_patterns{k}{1}(2)], g);
+    z_calculated(k) = test_results{numel(test_results)};
+  endfor
+  
+  general_error = mean((zt - z_calculated).^2);
   figure(1)
   surf(x, y, z)
   %hold on;

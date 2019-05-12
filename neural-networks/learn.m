@@ -94,8 +94,8 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
       endif
       last_error = error;
     endif
-      plot_error(error_array)
-      error;
+      plot_error(error_array);
+      error
   endfor
   
   answer = cell(2,1);

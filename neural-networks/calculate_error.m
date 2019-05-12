@@ -12,12 +12,9 @@ function error = calculate_error(W, patterns, g)
   cant_layers = numel(W);
   outsize = rows(W{cant_layers});
   P = numel(patterns);
-  error = 0;
   for p = [1:P]
     res = run_pattern(W, patterns{p}{1}, g){cant_layers+1};
-    for o = [1:outsize]
-      error += (patterns{p}{2}(o) - res(o))^2;
-    endfor
+    wanted = patterns{p}{2}(1);
   endfor
-  error /= (2);
+  error = mean((wanted - res).^2);
 endfunction

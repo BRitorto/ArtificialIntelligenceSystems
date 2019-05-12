@@ -14,11 +14,11 @@ function out = network_setup()
     global g;
 
     full_patterns = load_file(terrain_file);
-    normalized_patterns = normalize_fun(full_patterns);
-    patterns = randomize_patterns(normalized_patterns, sample_number);
-    train_patterns = patterns{1};
-    test_patterns = patterns{2};
-    out = learn(train_patterns, is_batch, is_random_approach, adaptative_eta, record_error);    
+    %normalized_patterns = normalize_fun(full_patterns);
+    patterns = randomize_patterns(full_patterns, sample_number);
+    %train_patterns = patterns{1};
+    %test_patterns = patterns{2};
+    out = learn(patterns, is_batch, is_random_approach, adaptative_eta, record_error);    
     trained_weights = out{1};
-    plot_nn(trained_weights, test_patterns, g);
+    plot_nn(trained_weights, full_patterns, g);
 endfunction

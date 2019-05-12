@@ -5,7 +5,7 @@ global arq = [2 6 10 1];
 global g = {{@tanh, @dtanh}, {@tanh, @dtanh}, {@(x) x, @(x) 1}};
 global W = generate_weights_random(arq);
 global momentum = 0.8; 
-global is_batch = true;
+global is_batch = false;
 if is_batch == true
     global eta = 0.0003;
 else
@@ -13,5 +13,5 @@ else
 endif
 global is_random_approach = false;
 global adaptative_eta = [];
-global normalize_fun = @normalize;                          
+global normalize_fun = @normalize_gaussian;                          
 global record_error = true;

@@ -8,8 +8,8 @@ function plot_original(terrain_file)
    figure(3)
    plot3(x,y,z,'o')
    title("Terreno original")
-    xlabel("X")
-    ylabel("Y")
-    zlabel("Z")
+   xlabel("X")
+   ylabel("Y")
+   zlabel("Z")
    
 endfunction

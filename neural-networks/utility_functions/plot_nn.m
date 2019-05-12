@@ -13,7 +13,7 @@
 % patterns is a two dimentional cell array. patterns{i}{1} contains and input 
 %   pattern.
 
-function plot_nn(trained_weights, test_patterns, g)
+function plot_nn(trained_weights, test_patterns, g, terrain_file)
   x = [-2:0.2:2];
   y = x;
   for i = [1: length(x)]
@@ -23,20 +23,19 @@ function plot_nn(trained_weights, test_patterns, g)
     endfor
   endfor
  
-  %title ("Neural network's interpretation");
-   %subplot (2, 1, 1)
-   %subplot (2, 1, 2)
-   %plot3(x, y, z_n, ".");
-   %rotate3d
-   %surf(x, y, z_n)
-    figure(1)
-    surf(x, y, z)
-    title("Terreno realizado por la red")
-    xlabel("X")
-    ylabel("Y")
-    zlabel("Z")
+  data =dlmread(terrain_file,'',1,0);
+  length = length(data / 3);
+    xo = data(1:length);
+    yo = data(length+1: length*2);
+    zo = data(length*2 + 1: length*3);
 
-   %hold on;
-   %plot3(xo, yo, zo, ".");
+  figure(1)
+  surf(x, y, z)
+  hold on;
+  plot3(xo,yo,zo,'o')
+  title("Terreno realizado por la red")
+  xlabel("X")
+  ylabel("Y")
+  zlabel("Z")
 
 end

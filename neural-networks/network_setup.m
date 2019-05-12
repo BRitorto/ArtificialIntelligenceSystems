@@ -11,6 +11,7 @@ function out = network_setup()
     global is_random_approach;
     global adaptative_eta;
     global record_error;
+    global g;
 
     full_patterns = load_file(terrain_file);
     normalized_patterns = normalize_fun(full_patterns);
@@ -18,6 +19,6 @@ function out = network_setup()
     train_patterns = patterns{1};
     test_patterns = patterns{2};
     out = learn(train_patterns, is_batch, is_random_approach, adaptative_eta, record_error);    
-    %trained_weights = out{1};
-    %result = run_pattern(trained_weights, test_patterns, g);
+    trained_weights = out{1};
+    plot_nn(trained_weights, test_patterns, g);
 endfunction

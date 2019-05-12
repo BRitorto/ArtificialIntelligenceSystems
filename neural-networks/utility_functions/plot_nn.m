@@ -13,12 +13,12 @@
 % patterns is a two dimentional cell array. patterns{i}{1} contains and input 
 %   pattern.
 
-function plot_nn(result, test_patterns, g)
+function plot_nn(trained_weights, test_patterns, g)
   x = [-2:0.2:2];
   y = x;
   for i = [1: length(x)]
     for j = [1: length(y)]
-      V = run_pattern(result, [x(i);y(j)], g);
+      V = run_pattern(trained_weights, [x(i);y(j)], g);
       z(i, j) = V{numel(V)};
     endfor
   endfor
@@ -29,11 +29,6 @@ function plot_nn(result, test_patterns, g)
    %plot3(x, y, z_n, ".");
    %rotate3d
    %surf(x, y, z_n)
-   for i = [1: 441]
-      xo(i) = test_patterns{i}{1}(1);
-      yo(i) = test_patterns{i}{1}(2);
-      zo(i) = test_patterns{i}{2};
-    endfor
     figure(1)
     surf(x, y, z)
     title("Terreno realizado por la red")

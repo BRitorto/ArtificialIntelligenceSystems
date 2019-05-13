@@ -95,7 +95,8 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
       endif
       last_error = error;
     endif
-      plot_error(error_array);
+      plot_error(error_array)
+      refresh(2)
       error
   endfor
   
@@ -107,4 +108,5 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
     answer{2} = [];
   endif
   plot_error(error_array)
+  refresh(2)
 endfunction

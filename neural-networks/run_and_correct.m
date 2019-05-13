@@ -1,5 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Agarra una red, una patron entrenado y un aprendijaze rate y calcula los pesos teniendo en cuenta as reglas de back-propagation
 % W es una matriz W{m}(i,j) que guarda los pesos de las conecciones de i en la capa m-1 a j en la capa m
 % g guarda las funciones de activacion y su derivada para cada capa
@@ -8,7 +6,7 @@
 % eta es el learning rate
 %
 % Retorna delta_W{m} que es el update para anadir a la matriz de pesos en la capa m
-%
+
 
 function delta_W = run_and_correct(W, E, g, S, eta)
   cant_layers = numel(W);

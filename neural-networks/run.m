@@ -1,6 +1,6 @@
 1;# Script file
 clear all;
-more off; % Print error in real time
+more off; % Ir imprimiendo le error en real time
 
 addpath('./activation_derivatives')
 addpath('./activation_functions')

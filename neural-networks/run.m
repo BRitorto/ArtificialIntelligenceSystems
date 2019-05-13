@@ -1,5 +1,7 @@
 1;# Script file
 clear all;
+more off; % Print error in real time
+
 addpath('./activation_derivatives')
 addpath('./activation_functions')
 addpath('./utility_functions')

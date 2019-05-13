@@ -15,4 +15,5 @@ global is_random_approach = false;
 global adaptative_eta = [];
 global normalize_fun = @normalize_gaussian;                          
 global record_error = true;
-global max_error = 0.00005;
+global max_error = 0.0002;
+global min_epochs = 20;

@@ -8,6 +8,7 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
   global arq;
   global momentum;
   global max_error;
+  global min_epochs;
 
   cant_layers = numel(W);
   cant_patterns = numel(patterns);
@@ -66,7 +67,7 @@ function answer = learn(patterns, is_batch, is_random_approach, adaptative_eta, 
     if (record_error)
       error = calculate_error(W, patterns, g);
       error_array(k) = error;
-      if (error <= max_error)
+      if (error <= max_error && k >= min_epochs )
         answer = cell(2,1);
         answer{1} = W;
         answer{2} = error_array;

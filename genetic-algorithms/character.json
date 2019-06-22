@@ -1,0 +1,31 @@
+{
+  "Class":"ARCHER1",
+  "Items":{
+    "Helmets":"./fullData/cascos.tsv",
+    "Weapons":"./fullData/armas.tsv",
+    "Boots":"./fullData/botas.tsv",
+    "Gauntlets":"./fullData/guantes.tsv",
+    "Chestplates":"./fullData/pecheras.tsv"
+  },
+  "Genetic Parameters":
+  {
+    "Mutator":"UniformOneGeneMutator",
+    "Replacer":"KeepSomeAncestorsReplacer",
+    "Crossover":{
+      "name":"AnnularCross",
+      "arg": 0.7
+    },
+    "Selector1":"EliteSelection",
+    "Selector2":"ProbabilisticTournamentSelection",
+    "Selector3":"RankingSelection",
+    "Selector4":"RouletteSelection",
+    "RatioA": 0.5,
+    "RatioB": 0.5,
+    "Conditioner":{
+      "name":"OptimumConditioner",
+      "arg" : 40
+    }
+  },
+  "PopulationQty": 2000,
+  "GraphDiversityGenerations": 50
+}

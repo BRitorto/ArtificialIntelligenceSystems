@@ -1,0 +1,8 @@
+# Ignore .class files
+target/
+
+# Ignore .idea stuff
+.idea/
+.idea/**/workspace.xml
+.idea/**/uiDesigner.xml
+*.iml
